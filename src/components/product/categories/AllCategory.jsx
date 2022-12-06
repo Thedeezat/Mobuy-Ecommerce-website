@@ -7,7 +7,7 @@ export default function AllCategory() {
     <div className="pt-6">
       {' '}
       <h2 className="text-3xl text-black-200"> Popular Items</h2>
-      <ProductItem />
+      <ProductItem productImage_num={0} />
     </div>
   )
 }

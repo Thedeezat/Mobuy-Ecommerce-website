@@ -6,27 +6,32 @@ import Rating from '@mui/material/Rating'
 
 import Button from '@mui/material/Button'
 
-export default function ProductItem() {
+import Loader from '../Loader'
+
+import Error from '../Error'
+
+export default function ProductItem({ productImage_num }) {
   const [currency, setCurrency] = useState('$')
 
-  const { data: products, isPending, error } = useFetch(
+  const { data: products, loading, error } = useFetch(
     'https://api.escuelajs.co/api/v1/products',
   )
-  //   console.log(products)
   return (
     <section className="pt-4 grid grid-cols-4 gap-4 text-black-200 ">
+      {loading && <Loader />}
+      {error && <Error error={error} />}
       {products
         ? products.map((product) => (
             <div
               key={product.id}
               className={`pb-4 h-[350px] bg-stone-500 ${
-                product.id >= 20 ? 'hidden' : ''
-              } rounded-md`}
+                product.id >= 50 ? 'hidden' : ''
+              } rounded-lg rounded-t-2xl`}
             >
               {/* Image */}
               <img
-                src={product.images[0]}
-                className="w-7.5 h-7.2 object-cover rounded-2xl"
+                src={product.images[productImage_num]}
+                className="w-7.5 h-7.2 object-cover rounded-2xl bg-stone-600"
               />{' '}
               {/* Description */}
               <div className="pt-3.5 px-3">

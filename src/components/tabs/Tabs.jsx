@@ -20,6 +20,10 @@ import TabContent from './TabContent'
 
 import AllCategory from '../product/categories/AllCategory'
 
+import Clothes from '../product/categories/Clothes'
+
+import Furniture from '../product/categories/Furniture'
+
 export default function Tabs() {
   const [activeTab, setActiveTab] = useState('tab1')
 
@@ -121,11 +125,11 @@ export default function Tabs() {
         </TabContent>
         {/* 2 Tab */}
         <TabContent id="tab2" activeTab={activeTab}>
-          <p>Tab 2 works!</p>
+          <Clothes />
         </TabContent>
         {/* 3 Tab */}
         <TabContent id="tab3" activeTab={activeTab}>
-          <p>Tab 3 works!</p>
+          <Furniture />
         </TabContent>
         {/* 4 Tab */}
         <TabContent id="tab4" activeTab={activeTab}>
