@@ -10,12 +10,35 @@ import Loader from '../Loader'
 
 import Error from '../Error'
 
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined'
+
+import Snackbar from '@mui/material/Snackbar'
+
+import Slide from '@mui/material/Slide'
+
+import { SuccessSnackbar } from '../Snackbar'
+
+function TransitionLeft(props) {
+  return <Slide {...props} direction="right" />
+}
+
 export default function ProductItem({ productImage_num }) {
   const [currency, setCurrency] = useState('$')
+  const [open, setOpen] = useState(false)
+  const [transition, setTransition] = useState(undefined)
 
   const { data: products, loading, error } = useFetch(
     'https://api.escuelajs.co/api/v1/products',
   )
+
+  //   const handleSnacbarClick = (Transition) => () => {
+  //     setTransition(() => Transition)
+  //     setOpen(true)
+  //   }
+  //   const handleSnacbarClose = () => {
+  //     setOpen(false)
+  //   }
+
   return (
     <section className="pt-4 grid grid-cols-4 gap-4 text-black-200 ">
       {loading && <Loader />}
@@ -24,14 +47,37 @@ export default function ProductItem({ productImage_num }) {
         ? products.map((product) => (
             <div
               key={product.id}
-              className={`pb-4 h-[350px] bg-stone-500 ${
+              className={`pb-4 h-[350px] w-[305px] bg-stone-500 ${
                 product.id >= 50 ? 'hidden' : ''
-              } rounded-lg rounded-t-2xl`}
+              } rounded-lg rounded-t-2xl overflow-hidden`}
             >
+              {/* Svaelater */}
+              <div className="relative">
+                <SuccessSnackbar
+                  children={
+                    <>
+                      {' '}
+                      <div
+                        className="absolute bg-white-600 flex
+                       rounded-full w-[28px] h-[28px] shadow-md group
+                       items-center justify-center right-1 top-1 cursor-pointer
+                        "
+                        //   onClick={handleSnacbarClick(TransitionLeft)}
+                      >
+                        <FavoriteBorderOutlinedIcon
+                          className="text-yellow
+                    group-hover:text-black-200"
+                        />
+                      </div>
+                    </>
+                  }
+                />
+              </div>
               {/* Image */}
               <img
                 src={product.images[productImage_num]}
-                className="w-7.5 h-7.2 object-cover rounded-2xl bg-stone-600"
+                className="h-7.2 w-full object-cover rounded-2xl
+                 bg-stone-600 border-none"
               />{' '}
               {/* Description */}
               <div className="pt-3.5 px-3">
@@ -84,6 +130,15 @@ export default function ProductItem({ productImage_num }) {
             </div>
           ))
         : ''}
+      {/* Snackbar */}
+      {/* <Snackbar
+        autoHideDuration={3000}
+        open={open}
+        onClose={handleSnacbarClose}
+        TransitionComponent={transition}
+        message="I love snacks"
+        key={transition ? transition.name : ''}
+      /> */}
     </section>
   )
 }

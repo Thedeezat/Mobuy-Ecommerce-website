@@ -7,7 +7,7 @@ import Stack from '@mui/material/Stack'
 export default function Loader() {
   return (
     <div className="flex gap-7">
-      <Stack spacing={2.5} className="mt-4">
+      <Stack spacing={2.5}>
         <Skeleton
           animation="wave"
           variant="rounded"
@@ -47,7 +47,7 @@ export default function Loader() {
         />
       </Stack>
       {/* 2 skeleton */}
-      <Stack spacing={2.5} className="mt-4">
+      <Stack spacing={2.5}>
         <Skeleton
           animation="wave"
           variant="rounded"
@@ -87,7 +87,7 @@ export default function Loader() {
         />
       </Stack>
       {/* 3 skeleton */}
-      <Stack spacing={2.5} className="mt-4">
+      <Stack spacing={2.5}>
         <Skeleton
           animation="wave"
           variant="rounded"

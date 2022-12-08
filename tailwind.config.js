@@ -10,7 +10,7 @@ module.exports = {
       backgd: '#F6F7F9',
       blue: '#4646b9',
       charcoal: '#3D5278',
-      gray: 'rgba(195, 212, 233, 0.4)',
+      gray: 'rgba(195, 212, 233, 0.7)',
       glass: '#f3f5f7bd',
       green: 'rgb(80, 200, 120)',
       yellow: '#e69b00',
@@ -22,6 +22,7 @@ module.exports = {
         300: '#eceff2',
         400: '#FFFFFF',
         500: '#dce8f4',
+        600: '#E1D9D1',
       },
       black: {
         100: '#1A202C',
