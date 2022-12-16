@@ -25,7 +25,7 @@ export default function PagesContent({
 }) {
   const { counter } = useContext(productContext)
   return (
-    <div className="">
+    <>
       <div className="px-7 h-screen flex flex-col">
         <Navigation
           counter={counter}
@@ -56,7 +56,10 @@ export default function PagesContent({
         </h2>
         {/* empty cart item */}
         {is_cartEmpty && (
-          <section className="absolute top-[34vh] flex justify-center left-0 right-0">
+          <section
+            className="absolute top-[34vh] flex
+           justify-center left-0 right-0 h-screen"
+          >
             <div
               className="bg-white-300 shadow-md w-11 h-7.8 rounded-2xl
               flex justify-center items-center flex-col"
@@ -76,7 +79,6 @@ export default function PagesContent({
         <section>{productAdded}</section>
       </div>
       {/* footer */}
-      <Footer className="w-full " />
-    </div>
+    </>
   )
 }

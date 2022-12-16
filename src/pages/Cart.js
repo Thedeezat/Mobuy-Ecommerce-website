@@ -14,12 +14,15 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined'
 
-import Footer from '../components/footer/Footer'
+import { CustomSnackbar } from '../components/Snackbar'
 
 export default function Cart() {
-  const { handleCart, counter, cart, currency, setCart } = useContext(
-    productContext,
-  )
+  const { counter, cart, currency, setCart } = useContext(productContext)
+
+  const handleRemoveItem = (id) => {
+    const arr = cart.filter((item) => item.id !== id)
+    setCart(arr)
+  }
 
   return (
     <>
@@ -43,7 +46,7 @@ export default function Cart() {
             <>
               <div
                 className="flex text-black-200 justify-start items-start 
-                text-lg relative top-7 "
+                text-lg relative top-7 pb-5"
               >
                 <div className="bg-white-300 w-13 rounded-2xl">
                   {/* Heading */}
@@ -77,7 +80,7 @@ export default function Cart() {
                             {' '}
                             {item.title}{' '}
                           </h4>
-                          <p className="font-light mt-2"> Description </p>
+
                           <p className="text-blue text-sm mt-2"> Mobuy store</p>
                         </div>
                       </div>
@@ -90,7 +93,7 @@ export default function Cart() {
                           </h4>
                           <p
                             className="text-black-200 opacity-[0.7]
-                       font-regular text-sm"
+                            font-regular text-sm"
                           >
                             {' '}
                             {/* $428 x 1{' '} */}
@@ -98,22 +101,41 @@ export default function Cart() {
                         </div>
                         {/* Action */}
                         <div className="text-base text-stone-300 flex flex-col gap-y-2">
-                          <p className="cursor-pointer hover:text-blue">
-                            <DeleteOutlinedIcon
-                              sx={{ width: '22px', height: '22px' }}
-                              className="mr-1"
-                            />
-                            Remove Item
-                          </p>
-                          <p className="cursor-pointer ml-[3px] hover:text-blue">
-                            {' '}
-                            <FavoriteBorderOutlinedIcon
-                              sx={{ width: '19px', height: '19px' }}
-                              className="mr-1"
-                            />
-                            Save Item
-                          </p>
+                          {/* Remove item */}
+                          <CustomSnackbar
+                            children={
+                              <p className="cursor-pointer hover:text-blue">
+                                <DeleteOutlinedIcon
+                                  sx={{ width: '22px', height: '22px' }}
+                                  className="mr-1"
+                                />
+                                Remove Item
+                              </p>
+                            }
+                            message={
+                              <span>Item has been removed from cart</span>
+                            }
+                            button_text="View home"
+                            success="True"
+                          />
+                          {/* save */}
+                          <CustomSnackbar
+                            children={
+                              <p className="cursor-pointer ml-[3px] hover:text-blue">
+                                {' '}
+                                <FavoriteBorderOutlinedIcon
+                                  sx={{ width: '19px', height: '19px' }}
+                                  className="mr-1"
+                                />
+                                Save Item
+                              </p>
+                            }
+                            message={<span>Item has been saved</span>}
+                            button_text="View saved items"
+                            success="True"
+                          />
                         </div>
+                        {/* Action ends */}
                       </div>
                     </div>
                   ))}

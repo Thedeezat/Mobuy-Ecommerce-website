@@ -706,6 +706,10 @@ video {
   margin-left: 3px;
 }
 
+.mb-4 {
+  margin-bottom: 28px;
+}
+
 .flex {
   display: flex;
 }
@@ -1154,6 +1158,11 @@ video {
   background-color: rgb(255 68 35 / var(--tw-bg-opacity));
 }
 
+.bg-darkOrange {
+  --tw-bg-opacity: 1;
+  background-color: rgb(220 88 42 / var(--tw-bg-opacity));
+}
+
 .object-cover {
   object-fit: cover;
 }
@@ -1252,6 +1261,10 @@ video {
 
 .pb-1 {
   padding-bottom: 8px;
+}
+
+.pb-5 {
+  padding-bottom: 32px;
 }
 
 .text-left {
