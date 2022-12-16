@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded'
 
@@ -14,7 +14,20 @@ import FaceRoundedIcon from '@mui/icons-material/FaceRounded'
 
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded'
 
-export default function Navigation() {
+import { Link } from 'react-router-dom'
+
+import { productContext } from '../../App'
+
+import debounce from 'lodash.debounce'
+
+export default function Navigation({
+  counter,
+  currency,
+  cartActive,
+  savelaterActive,
+}) {
+  const { setSearchItem } = useContext(productContext)
+
   const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
       right: -3,
@@ -26,16 +39,22 @@ export default function Navigation() {
       borderRadius: '8px',
     },
   }))
+  const handleChange = debounce((e) => {
+    setSearchItem(e.target.value)
+  }, 800)
+
   return (
     <>
       {/* navigation */}
       <nav className="flex items-center justify-between py-4 text-black-200">
         {/* Logo */}
         <div className="flex items-center">
-          <div className="flex items-center cursor-pointer">
-            <MenuRoundedIcon fontSize="large" className="mr-3" />
-            <h3 className="text-3xl"> Mobuy </h3>
-          </div>
+          <Link to="/">
+            <div className="flex items-center cursor-pointer">
+              <MenuRoundedIcon fontSize="large" className="mr-3" />
+              <h3 className="text-3xl"> Mobuy </h3>
+            </div>
+          </Link>
           {/* Search bar */}
           <div className="ml-6 mt-2 relative flex items-center">
             <CiSearch className="text-yellow absolute right-3 w-3.5 h-3.5" />
@@ -44,9 +63,10 @@ export default function Navigation() {
               type="text"
               id="search-bar"
               className="w-12 h-[55px] border-none outline-none
-                rounded-xl bg-stone-400 px-4 text-sm font-out-fit
-                placeholder:text-black-200 tracking-wider"
+              rounded-xl bg-stone-400 px-4 text-sm font-out-fit
+              placeholder:text-black-200 tracking-wider"
               placeholder="Search for products..."
+              onChange={handleChange}
             />
           </div>
         </div>
@@ -67,30 +87,38 @@ export default function Navigation() {
             </select>
           </div>
           {/* cart */}
-          <StyledBadge
-            className="mr-5 cursor-pointer"
-            showZero
-            badgeContent={0}
-            color="secondary"
-          >
-            <div
-              className="bg-lightYellow w-[43px] h-[43px] rounded-2xl
-                flex justify-center items-center relative"
+          <Link to="/cart">
+            <StyledBadge
+              className="mr-5 cursor-pointer"
+              showZero
+              badgeContent={counter}
+              color="secondary"
             >
-              <LocalMallRoundedIcon fontSize="large" className="text-yellow" />
-            </div>
-          </StyledBadge>
+              <div
+                className={`bg-lightYellow w-[43px] h-[43px] rounded-2xl
+                flex justify-center items-center relative ${cartActive}`}
+              >
+                <LocalMallRoundedIcon
+                  fontSize="large"
+                  className="text-yellow"
+                />
+              </div>
+            </StyledBadge>
+          </Link>
           {/* savelater */}
-          <div
-            className="bg-lightYellow w-[43px] h-[43px] rounded-2xl
-              flex justify-center items-center relative mr-4 cursor-pointer"
-          >
-            <FavoriteRoundedIcon fontSize="large" className="text-yellow" />
-          </div>
+          <Link to="/saveLater">
+            <div
+              className={`bg-lightYellow w-[43px] h-[43px] rounded-2xl
+            flex justify-center items-center relative mr-4 cursor-pointer
+            ${savelaterActive}`}
+            >
+              <FavoriteRoundedIcon fontSize="large" className="text-yellow" />
+            </div>
+          </Link>
           {/* profile */}
           <div
             className="bg-lightYellow w-[43px] h-[43px] rounded-2xl
-              flex justify-center items-center relative mr-4 cursor-pointer"
+            flex justify-center items-center relative mr-4 cursor-pointer"
           >
             <FaceRoundedIcon fontSize="large" className="text-yellow" />
           </div>

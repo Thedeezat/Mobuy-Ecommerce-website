@@ -83,7 +83,7 @@ module.exports = {
         '10': '500px',
         '11': '550px',
         '12': '610px',
-        '13': '720px',
+        '13': '800px',
         maxWidth: '1450px',
       },
       keyframes: {
