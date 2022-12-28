@@ -10,8 +10,6 @@ import arrow from './lottie/arrow.json'
 
 import { Link } from 'react-router-dom'
 
-import Footer from './footer/Footer'
-
 export default function PagesContent({
   productstatus,
   productInfo,
@@ -47,13 +45,16 @@ export default function PagesContent({
           </h2>{' '}
         </Link>
         {/* heading */}
-        <h2
-          className="text-xl mt-2 bg-ash shadow-md w-7.3 
+        {page_heading && (
+          <h2
+            className="text-xl mt-2 bg-ash shadow-md w-7.3 
           text-left px-4 rounded-md py-2 opacity-[0.7] tracking-wide"
-        >
-          {' '}
-          {page_heading}{' '}
-        </h2>
+          >
+            {' '}
+            {page_heading}{' '}
+          </h2>
+        )}
+
         {/* empty cart item */}
         {is_cartEmpty && (
           <section
@@ -75,7 +76,7 @@ export default function PagesContent({
             </div>
           </section>
         )}
-        {/* item added to cart */}
+        {/* item added */}
         <section>{productAdded}</section>
       </div>
       {/* footer */}

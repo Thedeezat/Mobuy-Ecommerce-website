@@ -1,10 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import Snackbar from '@mui/material/Snackbar'
 
 import MuiAlert from '@mui/material/Alert'
-
-import Button from '@mui/material/Button'
 
 import IconButton from '@mui/material/IconButton'
 
@@ -15,11 +13,12 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 })
 
 export function CustomSnackbar({ children, message, success, button_text }) {
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = useState(false)
 
-  const handleClickVariant = () => () => {
+  const handleClickVariant = () => {
     setOpen(true)
   }
+
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return
@@ -54,7 +53,7 @@ export function CustomSnackbar({ children, message, success, button_text }) {
 
   return (
     <>
-      <div onClick={handleClickVariant()}>{children}</div>
+      <div onClick={handleClickVariant}>{children}</div>
 
       {success ? (
         <Snackbar

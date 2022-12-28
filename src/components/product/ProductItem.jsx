@@ -20,6 +20,7 @@ export default function ProductItem({ productImage_num }) {
   const { handleCounter, currency, searchItem, handleCart } = useContext(
     productContext,
   )
+  const [open, setOpen] = React.useState(false)
 
   const { data: products, loading, error } = useFetch(
     'https://api.escuelajs.co/api/v1/products',
@@ -55,7 +56,7 @@ export default function ProductItem({ productImage_num }) {
       {products &&
         products
           .filter((val) => {
-            if (searchItem == ' ') {
+            if (searchItem === ' ') {
               return val
             } else if (
               val.title.toLowerCase().includes(searchItem.toLowerCase())
@@ -97,6 +98,7 @@ export default function ProductItem({ productImage_num }) {
                 src={product.images[productImage_num]}
                 className="h-7.2 w-full object-cover rounded-2xl
                  bg-stone-600 border-none"
+                alt=""
               />{' '}
               {/* Description */}
               <div className="pt-3.5 px-3">
