@@ -37,6 +37,7 @@ module.exports = {
         400: '#D3D3D3',
         500: '#ececec',
         600: 'rgba(163, 163, 163, 0.3)',
+        700: 'rgba(163, 163, 163, 0.1)',
       },
     },
     fontSize: {
@@ -85,6 +86,7 @@ module.exports = {
         '10': '500px',
         '11': '550px',
         '12': '610px',
+        '12.1': '690px',
         '13': '830px',
         maxWidth: '1450px',
       },
@@ -93,6 +95,9 @@ module.exports = {
           '0%,': { opacity: '0' },
           '100%': { opacity: '0' },
         },
+      },
+      outlineWidth: {
+        1: '1px',
       },
     },
   },

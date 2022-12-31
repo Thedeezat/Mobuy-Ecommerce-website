@@ -14,6 +14,8 @@ import Checkout from './pages/Checkout'
 
 import Login from './pages/Login'
 
+import Signup from './pages/Signup'
+
 export const productContext = createContext()
 
 export const homeContext = createContext()
@@ -72,11 +74,14 @@ function App() {
           <Route path="/saveLater">
             <SaveLater />
           </Route>
+          <Route path="/account/signup">
+            <Signup />
+          </Route>
+          <Route path="/account/login">
+            <Login />
+          </Route>
           <Route path="/checkout/completeOrder">
             <Checkout />
-          </Route>
-          <Route>
-            <Login path="/account/login" />
           </Route>
         </Switch>
       </productContext.Provider>

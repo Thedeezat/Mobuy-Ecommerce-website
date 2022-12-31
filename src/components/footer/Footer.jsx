@@ -8,6 +8,10 @@ import { BsTwitter } from 'react-icons/bs'
 
 import { AiFillYoutube } from 'react-icons/ai'
 
+import Lottie from 'lottie-react'
+
+import arrowup from '../lottie/arrowup.json'
+
 export default function Footer() {
   return (
     <footer
@@ -104,6 +108,16 @@ export default function Footer() {
           Terms of use
         </p>
         <p className="cursor-pointer hover:text-stone-300">Cookies</p>
+        {/* Scroll up */}
+        <p
+          className="text-base text-black-200 relative left-10 flex
+         justify-center items-end cursor-pointer opacity-[0.7] hover:opacity-[0.9]"
+        >
+          <span className="mr-[3px]"> Scroll to top </span>
+          <div className="rotate-[180deg] w-[30px] h-[30px]">
+            <Lottie animationData={arrowup} />
+          </div>
+        </p>
       </div>
     </footer>
   )

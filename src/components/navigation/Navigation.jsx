@@ -19,6 +19,7 @@ import { Link } from 'react-router-dom'
 import { productContext } from '../../App'
 
 import debounce from 'lodash.debounce'
+import { useState } from 'react'
 
 export default function Navigation({
   counter,
@@ -27,6 +28,7 @@ export default function Navigation({
   savelaterActive,
 }) {
   const { setSearchItem } = useContext(productContext)
+  const [showProfile, setShowProfile] = useState(false)
 
   const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -96,7 +98,8 @@ export default function Navigation({
             >
               <div
                 className={`bg-lightYellow w-[43px] h-[43px] rounded-2xl
-                flex justify-center items-center relative ${cartActive}`}
+                flex justify-center items-center relative ${cartActive}   
+                hover:border-2 border-yellow`}
               >
                 <LocalMallRoundedIcon
                   fontSize="large"
@@ -110,19 +113,57 @@ export default function Navigation({
             <div
               className={`bg-lightYellow w-[43px] h-[43px] rounded-2xl
             flex justify-center items-center relative mr-4 cursor-pointer
-            ${savelaterActive}`}
+            ${savelaterActive} hover:border-2 border-yellow`}
             >
               <FavoriteRoundedIcon fontSize="large" className="text-yellow" />
             </div>
           </Link>
           {/* profile */}
-          <div
-            className="bg-lightYellow w-[43px] h-[43px] rounded-2xl
-            flex justify-center items-center relative mr-4 cursor-pointer"
-          >
-            <FaceRoundedIcon fontSize="large" className="text-yellow" />
+          <div className="relative">
+            <div
+              className={`bg-lightYellow w-[43px] h-[43px] rounded-2xl
+            flex justify-center items-center relative mr-4 cursor-pointer
+            hover:border-2 border-yellow ${
+              showProfile && 'border-2 border-yellow'
+            }`}
+              onClick={() => setShowProfile(!showProfile)}
+            >
+              <FaceRoundedIcon fontSize="large" className="text-yellow" />
+            </div>
+            {/* Profile hover */}
+            {showProfile && (
+              <div
+                className="w-[220px] bg-ash shadow-md text-black-200
+                text-lg flex-col absolute right-4 top-[62px] rounded-xl border
+               border-stone-700"
+              >
+                <p className="text-lg px-3.5 opacity-[0.7] py-2 shadow-sm">
+                  {' '}
+                  Welcome Back!{' '}
+                </p>
+                <p
+                  className="border-b border-stone-600 px-3.5 py-3 cursor-pointer
+                 hover:text-charcoal"
+                >
+                  Account{' '}
+                </p>
+                <p
+                  className="border-b border-stone-600 px-3.5 py-3 cursor-pointer
+                hover:text-charcoal"
+                >
+                  {' '}
+                  Profile{' '}
+                </p>
+                {/* <p
+                  className="text-darkOrange border-stone-600 px-3.5 py-3
+                  cursor-pointer"
+                >
+                  {' '}
+                  Log Out{' '}
+                </p> */}
+              </div>
+            )}
           </div>
-          {/* <p className="text-base"> Welcome Back </p> */}
         </div>
       </nav>
     </>

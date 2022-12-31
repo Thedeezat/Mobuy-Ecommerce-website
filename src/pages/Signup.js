@@ -14,11 +14,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility'
 
 import Divider from '@mui/material/Divider'
 
-import FacebookIcon from '@mui/icons-material/Facebook'
-
-import { FcGoogle } from 'react-icons/fc'
-
-export default function Login() {
+export function Signup() {
   const [passwordType, setPasswordType] = useState('password')
   const [passwordInput, setPasswordInput] = useState('')
   const [visibilityOn, setVisibilityOn] = useState(true)
@@ -43,7 +39,7 @@ export default function Login() {
         {' '}
         <h2
           className="text-lg text-black-200 mt-3 absolute top-3
-            left-5 flex items-center cursor-pointer hover:text-charcoal"
+          left-5 flex items-center cursor-pointer hover:text-charcoal"
         >
           <Lottie
             animationData={arrow}
@@ -57,17 +53,17 @@ export default function Login() {
         className="h-screen flex justify-center
         items-center"
       >
-        <div className="w-9 h-[525px] bg-white-300 rounded-xl">
+        <div className="w-9 h-12.1 bg-white-300 rounded-xl">
           {/* Heading */}
           <div
             className="text-center border-b border-white-700
-           py-3"
+            py-3"
           >
             <h4 className="text-3xl">
               <Link to="/">
-                <span className="text-stone-200 mr-[5px]">Mobuy</span>
+                <span className="text-stone-200 mr-[6px]">Mobuy</span>
               </Link>{' '}
-              Login
+              Signup
             </h4>
           </div>
           {/* Form */}
@@ -75,6 +71,24 @@ export default function Login() {
             className="flex justify-center
             flex-col px-5 mt-3 gap-y-3.5"
           >
+            {/* Full name */}
+            <div className="relative flex flex-col">
+              <label htmlFor="name" className="text-sm text-black-200">
+                Full name
+              </label>
+              <input
+                type="text"
+                required
+                id="name"
+                name="name"
+                placeholder="Enter Full Name"
+                className="placeholder:text-black-200 placeholder:opacity-[0.7] 
+                text-sm px-3.5 my-1 w-full h-[50px] bg-transparent text-black-100 
+                rounded-xl border border-stone-400 font-out-fit focus:outline
+                focus:border-transparent outline-1 outline-stone-200
+                hover:border-stone-200"
+              />
+            </div>
             {/* email */}
             <div className="relative flex flex-col">
               <label htmlFor="email" className="text-sm text-black-200">
@@ -92,9 +106,23 @@ export default function Login() {
                 focus:border-transparent outline-1 outline-stone-200
                 hover:border-stone-200"
               />
-              <AlternateEmailIcon
-                className="absolute text-black-200 right-2 
-                top-[48px] opacity-[0.7] "
+            </div>
+            {/* Number */}
+            <div className="relative flex flex-col">
+              <label htmlFor="number" className="text-sm text-black-200">
+                Phone Number
+              </label>
+              <input
+                type="number"
+                required
+                id="number"
+                name="number"
+                placeholder="Enter Phone Number"
+                className="placeholder:text-black-200 placeholder:opacity-[0.7] 
+                text-sm px-3.5 my-1 w-full h-[50px] bg-transparent text-black-100 
+                rounded-xl border border-stone-400 font-out-fit focus:outline
+                focus:border-transparent outline-1 outline-stone-200
+                hover:border-stone-200"
               />
             </div>
 
@@ -103,14 +131,6 @@ export default function Login() {
               <label htmlFor="password" className="text-sm text-black-200">
                 Password
               </label>
-              {/* forget password */}
-              <p
-                className="absolute top-0 right-0 text-right text-blue text-sm 
-                cursor-pointer underline"
-              >
-                {' '}
-                Forget Password?{' '}
-              </p>
               <input
                 type={passwordType}
                 required
@@ -128,78 +148,53 @@ export default function Login() {
               {visibilityOn ? (
                 <VisibilityOffIcon
                   className="absolute text-black-200 right-2 top-[45px]
-                  cursor-pointer opacity-[0.7] "
+              cursor-pointer opacity-[0.7] "
                   onClick={handlePasswordShow}
                 />
               ) : (
                 <VisibilityIcon
                   className="absolute text-black-200 right-2 top-[45px]
-                  cursor-pointer opacity-[0.7] "
+              cursor-pointer opacity-[0.7] "
                   onClick={handlePasswordShow}
                 />
               )}
             </div>
-            {/* Login btn */}
+            {/* Signup btn */}
             <div>
               <button
                 className="w-full h-[45px] bg-stone-200
-               text-white-300 rounded-xl text-base font-out-fit
-               tracking-wide hover:bg-charcoal"
+           text-white-300 rounded-xl text-base font-out-fit
+           tracking-wide hover:bg-charcoal"
               >
                 {' '}
-                Login{' '}
+                Signup{' '}
               </button>
             </div>
           </form>
 
-          {/* Signin options */}
-          <div className="py-5 px-4">
-            <Divider className="opacity-[0.5]" orientation="horizontal">
-              <span
-                className="border border-stone-600 w-6 h-6
-               p-[4px] rounded-full tracking-wider"
-              >
-                OR
-              </span>
-            </Divider>
-            {/* social media */}
-            <div className="mt-3.5 flex items-center gap-x-3">
-              {/* Facebook */}
-              <div
-                className="h-3 border border-stone-200 flex
-              justify-center items-center py-3 rounded-md text-sm
-              px-2 cursor-pointer hover:bg-ash"
-              >
-                <span className="opacity-[0.7]"> Login with</span>
-                <FacebookIcon
-                  fontSize="large"
-                  className="ml-[4px] text-black-200"
-                />
-              </div>
-
-              {/* google */}
-              <div
-                className="h-3 border border-stone-200 flex
-              justify-center items-center py-3 rounded-md text-sm
-              px-2 cursor-pointer hover:bg-ash"
-              >
-                <span className="opacity-[0.7]"> Login with </span>
-                <FcGoogle className="ml-[4px] text-base" />
-              </div>
+          {/* Terms and Conditions */}
+          <div className="px-4">
+            <div className="mt-3.5 flex items-center justify-center">
+              <p className="text-black-200 opacity-[0.7] text-sm text-center">
+                By signing up you accept our{' '}
+                <span className="underline cursor-pointer">
+                  terms and conditions <br /> & privacy policy
+                </span>
+              </p>
             </div>
 
-            {/* Create account */}
+            {/* Login */}
             <p
-              className="text-base mt-4 text-black-200
-               w-full opacity-[0.8]"
+              className="text-base mt-3 text-black-200
+              w-full opacity-[0.8] text-center"
             >
-              Don't have an account?{' '}
-              <Link to="/account/signup">
+              Already have an account?{' '}
+              <Link to="/account/login">
                 <span
                   className="text-blue ml-[4px] cursor-pointer
-                 hover:text-black-200"
+                hover:text-black-200"
                 >
-                  Create an account{' '}
+                  Login{' '}
                 </span>
               </Link>
             </p>
@@ -210,3 +205,5 @@ export default function Login() {
     </>
   )
 }
+
+export default Signup

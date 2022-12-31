@@ -14,8 +14,6 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined'
 
-import { CustomSnackbar } from '../components/Snackbar'
-
 import OrderSummary from '../components/cart/OrderSummary'
 
 import Snackbar from '@mui/material/Snackbar'
