@@ -36,12 +36,18 @@ function App() {
     const initialValue = JSON.parse(localStorage.getItem('cart'))
     return initialValue || ''
   })
+  const [savelater, setSavelater] = useState({})
+
   const handleCounter = () => {
     setConter((count) => count + 1)
   }
   // ₦
   const handleCurrency = (e) => {}
 
+  const handleSavelater = (item) => {
+    if (savelater.indexOf(item) !== -1) return
+    setSavelater([...savelater, item])
+  }
   const handleCart = (item) => {
     if (cart.indexOf(item) !== -1) return
     setCart([...cart, item])
