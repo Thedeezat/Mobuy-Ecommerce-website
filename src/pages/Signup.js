@@ -1,36 +1,51 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 import Lottie from 'lottie-react'
 
 import arrow from '../components/lottie/arrow.json'
 
-import AlternateEmailIcon from '@mui/icons-material/AlternateEmail'
-
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
 
 import VisibilityIcon from '@mui/icons-material/Visibility'
 
-import Divider from '@mui/material/Divider'
+import { AuthContext } from '../components/Auth/AuthContext'
 
-export function Signup() {
-  const [passwordType, setPasswordType] = useState('password')
-  const [passwordInput, setPasswordInput] = useState('')
-  const [visibilityOn, setVisibilityOn] = useState(true)
+import { auth } from '../components/Auth/Firebase'
 
-  const handlePasswordChange = (e) => {
-    setPasswordInput(e.target.value)
-  }
-  const handlePasswordShow = () => {
-    if (passwordType === 'password') {
-      setPasswordType('text')
-      setVisibilityOn(false)
-      return
-    } else {
-      setPasswordType('password')
-      setVisibilityOn(true)
+import { AlertError } from '../components/Error'
+
+import Spinner from '../components/Loader/Spinner'
+
+export function Signup({
+  visibilityOn,
+  passwordInput,
+  handlePasswordChange,
+  handlePasswordShow,
+  passwordType,
+}) {
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
+  const { signUp } = AuthContext()
+  const history = useHistory()
+
+  const emailRef = useRef()
+  const passwordRef = useRef()
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    try {
+      setError('')
+      setLoading(true)
+      await signUp(auth, emailRef.current.value, passwordRef.current.value)
+      history.push('/')
+    } catch {
+      setError('Failed to create an account')
     }
+
+    setLoading(false)
   }
   return (
     <>
@@ -53,7 +68,7 @@ export function Signup() {
         className="h-screen flex justify-center
         items-center"
       >
-        <div className="w-9 h-12.1 bg-white-300 rounded-xl">
+        <div className="w-9 pb-3.5 bg-white-300 rounded-xl">
           {/* Heading */}
           <div
             className="text-center border-b border-white-700
@@ -70,7 +85,14 @@ export function Signup() {
           <form
             className="flex justify-center
             flex-col px-5 mt-3 gap-y-3.5"
+            onSubmit={handleSubmit}
           >
+            {/* Error */}
+            {error && (
+              <div className="top-3">
+                <AlertError styles="text-blue" error={error} />
+              </div>
+            )}
             {/* Full name */}
             <div className="relative flex flex-col">
               <label htmlFor="name" className="text-sm text-black-200">
@@ -82,11 +104,11 @@ export function Signup() {
                 id="name"
                 name="name"
                 placeholder="Enter Full Name"
-                className="placeholder:text-black-200 placeholder:opacity-[0.7] 
+                className={`placeholder:text-black-200 placeholder:opacity-[0.7] 
                 text-sm px-3.5 my-1 w-full h-[50px] bg-transparent text-black-100 
                 rounded-xl border border-stone-400 font-out-fit focus:outline
                 focus:border-transparent outline-1 outline-stone-200
-                hover:border-stone-200"
+                hover:border-stone-200`}
               />
             </div>
             {/* email */}
@@ -96,6 +118,7 @@ export function Signup() {
               </label>
               <input
                 type="email"
+                ref={emailRef}
                 required
                 id="email"
                 name="email"
@@ -133,6 +156,7 @@ export function Signup() {
               </label>
               <input
                 type={passwordType}
+                ref={passwordRef}
                 required
                 onChange={handlePasswordChange}
                 value={passwordInput}
@@ -162,12 +186,16 @@ export function Signup() {
             {/* Signup btn */}
             <div>
               <button
+                type="submit"
+                disabled={loading}
                 className="w-full h-[45px] bg-stone-200
-           text-white-300 rounded-xl text-base font-out-fit
-           tracking-wide hover:bg-charcoal"
+             text-white-300 rounded-xl text-base font-out-fit
+               tracking-wide hover:bg-charcoal relative flex 
+               justify-center items-center"
               >
                 {' '}
-                Signup{' '}
+                {loading ? '' : <span> Signup </span>}
+                {loading && <Spinner color="#D3D3D3" styles="absolute" />}
               </button>
             </div>
           </form>

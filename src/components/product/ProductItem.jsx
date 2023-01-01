@@ -6,9 +6,9 @@ import Rating from '@mui/material/Rating'
 
 import Button from '@mui/material/Button'
 
-import Loader from '../Loader'
+import PageSkeleton from '../Loader/Skeleton'
 
-import Error from '../Error'
+import { TextError } from '../Error'
 
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined'
 
@@ -20,7 +20,6 @@ export default function ProductItem({ productImage_num }) {
   const { handleCounter, currency, searchItem, handleCart } = useContext(
     productContext,
   )
-  const [open, setOpen] = React.useState(false)
 
   const { data: products, loading, error } = useFetch(
     'https://api.escuelajs.co/api/v1/products',
@@ -51,8 +50,8 @@ export default function ProductItem({ productImage_num }) {
 
   return (
     <section className="pt-4 grid grid-cols-4 gap-4 text-black-200 ">
-      {loading && <Loader />}
-      {error && <Error error={error} />}
+      {loading && <PageSkeleton />}
+      {error && <TextError error={error} />}
       {products &&
         products
           .filter((val) => {
@@ -97,7 +96,7 @@ export default function ProductItem({ productImage_num }) {
               <img
                 src={product.images[productImage_num]}
                 className="h-7.2 w-full object-cover rounded-2xl
-                 bg-stone-600 border-none"
+                 bg-stone-300 border-none"
                 alt=""
               />{' '}
               {/* Description */}

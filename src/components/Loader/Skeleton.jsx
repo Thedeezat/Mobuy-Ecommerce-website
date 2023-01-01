@@ -4,7 +4,7 @@ import Skeleton from '@mui/material/Skeleton'
 
 import Stack from '@mui/material/Stack'
 
-export default function Loader() {
+export default function PageSkeleton() {
   return (
     <div className="w-screen h-screen">
       <div className="flex gap-7">

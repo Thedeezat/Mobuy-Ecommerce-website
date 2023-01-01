@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 import Lottie from 'lottie-react'
 
@@ -18,23 +18,42 @@ import FacebookIcon from '@mui/icons-material/Facebook'
 
 import { FcGoogle } from 'react-icons/fc'
 
-export default function Login() {
-  const [passwordType, setPasswordType] = useState('password')
-  const [passwordInput, setPasswordInput] = useState('')
-  const [visibilityOn, setVisibilityOn] = useState(true)
+import { AuthContext } from '../components/Auth/AuthContext'
 
-  const handlePasswordChange = (e) => {
-    setPasswordInput(e.target.value)
-  }
-  const handlePasswordShow = () => {
-    if (passwordType === 'password') {
-      setPasswordType('text')
-      setVisibilityOn(false)
-      return
-    } else {
-      setPasswordType('password')
-      setVisibilityOn(true)
+import { auth } from '../components/Auth/Firebase'
+
+import { AlertError } from '../components/Error'
+
+import Spinner from '../components/Loader/Spinner'
+
+export default function Login({
+  visibilityOn,
+  passwordInput,
+  handlePasswordChange,
+  handlePasswordShow,
+  passwordType,
+}) {
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+  const { login } = AuthContext()
+  const history = useHistory()
+
+  const emailRef = useRef()
+  const passwordRef = useRef()
+
+  const handleLogin = async (e) => {
+    e.preventDefault()
+
+    try {
+      setError('')
+      setLoading(true)
+      await login(auth, emailRef.current.value, passwordRef.current.value)
+      history.push('/')
+    } catch {
+      setError('Failed to log in')
     }
+
+    setLoading(false)
   }
   return (
     <>
@@ -57,7 +76,7 @@ export default function Login() {
         className="h-screen flex justify-center
         items-center"
       >
-        <div className="w-9 h-[525px] bg-white-300 rounded-xl">
+        <div className="w-9 bg-white-300 pb-3.5 rounded-xl">
           {/* Heading */}
           <div
             className="text-center border-b border-white-700
@@ -74,7 +93,14 @@ export default function Login() {
           <form
             className="flex justify-center
             flex-col px-5 mt-3 gap-y-3.5"
+            onSubmit={handleLogin}
           >
+            {/* Error */}
+            {error && (
+              <div className="top-3">
+                <AlertError styles="text-blue" error={error} />
+              </div>
+            )}
             {/* email */}
             <div className="relative flex flex-col">
               <label htmlFor="email" className="text-sm text-black-200">
@@ -82,6 +108,7 @@ export default function Login() {
               </label>
               <input
                 type="email"
+                ref={emailRef}
                 required
                 id="email"
                 name="email"
@@ -104,18 +131,21 @@ export default function Login() {
                 Password
               </label>
               {/* forget password */}
-              <p
-                className="absolute top-0 right-0 text-right text-blue text-sm 
+              <Link to="/forgot-password">
+                <p
+                  className="absolute top-0 right-0 text-right text-blue text-sm 
                 cursor-pointer underline"
-              >
-                {' '}
-                Forget Password?{' '}
-              </p>
+                >
+                  {' '}
+                  Forget Password?{' '}
+                </p>
+              </Link>
               <input
                 type={passwordType}
                 required
                 onChange={handlePasswordChange}
                 value={passwordInput}
+                ref={passwordRef}
                 id="password"
                 name="password"
                 placeholder="Enter Password"
@@ -142,18 +172,22 @@ export default function Login() {
             {/* Login btn */}
             <div>
               <button
+                type="submit"
+                disabled={loading}
                 className="w-full h-[45px] bg-stone-200
                text-white-300 rounded-xl text-base font-out-fit
-               tracking-wide hover:bg-charcoal"
+               tracking-wide hover:bg-charcoal relative flex 
+               justify-center items-center"
               >
                 {' '}
-                Login{' '}
+                {loading ? '' : <span>Login</span>}
+                {loading && <Spinner color="#D3D3D3" styles="absolute" />}
               </button>
             </div>
           </form>
 
           {/* Signin options */}
-          <div className="py-5 px-4">
+          <div className="pt-5 px-4">
             <Divider className="opacity-[0.5]" orientation="horizontal">
               <span
                 className="border border-stone-600 w-6 h-6

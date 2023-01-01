@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded'
 
@@ -14,12 +14,15 @@ import FaceRoundedIcon from '@mui/icons-material/FaceRounded'
 
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded'
 
-import { Link } from 'react-router-dom'
+import LogoutIcon from '@mui/icons-material/Logout'
+
+import { Link, useHistory } from 'react-router-dom'
 
 import { productContext } from '../../App'
 
 import debounce from 'lodash.debounce'
-import { useState } from 'react'
+
+import { AuthContext } from '../Auth/AuthContext'
 
 export default function Navigation({
   counter,
@@ -29,6 +32,9 @@ export default function Navigation({
 }) {
   const { setSearchItem } = useContext(productContext)
   const [showProfile, setShowProfile] = useState(false)
+  const { currentUser, logOut } = AuthContext()
+  const [error, setError] = useState('')
+  const history = useHistory()
 
   const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -44,6 +50,17 @@ export default function Navigation({
   const handleChange = debounce((e) => {
     setSearchItem(e.target.value)
   }, 800)
+
+  const handleLogout = async () => {
+    setError('')
+
+    try {
+      await logOut()
+      history.push('/account/login')
+    } catch {
+      setError('Failed to log out')
+    }
+  }
 
   return (
     <>
@@ -134,36 +151,56 @@ export default function Navigation({
             {showProfile && (
               <div
                 className="w-[220px] bg-ash shadow-md text-black-200
-                text-lg flex-col absolute right-4 top-[62px] rounded-xl border
-               border-stone-700"
+                text-lg flex-col absolute right-0 top-[62px] rounded-xl border
+               border-stone-700 z-50"
               >
                 <p className="text-lg px-3.5 opacity-[0.7] py-2 shadow-sm">
                   {' '}
-                  Welcome Back!{' '}
+                  Welcome back!{' '}
                 </p>
-                <p
-                  className="border-b border-stone-600 px-3.5 py-3 cursor-pointer
-                 hover:text-charcoal"
-                >
-                  Account{' '}
-                </p>
-                <p
-                  className="border-b border-stone-600 px-3.5 py-3 cursor-pointer
-                hover:text-charcoal"
-                >
-                  {' '}
-                  Profile{' '}
-                </p>
-                {/* <p
-                  className="text-darkOrange border-stone-600 px-3.5 py-3
-                  cursor-pointer"
-                >
-                  {' '}
-                  Log Out{' '}
-                </p> */}
+                {currentUser && (
+                  <p
+                    className="border-b border-stone-600 px-3.5 py-3 cursor-pointer
+                hover:bg-stone-700 flex items-center"
+                  >
+                    <span> Profile</span>{' '}
+                  </p>
+                )}
+                <Link to="/account/login">
+                  <p
+                    className="border-b border-stone-600 px-3.5 py-3 cursor-pointer
+                    hover:bg-stone-700 flex items-center"
+                  >
+                    <span> Login / Signup </span>{' '}
+                  </p>
+                </Link>
+                {currentUser && (
+                  <>
+                    <p
+                      className="text-darkOrange border-stone-600 px-3.5 py-3
+                      cursor-pointer hover:bg-stone-700 flex items-center"
+                      onClick={handleLogout}
+                    >
+                      <LogoutIcon
+                        className="mr-1"
+                        sx={{ width: '18px', height: '18px' }}
+                      />{' '}
+                      <span> Log Out</span>
+                      <br />
+                      {error && (
+                        <span className="text-xs text-darkOrange pt-3">
+                          Failed to log out.. ☹️
+                        </span>
+                      )}
+                    </p>
+                  </>
+                )}
               </div>
             )}
           </div>
+          {/* {currentUser && (
+            <p className="text-base opacity-[0.7] py-2 "> Welcome Jane! </p>
+          )} */}
         </div>
       </nav>
     </>

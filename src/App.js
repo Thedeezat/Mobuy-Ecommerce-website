@@ -16,9 +16,9 @@ import Login from './pages/Login'
 
 import Signup from './pages/Signup'
 
-export const productContext = createContext()
+import ForgotPassword from './pages/ForgotPassword'
 
-export const homeContext = createContext()
+export const productContext = createContext()
 
 function App() {
   const [counter, setConter] = useState(() => {
@@ -27,11 +27,15 @@ function App() {
   })
   const [currency, setCurrency] = useState('$')
   const [searchItem, setSearchItem] = useState('')
+
+  const [passwordType, setPasswordType] = useState('password')
+  const [passwordInput, setPasswordInput] = useState('')
+  const [visibilityOn, setVisibilityOn] = useState(true)
+
   const [cart, setCart] = useState(() => {
     const initialValue = JSON.parse(localStorage.getItem('cart'))
     return initialValue || ''
   })
-
   const handleCounter = () => {
     setConter((count) => count + 1)
   }
@@ -47,23 +51,35 @@ function App() {
     localStorage.setItem('cart', JSON.stringify(cart))
   }, [counter])
 
-  // localStorage.clear()
+  // password
+  const handlePasswordChange = (e) => {
+    setPasswordInput(e.target.value)
+  }
+  const handlePasswordShow = () => {
+    if (passwordType === 'password') {
+      setPasswordType('text')
+      setVisibilityOn(false)
+      return
+    } else {
+      setPasswordType('password')
+      setVisibilityOn(true)
+    }
+  }
 
+  const value = {
+    handleCounter,
+    handleCart,
+    cart,
+    setCart,
+    counter,
+    setConter,
+    currency,
+    searchItem,
+    setSearchItem,
+  }
   return (
     <Router>
-      <productContext.Provider
-        value={{
-          handleCounter,
-          handleCart,
-          cart,
-          setCart,
-          counter,
-          setConter,
-          currency,
-          searchItem,
-          setSearchItem,
-        }}
-      >
+      <productContext.Provider value={value}>
         <Switch>
           <Route exact path="/">
             <Home />
@@ -75,13 +91,28 @@ function App() {
             <SaveLater />
           </Route>
           <Route path="/account/signup">
-            <Signup />
+            <Signup
+              visibilityOn={visibilityOn}
+              passwordInput={passwordInput}
+              passwordType={passwordType}
+              handlePasswordChange={handlePasswordChange}
+              handlePasswordShow={handlePasswordShow}
+            />
           </Route>
           <Route path="/account/login">
-            <Login />
+            <Login
+              visibilityOn={visibilityOn}
+              passwordInput={passwordInput}
+              passwordType={passwordType}
+              handlePasswordChange={handlePasswordChange}
+              handlePasswordShow={handlePasswordShow}
+            />
           </Route>
           <Route path="/checkout/completeOrder">
             <Checkout />
+          </Route>
+          <Route path="/forgot-password">
+            <ForgotPassword />
           </Route>
         </Switch>
       </productContext.Provider>
