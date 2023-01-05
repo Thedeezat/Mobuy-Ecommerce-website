@@ -28,7 +28,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />
 })
 
-export default function Cart() {
+export default function Cart({ handleSavelater, currentUser }) {
   const { counter, setConter, cart, currency, setCart } = useContext(
     productContext,
   )
@@ -47,24 +47,28 @@ export default function Cart() {
     }
     setOpen(false)
   }
+
   const Savelater_snackbar = (
-    <div className="flex flex-col">
-      <span className="text-sm font-out-fit">
-        You need to be loged in to save
-        <br /> an item
-      </span>
-      <button
-        className="border border-yellow outline-none bg-transparent
+    <>
+      <div className="flex flex-col">
+        <span className="text-sm font-out-fit">
+          You need to be loged in to save
+          <br /> an item
+        </span>
+        <button
+          className="border border-yellow outline-none bg-transparent
         w-[120px] mt-1 rounded-md py-[4px] text-xs font-out-fit 
         hover:bg-darkYellow hover:text-black-300"
-      >
-        {' '}
-        Click here to login{' '}
-      </button>
-    </div>
+        >
+          {' '}
+          Click here to login{' '}
+        </button>
+      </div>
+    </>
   )
-  const handleSaveLater = () => {
+  const handleSaveLater = (item) => {
     setSavelaterOpen(true)
+    handleSavelater(item)
   }
   const handleSavelaterClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -99,10 +103,12 @@ export default function Cart() {
           page_heading="Shopping cart"
           cart_true="true"
           is_cartEmpty="true"
+          is_back="true"
         />
       ) : (
         <PagesContent
           cart_true="true"
+          is_back="true"
           productAdded={
             <>
               <div
@@ -178,7 +184,7 @@ export default function Cart() {
 
                           <p
                             className="cursor-pointer ml-[3px] hover:text-blue"
-                            onClick={handleSaveLater}
+                            onClick={() => handleSaveLater(item)}
                           >
                             {' '}
                             <FavoriteBorderOutlinedIcon
@@ -194,10 +200,12 @@ export default function Cart() {
                   ))}
                   {/* Cart Items ends*/}
                 </div>
+
                 <OrderSummary
                   counter={counter}
                   currency={currency}
                   cart={cart}
+                  currentUser={currentUser}
                 />
               </div>
               {/* Cart */}
@@ -213,20 +221,47 @@ export default function Cart() {
                   sx={{ width: '290px', opacity: '0.1' }}
                 >
                   <span className="text-sm font-out-fit">
-                    Item has been removed from cart
+                    Product has been removed from cart
                   </span>
                 </Alert>
               </Snackbar>
 
               {/* Save items */}
-              <Snackbar
-                sx={{ zIndex: '30px' }}
-                open={savelaterOpen}
-                autoHideDuration={6000}
-                onClose={handleSavelaterClose}
-                message={Savelater_snackbar}
-                action={savelaterAction}
-              />
+              {currentUser ? (
+                <Snackbar
+                  open={savelaterOpen}
+                  autoHideDuration={6000}
+                  onClose={handleSavelaterClose}
+                  sx={{ zIndex: '30px' }}
+                >
+                  <Alert
+                    onClose={handleSavelaterClose}
+                    severity="success"
+                    sx={{ width: '290px', opacity: '0.1' }}
+                  >
+                    <span className="text-sm font-out-fit">
+                      Product added to saved items
+                    </span>
+                    <button
+                      className="border border-white-100 outline-none bg-transparent
+                      w-[80px] mt-1 rounded-md py-[1px] text-xs font-out-fit 
+                      hover:bg-darkYellow hover:border-yellow tracking-wider"
+                    >
+                      {' '}
+                      View Items
+                    </button>
+                  </Alert>
+                </Snackbar>
+              ) : (
+                <Snackbar
+                  sx={{ zIndex: '30px' }}
+                  open={savelaterOpen}
+                  autoHideDuration={6000}
+                  onClose={handleSavelaterClose}
+                  message={Savelater_snackbar}
+                  action={savelaterAction}
+                />
+              )}
             </>
           }
           page_heading="Shopping cart"

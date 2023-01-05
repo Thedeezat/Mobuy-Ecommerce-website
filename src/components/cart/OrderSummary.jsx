@@ -8,7 +8,7 @@ import { SiVisa } from 'react-icons/si'
 
 import { Link } from 'react-router-dom'
 
-export default function OrderSummary({ counter, currency, cart }) {
+export default function OrderSummary({ counter, currency, cart, currentUser }) {
   const [price, setPrice] = useState('')
   const [total, setTotal] = useState(0)
 
@@ -66,7 +66,7 @@ export default function OrderSummary({ counter, currency, cart }) {
         Excluding delivery charges{' '}
       </p>
       {/* Checkout Button */}
-      <Link to="/account/login">
+      <Link to={currentUser ? '/checkout/completeOrder' : '/account/login'}>
         <div className="border-b border-white-700 flex justify-center py-2 pb-3">
           <button
             className="w-[90%] h-5.5 rounded-lg bg-stone-200

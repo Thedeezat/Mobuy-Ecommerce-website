@@ -20,8 +20,10 @@ export default function PagesContent({
   texts_style,
   productAdded,
   is_cartEmpty,
+  is_back,
+  profile_style,
 }) {
-  const { counter } = useContext(productContext)
+  const { counter, firstName } = useContext(productContext)
   return (
     <>
       <div className="px-7 h-screen flex flex-col">
@@ -29,26 +31,31 @@ export default function PagesContent({
           counter={counter}
           cartActive={cart_true ? 'border-2 border-yellow' : ''}
           savelaterActive={savelater_true ? 'border-2 border-yellow' : ''}
+          firstName={firstName}
         />
         {/* back arrow */}
-        <Link to="/">
-          {' '}
-          <h2
-            className="text-lg text-black-200 mt-1 relative 
-            right-3.5 flex items-center cursor-pointer hover:text-charcoal"
-          >
-            <Lottie
-              animationData={arrow}
-              className="w-[50px] h-[50px] rotate-[180deg]"
-            />
-            <span className="ml-2">Back</span>
-          </h2>{' '}
-        </Link>
+        {is_back && (
+          <Link to="/">
+            {' '}
+            <div
+              className="text-lg text-black-200 mt-1 relative 
+             right-3.5 flex items-center cursor-pointer hover:text-charcoal"
+            >
+              <Lottie
+                animationData={arrow}
+                className="w-[50px] h-[50px] rotate-[180deg]"
+              />
+              <p className="ml-2">Back</p>
+            </div>{' '}
+          </Link>
+        )}
+
         {/* heading */}
         {page_heading && (
           <h2
-            className="text-xl mt-2 bg-ash shadow-md w-7.3 
-          text-left px-4 rounded-md py-2 opacity-[0.7] tracking-wide"
+            className={`text-xl mt-2 bg-ash shadow-md w-7.3 
+            text-left px-4 rounded-md py-2 opacity-[0.7] tracking-wide
+            ${profile_style}`}
           >
             {' '}
             {page_heading}{' '}

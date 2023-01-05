@@ -9,11 +9,15 @@ import { productContext } from '../App'
 import Footer from '../components/footer/Footer'
 
 export default function Home() {
-  const { counter, currency } = useContext(productContext)
+  const { counter, currency, firstName } = useContext(productContext)
   return (
     <div>
       <header className="px-7">
-        <Navigation counter={counter} currency={currency} />
+        <Navigation
+          counter={counter}
+          currency={currency}
+          firstName={firstName}
+        />
         <Tabs />
       </header>
       <Footer />

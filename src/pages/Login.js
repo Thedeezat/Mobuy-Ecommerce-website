@@ -35,7 +35,8 @@ export default function Login({
 }) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
-  const { login } = AuthContext()
+  const [googleError, setGoogleError] = useState('')
+  const { login, googleSignin } = AuthContext()
   const history = useHistory()
 
   const emailRef = useRef()
@@ -50,10 +51,19 @@ export default function Login({
       await login(auth, emailRef.current.value, passwordRef.current.value)
       history.push('/')
     } catch {
-      setError('Failed to log in')
+      setError('Failed to login')
     }
 
     setLoading(false)
+  }
+  const handleGoogle = async () => {
+    try {
+      setGoogleError('')
+      await googleSignin()
+      history.push('/')
+    } catch {
+      setGoogleError('Failed to login with google')
+    }
   }
   return (
     <>
@@ -99,6 +109,11 @@ export default function Login({
             {error && (
               <div className="top-3">
                 <AlertError styles="text-blue" error={error} />
+              </div>
+            )}
+            {googleError && (
+              <div className="top-3">
+                <AlertError styles="text-blue" error={googleError} />
               </div>
             )}
             {/* email */}
@@ -216,6 +231,7 @@ export default function Login({
                 className="h-3 border border-stone-200 flex
               justify-center items-center py-3 rounded-md text-sm
               px-2 cursor-pointer hover:bg-ash"
+                onClick={handleGoogle}
               >
                 <span className="opacity-[0.7]"> Login with </span>
                 <FcGoogle className="ml-[4px] text-base" />

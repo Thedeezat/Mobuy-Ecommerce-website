@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, useEffect } from 'react'
+import { createContext, useState, useContext, useEffect } from 'react'
 import { auth } from './Firebase'
 import {
   createUserWithEmailAndPassword,
@@ -6,6 +6,8 @@ import {
   signInWithEmailAndPassword,
   signOut,
   sendPasswordResetEmail,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from 'firebase/auth'
 
 const AuthProvider = createContext()
@@ -30,6 +32,10 @@ export function AuthContext() {
   const resetPassword = (auth, email) => {
     return sendPasswordResetEmail(auth, email)
   }
+  const googleSignin = () => {
+    const provider = new GoogleAuthProvider()
+    return signInWithPopup(auth, provider)
+  }
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -39,5 +45,5 @@ export function AuthContext() {
     return unsubscribe
   }, [])
 
-  return { currentUser, signUp, login, logOut, resetPassword }
+  return { currentUser, signUp, login, logOut, resetPassword, googleSignin }
 }

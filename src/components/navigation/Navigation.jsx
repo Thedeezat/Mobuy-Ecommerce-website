@@ -29,6 +29,7 @@ export default function Navigation({
   currency,
   cartActive,
   savelaterActive,
+  firstName,
 }) {
   const { setSearchItem } = useContext(productContext)
   const [showProfile, setShowProfile] = useState(false)
@@ -94,8 +95,8 @@ export default function Navigation({
           {/* Currency changer */}
           <div>
             <select
-              name="cars"
-              id="cars"
+              name="currency"
+              id="currency"
               className="border-none bg-transparent mr-4 font-out-fit
               text-yellow w-[50px] text-sm outline-none"
             >
@@ -156,15 +157,17 @@ export default function Navigation({
               >
                 <p className="text-lg px-3.5 opacity-[0.7] py-2 shadow-sm">
                   {' '}
-                  Welcome back!{' '}
+                  Hi {firstName ? firstName : ''}{' '}
                 </p>
                 {currentUser && (
-                  <p
-                    className="border-b border-stone-600 px-3.5 py-3 cursor-pointer
-                hover:bg-stone-700 flex items-center"
-                  >
-                    <span> Profile</span>{' '}
-                  </p>
+                  <Link to="/profile">
+                    <p
+                      className="border-b border-stone-600 px-3.5 py-3 cursor-pointer
+                     hover:bg-stone-700 flex items-center"
+                    >
+                      <span>My Profile</span>{' '}
+                    </p>
+                  </Link>
                 )}
                 <Link to="/account/login">
                   <p

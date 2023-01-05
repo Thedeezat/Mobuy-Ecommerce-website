@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 
 import { Link, useHistory } from 'react-router-dom'
 
@@ -24,6 +24,10 @@ export function Signup({
   handlePasswordChange,
   handlePasswordShow,
   passwordType,
+  setFirstName,
+  firstName,
+  setLastName,
+  lastName,
 }) {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
@@ -93,15 +97,17 @@ export function Signup({
                 <AlertError styles="text-blue" error={error} />
               </div>
             )}
-            {/* Full name */}
+            {/* First name */}
             <div className="relative flex flex-col">
               <label htmlFor="name" className="text-sm text-black-200">
-                Full name
+                First name
               </label>
               <input
                 type="text"
                 required
                 id="name"
+                onChange={(e) => setFirstName(e.target.value)}
+                value={firstName}
                 name="name"
                 placeholder="Enter Full Name"
                 className={`placeholder:text-black-200 placeholder:opacity-[0.7] 
@@ -109,6 +115,26 @@ export function Signup({
                 rounded-xl border border-stone-400 font-out-fit focus:outline
                 focus:border-transparent outline-1 outline-stone-200
                 hover:border-stone-200`}
+              />
+            </div>
+            {/* Last name */}
+            <div className="relative flex flex-col">
+              <label htmlFor="last-name" className="text-sm text-black-200">
+                Last Name
+              </label>
+              <input
+                type="text"
+                required
+                id="last-name"
+                name="last-name"
+                onChange={(e) => setLastName(e.target.value)}
+                value={lastName}
+                placeholder="Enter last name"
+                className="placeholder:text-black-200 placeholder:opacity-[0.7] 
+                text-sm px-3.5 my-1 w-full h-[50px] bg-transparent text-black-100 
+                rounded-xl border border-stone-400 font-out-fit focus:outline
+                focus:border-transparent outline-1 outline-stone-200
+                hover:border-stone-200"
               />
             </div>
             {/* email */}
@@ -130,25 +156,6 @@ export function Signup({
                 hover:border-stone-200"
               />
             </div>
-            {/* Number */}
-            <div className="relative flex flex-col">
-              <label htmlFor="number" className="text-sm text-black-200">
-                Phone Number
-              </label>
-              <input
-                type="number"
-                required
-                id="number"
-                name="number"
-                placeholder="Enter Phone Number"
-                className="placeholder:text-black-200 placeholder:opacity-[0.7] 
-                text-sm px-3.5 my-1 w-full h-[50px] bg-transparent text-black-100 
-                rounded-xl border border-stone-400 font-out-fit focus:outline
-                focus:border-transparent outline-1 outline-stone-200
-                hover:border-stone-200"
-              />
-            </div>
-
             {/* password */}
             <div className="relative flex flex-col">
               <label htmlFor="password" className="text-sm text-black-200">

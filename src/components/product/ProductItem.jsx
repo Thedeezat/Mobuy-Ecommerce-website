@@ -16,10 +16,18 @@ import { CustomSnackbar } from '../Snackbar'
 
 import { productContext } from '../../App'
 
+import Spinner from '../Loader/Spinner'
+
 export default function ProductItem({ productImage_num }) {
-  const { handleCounter, currency, searchItem, handleCart } = useContext(
-    productContext,
-  )
+  const {
+    handleCounter,
+    currency,
+    searchItem,
+    handleCart,
+    handleSavelater,
+    currentUser,
+    cartLoading,
+  } = useContext(productContext)
 
   const { data: products, loading, error } = useFetch(
     'https://api.escuelajs.co/api/v1/products',
@@ -33,18 +41,27 @@ export default function ProductItem({ productImage_num }) {
   }
   const Savelater_snackbar = (
     <div className="flex flex-col">
-      <span className="text-sm font-out-fit">
-        You need to be loged in to save
-        <br /> an item
-      </span>
-      <button
-        className="border border-yellow outline-none bg-transparent
-        w-[120px] mt-1 rounded-md py-[4px] text-xs font-out-fit 
+      {currentUser ? (
+        <span className="text-sm font-out-fit">
+          Product added to saved items
+        </span>
+      ) : (
+        <span className="text-sm font-out-fit">
+          You need to be loged in to save
+          <br /> an item
+        </span>
+      )}
+
+      {!currentUser && (
+        <button
+          className="border border-yellow outline-none bg-transparent
+         w-[120px] mt-1 rounded-md py-[4px] text-xs font-out-fit 
         hover:bg-darkYellow hover:text-black-300"
-      >
-        {' '}
-        Click here to login{' '}
-      </button>
+        >
+          {' '}
+          Click here to login
+        </button>
+      )}
     </div>
   )
 
@@ -52,6 +69,7 @@ export default function ProductItem({ productImage_num }) {
     <section className="pt-4 grid grid-cols-4 gap-4 text-black-200 ">
       {loading && <PageSkeleton />}
       {error && <TextError error={error} />}
+
       {products &&
         products
           .filter((val) => {
@@ -67,7 +85,7 @@ export default function ProductItem({ productImage_num }) {
             <div
               key={product.id}
               className={`pb-4 h-[350px] w-[305px] bg-stone-500 ${
-                product.id >= 130 ? 'hidden' : ''
+                product.id >= 310 ? 'hidden' : ''
               } rounded-lg rounded-t-2xl overflow-hidden`}
             >
               <CustomSnackbar
@@ -81,6 +99,7 @@ export default function ProductItem({ productImage_num }) {
                        rounded-full w-[28px] h-[28px] shadow-md group
                        items-center justify-center right-1 top-1 cursor-pointer
                         "
+                        onClick={() => handleSavelater(product)}
                       >
                         <FavoriteBorderOutlinedIcon
                           className="text-charcoal
@@ -91,12 +110,14 @@ export default function ProductItem({ productImage_num }) {
                   </>
                 }
                 message={Savelater_snackbar}
+                success={currentUser ? 'True' : null}
+                button_text={currentUser && 'View items'}
               />
               {/* Image */}
               <img
                 src={product.images[productImage_num]}
                 className="h-7.2 w-full object-cover rounded-2xl
-                 bg-stone-300 border-none"
+                 bg-stone-600 border-none"
                 alt=""
               />{' '}
               {/* Description */}
@@ -147,7 +168,10 @@ export default function ProductItem({ productImage_num }) {
                       }}
                     >
                       {' '}
-                      Add to cart{' '}
+                      {cartLoading ? '' : <span> Add to cart </span>}
+                      {cartLoading && (
+                        <Spinner color="#333333" styles="absolute" />
+                      )}
                     </Button>
                   }
                   message={

@@ -5,7 +5,11 @@ import PagesContent from '../components/PagesContent'
 export default function Checkout() {
   return (
     <>
-      <PagesContent productAdded={<div>Checkout</div>} />
+      <PagesContent
+        is_back="true"
+        page_heading="Checkout"
+        productAdded={<div>Checkout</div>}
+      />
     </>
   )
 }

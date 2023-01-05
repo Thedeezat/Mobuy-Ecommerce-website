@@ -5,3 +5,10 @@
 .opacity {
   background-color: rgba(163, 163, 163, 0.502);
 }
+.input-states select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: '';
+}
