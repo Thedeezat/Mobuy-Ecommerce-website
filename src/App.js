@@ -22,10 +22,6 @@ import ForgotPassword from './pages/ForgotPassword'
 
 import Profile from './pages/Profile'
 
-import Success from './pages/Success'
-
-import Cancel from './pages/Cancel'
-
 export const productContext = createContext()
 
 function App() {
@@ -183,12 +179,6 @@ function App() {
               OnsetLastName={setLastName}
               setDeliveryAddress={setDeliveryAddress}
             />
-          </Route>
-          <Route path="/success">
-            <Success />
-          </Route>
-          <Route path="/cancel">
-            <Cancel />
           </Route>
         </Switch>
       </productContext.Provider>
