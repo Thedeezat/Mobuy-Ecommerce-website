@@ -47,6 +47,7 @@ export default function AccountInfo({
               type="text"
               id="first-name"
               name="first-name"
+              required
               onChange={(e) => OnsetFirstName(e.target.value)}
               value={first_name ? first_name : ''}
               placeholder="Enter first name"
@@ -66,6 +67,7 @@ export default function AccountInfo({
               type="text"
               id="last-name"
               name="last-name"
+              required
               onChange={(e) => OnsetLastName(e.target.value)}
               value={last_name ? last_name : ''}
               placeholder="Enter last name"

@@ -12,7 +12,13 @@ import useFetch from '../Api/useFetch'
 
 import Spinner from '../Loader/Spinner'
 
-export default function DeliveryAdress({ first_name, last_name }) {
+import Location from './Location'
+
+export default function DeliveryAdress({
+  first_name,
+  last_name,
+  setDeliveryAddress,
+}) {
   const { data: location, loading, error } = useFetch(
     'https://pkgstore.datahub.io/core/world-cities/world-cities_json/data/5b3dd46ad10990bca47b04b4739a02ba/world-cities_json.json',
   )
@@ -20,39 +26,20 @@ export default function DeliveryAdress({ first_name, last_name }) {
   const [state, setState] = useState([])
   const [city, setCity] = useState([])
   const [changesLoading, setLoading] = useState(false)
-
-  const [dirction, setDirection] = useState(() => {
-    const savedDirection = localStorage.getItem('direction')
-    const parsedDirection = JSON.parse(savedDirection)
-    return parsedDirection || ''
-  })
-
-  const [phoneNumber, setPhoneNuber] = useState(() => {
-    const savedItem = localStorage.getItem('phoneNumber')
-    const parsedItem = JSON.parse(savedItem)
-    return parsedItem || ''
-  })
-  const [streetAddress, setStreetAddress] = useState(() => {
-    const savedAddress = localStorage.getItem('StreetAddress')
-    const parsedAddress = JSON.parse(savedAddress)
-    return parsedAddress || ''
-  })
-
-  const [getCountry, setCountry] = useState(() => {
-    const savedCountry = localStorage.getItem('country')
-    const parsedCountry = JSON.parse(savedCountry)
-    return parsedCountry || ''
-  })
-  const [getState, setGetState] = useState(() => {
-    const savedState = localStorage.getItem('state')
-    const parsedState = JSON.parse(savedState)
-    return parsedState || ''
-  })
-  const [getCity, setGetCity] = useState(() => {
-    const savedCity = localStorage.getItem('city')
-    const parsedCity = JSON.parse(savedCity)
-    return parsedCity || ''
-  })
+  const {
+    dirction,
+    setDirection,
+    phoneNumber,
+    setPhoneNuber,
+    streetAddress,
+    setStreetAddress,
+    getCountry,
+    setCountry,
+    getState,
+    setGetState,
+    getCity,
+    setGetCity,
+  } = Location()
 
   const country = [
     ...new Set(location ? location.map((item) => item.country) : ''),
@@ -100,6 +87,7 @@ export default function DeliveryAdress({ first_name, last_name }) {
     setTimeout(() => {
       setLoading(false)
       setSaveChanges(!saveChanges)
+      setDeliveryAddress(true)
     }, 2000)
   }
   clearTimeout(handleSubmit)
@@ -207,7 +195,6 @@ export default function DeliveryAdress({ first_name, last_name }) {
                   type="number"
                   id="number"
                   name="number"
-                  required
                   onChange={(e) => setPhoneNuber(e.target.value)}
                   value={phoneNumber}
                   placeholder="Mobile Number"
@@ -230,7 +217,6 @@ export default function DeliveryAdress({ first_name, last_name }) {
                   type="text"
                   id="street-address"
                   name="street-address"
-                  required
                   onChange={(e) => setStreetAddress(e.target.value)}
                   value={streetAddress}
                   placeholder="Enter delivery address"

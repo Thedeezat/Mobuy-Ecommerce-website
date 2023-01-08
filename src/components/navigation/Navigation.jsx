@@ -157,7 +157,7 @@ export default function Navigation({
               >
                 <p className="text-lg px-3.5 opacity-[0.7] py-2 shadow-sm">
                   {' '}
-                  Hi {firstName ? firstName : ''}{' '}
+                  Hi{currentUser ? `, ${firstName}` : ''}
                 </p>
                 {currentUser && (
                   <Link to="/profile">

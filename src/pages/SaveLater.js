@@ -27,6 +27,9 @@ export default function SaveLater({
   savelater,
   currency,
   handleCart,
+  currentUser,
+  savedCounter,
+  setSavedCounter,
 }) {
   const [openSnacbar, setOpenSnacbar] = useState('')
 
@@ -34,6 +37,8 @@ export default function SaveLater({
     const arr = savelater.filter((item) => item.id !== id)
     setSavelater(arr)
     setOpenSnacbar(true)
+
+    setSavedCounter((count) => count - 1)
   }
   const handleSavelaterClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -43,7 +48,7 @@ export default function SaveLater({
   }
   return (
     <>
-      {!savelater ? (
+      {savelater == 0 || !currentUser ? (
         <PagesContent
           image={
             <div className="w-[170px] h-[170px]">

@@ -8,10 +8,14 @@
     "@mui/icons-material": "^5.10.16",
     "@mui/material": "^5.10.16",
     "@mui/styled-engine-sc": "^5.10.16",
+    "@stripe/react-stripe-js": "^1.16.2",
+    "@stripe/stripe-js": "^1.46.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.2.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
     "firebase": "^9.15.0",
     "lodash": "^4.17.21",
     "lodash.debounce": "^4.0.8",
@@ -21,11 +25,15 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.7.1",
     "react-scripts": "5.0.1",
+    "react-stripe-checkout": "^2.6.3",
+    "stripe": "^11.6.0",
     "styled-components": "^5.3.6",
+    "toastify": "^2.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
+    "devStart": "nodemon server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -49,6 +57,7 @@
     ]
   },
   "devDependencies": {
+    "nodemon": "^2.0.20",
     "react-router-dom": "^5.3.4"
   }
 }

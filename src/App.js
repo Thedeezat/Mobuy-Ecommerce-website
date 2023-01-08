@@ -22,6 +22,10 @@ import ForgotPassword from './pages/ForgotPassword'
 
 import Profile from './pages/Profile'
 
+import Success from './pages/Success'
+
+import Cancel from './pages/Cancel'
+
 export const productContext = createContext()
 
 function App() {
@@ -51,13 +55,17 @@ function App() {
     return initialValue || ''
   })
 
+  const [savedCounter, setSavedCounter] = useState(() => {
+    const savedItem = JSON.parse(localStorage.getItem('countSaveditem'))
+    return savedItem || 0
+  })
+
   const [currency, setCurrency] = useState('$')
   const [searchItem, setSearchItem] = useState('')
   const [passwordType, setPasswordType] = useState('password')
   const [passwordInput, setPasswordInput] = useState('')
   const [visibilityOn, setVisibilityOn] = useState(true)
-  const [cartLoading, setCartLoading] = useState(false)
-  const [disable, setDisabled] = useState(false)
+  const [deliveryAddress, setDeliveryAddress] = useState(false)
 
   const handleCounter = () => {
     setConter((count) => count + 1)
@@ -67,6 +75,8 @@ function App() {
   const handleSavelater = (item) => {
     if (savelater.indexOf(item) !== -1) return
     setSavelater([...savelater, item])
+
+    setSavedCounter((count) => count + 1)
   }
   const handleCart = (item) => {
     if (cart.indexOf(item) !== -1) return
@@ -75,11 +85,12 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem('countItem', JSON.stringify(counter))
+    localStorage.setItem('countSaveditem', JSON.stringify(savedCounter))
     localStorage.setItem('cart', JSON.stringify(cart))
     localStorage.setItem('savelater', JSON.stringify(savelater))
     localStorage.setItem('firstName', JSON.stringify(firstName))
     localStorage.setItem('lastName', JSON.stringify(lastName))
-  }, [counter, savelater, firstName, lastName, cart])
+  }, [counter, savelater, firstName, lastName, cart, savedCounter])
 
   // password
   const handlePasswordChange = (e) => {
@@ -109,7 +120,6 @@ function App() {
     setSearchItem,
     currentUser,
     firstName,
-    cartLoading,
   }
   return (
     <Router>
@@ -127,6 +137,9 @@ function App() {
               setSavelater={setSavelater}
               currency={currency}
               handleCart={handleCart}
+              currentUser={currentUser}
+              savedCounter={savedCounter}
+              setSavedCounter={setSavedCounter}
             />
           </Route>
           <Route path="/account/signup">
@@ -152,7 +165,11 @@ function App() {
             />
           </Route>
           <Route path="/checkout/completeOrder">
-            <Checkout />
+            <Checkout
+              deliveryAddress={deliveryAddress}
+              cart={cart}
+              currency={currency}
+            />
           </Route>
           <Route path="/forgot-password">
             <ForgotPassword />
@@ -164,7 +181,14 @@ function App() {
               OnsetFirstName={setFirstName}
               last_name={lastName}
               OnsetLastName={setLastName}
+              setDeliveryAddress={setDeliveryAddress}
             />
+          </Route>
+          <Route path="/success">
+            <Success />
+          </Route>
+          <Route path="/cancel">
+            <Cancel />
           </Route>
         </Switch>
       </productContext.Provider>

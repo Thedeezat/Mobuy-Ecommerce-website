@@ -26,6 +26,7 @@ export default function Profile({
   OnsetFirstName,
   last_name,
   OnsetLastName,
+  setDeliveryAddress,
 }) {
   const [activeTab, setActiveTab] = useState('tab1')
 
@@ -121,7 +122,11 @@ export default function Profile({
 
             {/* Delivery */}
             <ProfileContent id="tab2" activeTab={activeTab}>
-              <DeliveryAdress first_name={first_name} last_name={last_name} />
+              <DeliveryAdress
+                first_name={first_name}
+                last_name={last_name}
+                setDeliveryAddress={setDeliveryAddress}
+              />
             </ProfileContent>
 
             {/* Order history  */}
