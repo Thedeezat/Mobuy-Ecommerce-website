@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 
 import Navigation from '../components/navigation/Navigation'
 
@@ -10,17 +10,20 @@ import Footer from '../components/footer/Footer'
 
 export default function Home() {
   const { counter, currency, firstName } = useContext(productContext)
+
   return (
-    <div>
-      <header className="px-7">
-        <Navigation
-          counter={counter}
-          currency={currency}
-          firstName={firstName}
-        />
-        <Tabs />
-      </header>
-      <Footer />
-    </div>
+    <>
+      <div className="overflow-hidden">
+        <header className="px-4 sm:px-5 md:px-7">
+          <Navigation
+            counter={counter}
+            currency={currency}
+            firstName={firstName}
+          />
+          <Tabs />
+        </header>
+        <Footer />
+      </div>
+    </>
   )
 }

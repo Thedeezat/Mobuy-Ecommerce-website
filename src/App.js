@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import { AuthContext } from './components/Auth/AuthContext'
 
+import Preloader from './components/Animation/Preloader'
+
 import './input.css'
 
 import Home from './pages/Home'
@@ -116,73 +118,81 @@ function App() {
     setSearchItem,
     currentUser,
     firstName,
+    savelater,
   }
   return (
-    <Router>
-      <productContext.Provider value={value}>
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/cart">
-            <Cart handleSavelater={handleSavelater} currentUser={currentUser} />
-          </Route>
-          <Route path="/saveLater">
-            <SaveLater
-              savelater={savelater}
-              setSavelater={setSavelater}
-              currency={currency}
-              handleCart={handleCart}
-              currentUser={currentUser}
-              savedCounter={savedCounter}
-              setSavedCounter={setSavedCounter}
-            />
-          </Route>
-          <Route path="/account/signup">
-            <Signup
-              visibilityOn={visibilityOn}
-              passwordInput={passwordInput}
-              passwordType={passwordType}
-              handlePasswordChange={handlePasswordChange}
-              handlePasswordShow={handlePasswordShow}
-              setFirstName={setFirstName}
-              firstName={firstName}
-              setLastName={setLastName}
-              lastName={lastName}
-            />
-          </Route>
-          <Route path="/account/login">
-            <Login
-              visibilityOn={visibilityOn}
-              passwordInput={passwordInput}
-              passwordType={passwordType}
-              handlePasswordChange={handlePasswordChange}
-              handlePasswordShow={handlePasswordShow}
-            />
-          </Route>
-          <Route path="/checkout/completeOrder">
-            <Checkout
-              deliveryAddress={deliveryAddress}
-              cart={cart}
-              currency={currency}
-            />
-          </Route>
-          <Route path="/forgot-password">
-            <ForgotPassword />
-          </Route>
-          <Route path="/profile">
-            <Profile
-              currentUser={currentUser}
-              first_name={firstName}
-              OnsetFirstName={setFirstName}
-              last_name={lastName}
-              OnsetLastName={setLastName}
-              setDeliveryAddress={setDeliveryAddress}
-            />
-          </Route>
-        </Switch>
-      </productContext.Provider>
-    </Router>
+    <>
+      <Preloader />
+      <Router>
+        <productContext.Provider value={value}>
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path="/cart">
+              <Cart
+                handleSavelater={handleSavelater}
+                currentUser={currentUser}
+              />
+            </Route>
+            <Route path="/saveLater">
+              <SaveLater
+                savelater={savelater}
+                setSavelater={setSavelater}
+                currency={currency}
+                handleCart={handleCart}
+                currentUser={currentUser}
+                savedCounter={savedCounter}
+                setSavedCounter={setSavedCounter}
+                setConter={setConter}
+              />
+            </Route>
+            <Route path="/account/signup">
+              <Signup
+                visibilityOn={visibilityOn}
+                passwordInput={passwordInput}
+                passwordType={passwordType}
+                handlePasswordChange={handlePasswordChange}
+                handlePasswordShow={handlePasswordShow}
+                setFirstName={setFirstName}
+                firstName={firstName}
+                setLastName={setLastName}
+                lastName={lastName}
+              />
+            </Route>
+            <Route path="/account/login">
+              <Login
+                visibilityOn={visibilityOn}
+                passwordInput={passwordInput}
+                passwordType={passwordType}
+                handlePasswordChange={handlePasswordChange}
+                handlePasswordShow={handlePasswordShow}
+              />
+            </Route>
+            <Route path="/checkout/completeOrder">
+              <Checkout
+                deliveryAddress={deliveryAddress}
+                cart={cart}
+                currency={currency}
+              />
+            </Route>
+            <Route path="/forgot-password">
+              <ForgotPassword />
+            </Route>
+            <Route path="/profile">
+              <Profile
+                currentUser={currentUser}
+                first_name={firstName}
+                OnsetFirstName={setFirstName}
+                last_name={lastName}
+                OnsetLastName={setLastName}
+                setDeliveryAddress={setDeliveryAddress}
+              />
+            </Route>
+          </Switch>
+        </productContext.Provider>
+      </Router>
+    </>
   )
 }
 

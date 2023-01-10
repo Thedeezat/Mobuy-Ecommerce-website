@@ -11,7 +11,7 @@ module.exports = {
       blue: '#4646b9',
       charcoal: '#3D5278',
       gray: 'rgba(195, 212, 233, 0.7)',
-      glass: '#f3f5f7bd',
+      glass: '#ecececbd',
       green: 'rgb(80, 200, 120)',
       yellow: '#e69b00',
       lightYellow: 'rgba(230, 155, 0, 0.2)',
@@ -42,7 +42,7 @@ module.exports = {
       },
     },
     fontSize: {
-      // 10px = 1rem
+      xxs: '1rem',
       xs: '1.2rem',
       sm: '1.4rem',
       base: '1.6rem',

@@ -1,7 +1,5 @@
 import React, { useContext, useState } from 'react'
 
-import MenuRoundedIcon from '@mui/icons-material/MenuRounded'
-
 import LocalMallRoundedIcon from '@mui/icons-material/LocalMallRounded'
 
 import { CiSearch } from 'react-icons/ci'
@@ -36,6 +34,10 @@ export default function Navigation({
   const { currentUser, logOut } = AuthContext()
   const [error, setError] = useState('')
   const history = useHistory()
+  const [isOpen, setIsOpen] = useState(false)
+
+  const genericHamburgerLine = `h-[2.5px] w-4 my-[2px] rounded-lg bg-black transition
+   ease transform duration-300 bg-black-200`
 
   const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -66,32 +68,63 @@ export default function Navigation({
   return (
     <>
       {/* navigation */}
-      <nav className="flex items-center justify-between py-4 text-black-200">
+      <nav className="md:py-5.5 flex items-center justify-between py-4 text-black-200 ">
         {/* Logo */}
         <div className="flex items-center">
           <Link to="/">
             <div className="flex items-center cursor-pointer">
-              <MenuRoundedIcon fontSize="large" className="mr-3" />
-              <h3 className="text-3xl"> Mobuy </h3>
+              <h3 className="text-2xl md:text-3xl"> Mobuy </h3>
             </div>
           </Link>
           {/* Search bar */}
-          <div className="ml-6 mt-2 relative flex items-center">
-            <CiSearch className="text-yellow absolute right-3 w-3.5 h-3.5" />
+          <div
+            className="sm:ml-5 md:ml-6 pt-1
+            ml-[1.8rem] relative flex items-center"
+          >
+            <CiSearch
+              className="md:flex md:w-3.5 md:h-3.5 md:right-3
+              right-1 w-2 h-2 text-yellow absolute"
+            />
             <label htmlFor="search-bar"></label>
             <input
               type="text"
               id="search-bar"
-              className="w-12 h-[55px] border-none outline-none
-              rounded-xl bg-stone-400 px-4 text-sm font-out-fit
-              placeholder:text-black-200 tracking-wider"
-              placeholder="Search for products..."
+              className="sm:w-7.5 md:w-12 md:h-[55px] md:text-sm md:px-4
+              w-full h-5.5 border-none outline-none rounded-xl bg-stone-400 
+              px-3 pr-4 text-xxs font-out-fit placeholder:text-black-200 tracking-wider"
+              placeholder="Search for products"
               onChange={handleChange}
             />
           </div>
         </div>
+        {/* Hamburger */}
+        <button
+          className="md:hidden pt-1
+          flex flex-col group"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          <div
+            className={`${genericHamburgerLine} ${
+              isOpen
+                ? 'rotate-45 translate-y-[7px] bg-charcoal'
+                : 'group-hover:bg-blue'
+            }`}
+          ></div>
+          <div
+            className={`${genericHamburgerLine} ${
+              isOpen ? 'opacity-0' : 'group-hover:bg-blue'
+            }`}
+          ></div>
+          <div
+            className={`${genericHamburgerLine} ${
+              isOpen
+                ? '-rotate-45 -translate-y-[7px] bg-charcoal'
+                : 'group-hover:bg-blue'
+            }`}
+          ></div>
+        </button>
         {/* Icons */}
-        <div className="flex items-center">
+        <div className="hidden md:flex items-center">
           {/* Currency changer */}
           <div>
             <select
@@ -157,7 +190,7 @@ export default function Navigation({
               >
                 <p className="text-lg px-3.5 opacity-[0.7] py-2 shadow-sm">
                   {' '}
-                  Hi{currentUser ? `, ${firstName}` : ''}
+                  Hi{currentUser ? `,${firstName}` : ''}
                 </p>
                 {currentUser && (
                   <Link to="/profile">

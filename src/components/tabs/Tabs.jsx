@@ -35,9 +35,15 @@ import Others from '../product/categories/Others'
 export default function Tabs() {
   const [activeTab, setActiveTab] = useState('tab1')
 
+  const categoryIcons = 'md:scale-1 text-yellow mb-1 scale-[0.7]'
+
   return (
     <>
-      <section className="pt-4 flex items-center gap-6">
+      <section
+        className="md:gap-6 md:over-hidden md:w-full
+        pt-4 flex items-center gap-3.5 w-[90vw] snap-x scroll-smooth 
+        whitespace-nowrap overflow-auto scrollbar-hide pr-2"
+      >
         {/* All */}
         <TabItem
           product="All product"
@@ -47,7 +53,7 @@ export default function Tabs() {
           icon={
             <CardGiftcardRoundedIcon
               fontSize="large"
-              className="text-yellow mb-1"
+              className={categoryIcons}
             />
           }
         />
@@ -58,10 +64,7 @@ export default function Tabs() {
           setActiveTab={setActiveTab}
           id="tab2"
           icon={
-            <CheckroomRoundedIcon
-              fontSize="large"
-              className="text-yellow mb-1"
-            />
+            <CheckroomRoundedIcon fontSize="large" className={categoryIcons} />
           }
         />
         {/* Furnitures */}
@@ -71,7 +74,7 @@ export default function Tabs() {
           setActiveTab={setActiveTab}
           id="tab3"
           icon={
-            <KingBedRoundedIcon fontSize="large" className="text-yellow mb-1" />
+            <KingBedRoundedIcon fontSize="large" className={categoryIcons} />
           }
         />
         {/* Electonics */}
@@ -80,9 +83,7 @@ export default function Tabs() {
           activeTab={activeTab}
           setActiveTab={setActiveTab}
           id="tab4"
-          icon={
-            <CableRoundedIcon fontSize="large" className="text-yellow mb-1" />
-          }
+          icon={<CableRoundedIcon fontSize="large" className={categoryIcons} />}
         />
         {/* Kids */}
         <TabItem
@@ -93,7 +94,7 @@ export default function Tabs() {
           icon={
             <BabyChangingStationRoundedIcon
               fontSize="large"
-              className="text-yellow mb-1"
+              className={categoryIcons}
             />
           }
         />
@@ -106,7 +107,7 @@ export default function Tabs() {
           icon={
             <SoupKitchenRoundedIcon
               fontSize="large"
-              className="text-yellow mb-1"
+              className={categoryIcons}
             />
           }
         />
@@ -119,7 +120,7 @@ export default function Tabs() {
           icon={
             <ShoppingBasketRoundedIcon
               fontSize="large"
-              className="text-yellow mb-1"
+              className={categoryIcons}
             />
           }
         />

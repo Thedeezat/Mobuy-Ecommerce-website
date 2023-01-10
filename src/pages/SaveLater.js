@@ -30,6 +30,7 @@ export default function SaveLater({
   currentUser,
   savedCounter,
   setSavedCounter,
+  setConter,
 }) {
   const [openSnacbar, setOpenSnacbar] = useState('')
 
@@ -45,6 +46,12 @@ export default function SaveLater({
       return
     }
     setOpenSnacbar(false)
+  }
+
+  const handeleSaveCart = (item) => {
+    handleCart(item)
+
+    setConter((count) => count + 1)
   }
   return (
     <>
@@ -135,7 +142,7 @@ export default function SaveLater({
                           <Button
                             variant="outlined"
                             className="relative top-2"
-                            onClick={() => handleCart(item)}
+                            onClick={() => handeleSaveCart(item)}
                             sx={{
                               boxShadow: 'none',
                               border: '1.2px solid rgba(230, 155, 0, 0.5)',

@@ -12,3 +12,6 @@
   text-indent: 1px;
   text-overflow: '';
 }
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

@@ -17,6 +17,7 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "firebase": "^9.15.0",
+    "gsap": "^3.11.4",
     "lodash": "^4.17.21",
     "lodash.debounce": "^4.0.8",
     "lottie-react": "^2.3.1",

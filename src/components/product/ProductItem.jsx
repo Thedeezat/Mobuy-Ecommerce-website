@@ -37,6 +37,7 @@ export default function ProductItem({ productImage_num }) {
   const handleAddToCart = (item) => {
     setProductTitle(item.title)
     handleCart(item)
+
     handleCounter()
   }
   const Savelater_snackbar = (
@@ -95,10 +96,11 @@ export default function ProductItem({ productImage_num }) {
                     <div className="relative">
                       {' '}
                       <div
-                        className="absolute bg-white-600 flex
-                       rounded-full w-[28px] h-[28px] shadow-md group
+                        className={` 
+                        absolute flex
+                        rounded-full w-[28px] h-[28px] shadow-md group
                        items-center justify-center right-1 top-1 cursor-pointer
-                        "
+                        `}
                         onClick={() => handleSavelater(product)}
                       >
                         <FavoriteBorderOutlinedIcon
