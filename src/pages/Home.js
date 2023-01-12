@@ -14,7 +14,7 @@ export default function Home() {
   return (
     <>
       <div className="overflow-hidden">
-        <header className="px-4 sm:px-5 md:px-7">
+        <header className="px-3.5 sm:px-5 lg:px-6 xl:px-7">
           <Navigation
             counter={counter}
             currency={currency}

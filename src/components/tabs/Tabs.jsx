@@ -35,7 +35,7 @@ import Others from '../product/categories/Others'
 export default function Tabs() {
   const [activeTab, setActiveTab] = useState('tab1')
 
-  const categoryIcons = 'md:scale-1 text-yellow mb-1 scale-[0.7]'
+  const categoryIcons = 'md:scale-[1] scale-[0.7] text-yellow mb-1'
 
   return (
     <>
