@@ -69,6 +69,7 @@ module.exports = {
         '5': '32px',
         '5.5': '42px',
         '6': '46px',
+        '6.1': '60px',
         '7': '70px',
         '7.1': '100px',
         '7.2': '180px',
@@ -88,18 +89,16 @@ module.exports = {
         '11': '550px',
         '12': '610px',
         '12.1': '690px',
-        '12.2': '750px',
+        '12.2': '710px',
+        '12.3': '800px',
         '13': '830px',
         maxWidth: '1450px',
       },
-      keyframes: {
-        fold: {
-          '0%,': { opacity: '0' },
-          '100%': { opacity: '0' },
-        },
-      },
       outlineWidth: {
         1: '1px',
+      },
+      screens: {
+        'mobile-xs': '320px',
       },
     },
   },

@@ -64,21 +64,57 @@ function App() {
   const [passwordInput, setPasswordInput] = useState('')
   const [visibilityOn, setVisibilityOn] = useState(true)
   const [deliveryAddress, setDeliveryAddress] = useState(false)
+  const [cartAdded, setCartAdded] = useState(false)
+  const [saveAdded, setSaveAdded] = useState(false)
 
-  const handleCounter = () => {
-    setConter((count) => count + 1)
-  }
   const handleCurrency = (e) => {}
 
   const handleSavelater = (item) => {
-    if (savelater.indexOf(item) !== -1) return
-    setSavelater([...savelater, item])
+    setSaveAdded(false)
+    const uniqueId = []
 
-    setSavedCounter((count) => count + 1)
+    const uniqueSave = savelater
+      ? savelater.filter((element) => {
+          const isDuplicate = uniqueId.includes(element.id)
+          if (!isDuplicate) {
+            uniqueId.push(element.id)
+            return true
+          }
+          return false
+        })
+      : []
+
+    const Product = uniqueSave.find((element) => element.id === item.id)
+    if (Product) {
+      setSaveAdded(true)
+    } else {
+      setSavelater([...uniqueSave, item])
+      setSavedCounter((count) => count + 1)
+    }
   }
+
   const handleCart = (item) => {
-    if (cart.indexOf(item) !== -1) return
-    setCart([...cart, item])
+    setCartAdded(false)
+    const uniqueIds = []
+
+    const uniqueCart = cart
+      ? cart.filter((element) => {
+          const isDuplicate = uniqueIds.includes(element.id)
+          if (!isDuplicate) {
+            uniqueIds.push(element.id)
+            return true
+          }
+          return false
+        })
+      : []
+
+    const ProductExist = uniqueCart.find((element) => element.id === item.id)
+    if (ProductExist) {
+      setCartAdded(true)
+    } else {
+      setCart([...uniqueCart, item])
+      setConter((count) => count + 1)
+    }
   }
 
   useEffect(() => {
@@ -104,9 +140,9 @@ function App() {
       setVisibilityOn(true)
     }
   }
-
   const value = {
-    handleCounter,
+    cartAdded,
+    saveAdded,
     handleCart,
     handleSavelater,
     cart,
@@ -145,6 +181,7 @@ function App() {
                 savedCounter={savedCounter}
                 setSavedCounter={setSavedCounter}
                 setConter={setConter}
+                cart={cart}
               />
             </Route>
             <Route path="/account/signup">

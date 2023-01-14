@@ -4,8 +4,6 @@ import useFetch from '../Api/useFetch'
 
 import Rating from '@mui/material/Rating'
 
-// import Button from '@mui/material/Button'
-
 import PageSkeleton from '../Loader/Skeleton'
 
 import { TextError } from '../Error'
@@ -16,17 +14,15 @@ import { CustomSnackbar } from '../Snackbar'
 
 import { productContext } from '../../App'
 
-import Spinner from '../Loader/Spinner'
-
 export default function ProductItem({ productImage_num }) {
   const {
-    handleCounter,
     currency,
     searchItem,
     handleCart,
     handleSavelater,
     currentUser,
-    cartLoading,
+    saveAdded,
+    cartAdded,
   } = useContext(productContext)
 
   const { data: products, loading, error } = useFetch(
@@ -37,14 +33,14 @@ export default function ProductItem({ productImage_num }) {
   const handleAddToCart = (item) => {
     setProductTitle(item.title)
     handleCart(item)
-
-    handleCounter()
   }
   const Savelater_snackbar = (
     <div className="flex flex-col">
       {currentUser ? (
         <span className="text-sm font-out-fit">
-          Product added to saved items
+          {saveAdded
+            ? 'Product already in saved items'
+            : ' Product added to saved items'}
         </span>
       ) : (
         <span className="text-sm font-out-fit">
@@ -102,14 +98,15 @@ export default function ProductItem({ productImage_num }) {
                       <div
                         className={` 
                           md:w-[28px] md:h-[28px] 
-                          absolute flex rounded-full w-[25px] h-[25px] shadow-md group
-                          items-center justify-center right-1 top-1 cursor-pointer
+                          absolute flex rounded-full w-[25px] h-[25px] shadow-md group opacity-[0.7]
+                          items-center justify-center bg-stone-500 right-2 top-2 cursor-pointer
+                          hover:opacity-[0.8]
                         `}
                         onClick={() => handleSavelater(product)}
                       >
                         <FavoriteBorderOutlinedIcon
                           className="md:scale-[1]
-                          text-charcoal group-hover:text-yellow scale-[0.9]"
+                          text-black-100 group-hover:text-black-100 scale-[0.9]"
                         />
                       </div>
                     </div>
@@ -128,8 +125,11 @@ export default function ProductItem({ productImage_num }) {
                 alt=""
               />{' '}
               {/* Description */}
-              <div className="md:pt-3.5 px-3 pt-3">
-                <h3 className="md:text-sm text-xs h-3 overflow-hidden">
+              <div className="px-3 pt-3">
+                <h3
+                  className="md:text-sm 2xl:text-base 2xl:h-4 
+                  text-xs h-3.5 overflow-hidden"
+                >
                   {' '}
                   {product.title}{' '}
                 </h3>
@@ -138,14 +138,14 @@ export default function ProductItem({ productImage_num }) {
                   className="md:pt-3 
                   pt-2 flex items-center justify-between"
                 >
-                  <h3 className="md:text-base text-[15px] text-black-100">
+                  <h3 className="md:text-base 2xl:text-tiny text-[15px] text-black-100">
                     {' '}
                     {currency}
                     {product.price}{' '}
                   </h3>
                   <h4
                     className="line-through tracking-wider 
-                    text-sm opacity-[0.8]"
+                    text-sm 2xl:text-base opacity-[0.8]"
                   >
                     {' '}
                     {currency}
@@ -156,7 +156,7 @@ export default function ProductItem({ productImage_num }) {
                 <div className="md:block hidden">
                   <Rating
                     name="read-only"
-                    className=" pt-1"
+                    className="2xl:scale-[1.1] pt-1"
                     value="4"
                     readOnly
                   />
@@ -173,24 +173,24 @@ export default function ProductItem({ productImage_num }) {
                         onClick={() => handleAddToCart(product)}
                       >
                         {' '}
-                        {cartLoading ? (
-                          ''
-                        ) : (
-                          <span className="md:text-[13px] text-[11px]">
-                            {' '}
-                            Add To Cart{' '}
-                          </span>
-                        )}
-                        {cartLoading && (
-                          <Spinner color="#333333" styles="absolute" />
-                        )}
+                        <span className="md:text-[13px] 2xl:text-[14px] text-[11px]">
+                          {' '}
+                          Add To Cart{' '}
+                        </span>
                       </button>
                     }
                     message={
-                      <span>
-                        {productTitle} <br />
-                        has been added to cart
-                      </span>
+                      cartAdded ? (
+                        <span>
+                          {productTitle} <br />
+                          is alredy in the cart
+                        </span>
+                      ) : (
+                        <span>
+                          {productTitle} <br />
+                          has been added to cart
+                        </span>
+                      )
                     }
                     button_text=" View Cart"
                     success="True"

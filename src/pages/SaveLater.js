@@ -12,8 +12,6 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 
 import Rating from '@mui/material/Rating'
 
-import Button from '@mui/material/Button'
-
 import Snackbar from '@mui/material/Snackbar'
 
 import MuiAlert from '@mui/material/Alert'
@@ -31,8 +29,10 @@ export default function SaveLater({
   savedCounter,
   setSavedCounter,
   setConter,
+  cart,
 }) {
   const [openSnacbar, setOpenSnacbar] = useState('')
+  const [cartAdded, setCartAdded] = useState(false)
 
   const handleRemoveItem = (id) => {
     const arr = savelater.filter((item) => item.id !== id)
@@ -51,15 +51,26 @@ export default function SaveLater({
   const handeleSaveCart = (item) => {
     handleCart(item)
 
-    setConter((count) => count + 1)
+    const ProductExist = cart.find((element) => element.id === item.id)
+    if (ProductExist) {
+      setCartAdded(false)
+    } else {
+      setConter((count) => count + 1)
+      setCartAdded(true)
+    }
   }
+
   return (
     <>
       {savelater == 0 || !currentUser ? (
         <PagesContent
           image={
-            <div className="w-[170px] h-[170px]">
-              <Lottie animationData={box} />
+            <div className="">
+              <Lottie
+                className="lg:w-[170px] lg:h-[170px] 2xl:w-[200px] 2xl:h-[200px]
+                 w-[140px] h-[140px]"
+                animationData={box}
+              />
             </div>
           }
           productstatus="No saved item"
@@ -77,51 +88,63 @@ export default function SaveLater({
           page_heading="Saved items"
           productAdded={
             <>
-              <div className="relative top-[7vh] grid grid-cols-4 gap-4 text-black-200">
+              <div
+                className="xl:grid-cols-5 md:grid-cols-3 lg:grid-cols-4 md:gap-4 2xl:grid-cols-6
+                relative mb-7.1 top-[7vh] grid grid-cols-2 gap-2 text-black-200"
+              >
                 {savelater.map((item) => (
                   <div
-                    key={item.id}
-                    className={`pb-4 h-[350px] w-[305px] bg-stone-500 
-                    rounded-lg rounded-t-2xl overflow-hidden `}
+                    className={`pb-3 w-full bg-stone-500 
+                    rounded-xl rounded-t-xl overflow-hidden `}
                   >
                     {/* Savelater */}
                     <div className="relative">
                       {' '}
                       <div
-                        className="absolute bg-stone-200 flex
-                        rounded-full w-[28px] h-[28px] shadow-md group
-                        items-center justify-center right-1 top-1 cursor-pointer"
+                        className=" md:w-[28px] md:h-[28px] 
+                        absolute bg-stone-200 flex opacity-[0.8]
+                        rounded-full w-[25px] h-[25px] shadow-md group
+                        items-center justify-center right-2 top-2 cursor-pointer
+                        hover:bg-stone-500"
                         onClick={() => handleRemoveItem(item.id)}
                       >
                         <FavoriteBorderOutlinedIcon
-                          className="text-white-300
-                           group-hover:text-yellow"
+                          className="md:scale-[1]
+                          text-white-300 group-hover:text-charcoal scale-[0.9]"
                         />
                       </div>
                     </div>
                     {/* Image */}
                     <img
                       src={item.images[0]}
-                      className="h-7.2 w-full object-cover rounded-2xl
+                      className="md:h-[180px] md:rounded-xl
+                      h-[120px] w-full object-cover rounded-xl
                     bg-stone-100 border-none"
                       alt=""
                     />{' '}
                     {/* Description */}
                     <div className="pt-3.5 px-3">
-                      <h3 className="text-sm"> {item.title} </h3>
+                      <h3
+                        className="md:text-sm 2xl:text-base 2xl:h-4
+                        text-xs h-3.5 overflow-hidden"
+                      >
+                        {' '}
+                        {item.title}{' '}
+                      </h3>
                       {/* price */}
                       <div
-                        className="flex items-center justify-between
-                       pt-2"
+                        className="md:pt-3 
+                        flex items-center justify-between
+                        pt-2"
                       >
-                        <h3 className="text-base text-black-100">
+                        <h3 className="md:text-base 2xl:text-tiny text-[15px] text-black-100">
                           {' '}
                           {currency}
                           {item.price}
                         </h3>
                         <h4
                           className="line-through tracking-wider 
-                        text-sm opacity-[0.8]"
+                          text-sm 2xl:text-base opacity-[0.8]"
                         >
                           {' '}
                           {currency}
@@ -129,41 +152,39 @@ export default function SaveLater({
                         </h4>
                       </div>
                       {/* Rating */}
-                      <Rating
-                        name="read-only"
-                        className="pt-1"
-                        value="4"
-                        readOnly
-                      />
+                      <div className="md:block hidden">
+                        <Rating
+                          name="read-only"
+                          className="2xl:scale-[1.1] pt-1"
+                          value="4"
+                          readOnly
+                        />
+                      </div>
 
                       {/* Add to cart */}
                       <CustomSnackbar
                         children={
-                          <Button
-                            variant="outlined"
-                            className="relative top-2"
+                          <button
+                            className="md:h-[36px] md:rounded-xl md:mt-3
+                            w-[100%] h-[30px] rounded-lg bg-transparent
+                            text-black-200 hover:bg-lightYellow font-out-fit
+                            border border-darkYellow mt-3"
                             onClick={() => handeleSaveCart(item)}
-                            sx={{
-                              boxShadow: 'none',
-                              border: '1.2px solid rgba(230, 155, 0, 0.5)',
-                              width: '100%',
-                              height: '35px',
-                              fontFamily: 'outfit',
-                              fontSize: '11px',
-                              color: '#333333',
-                              borderRadius: '10px',
-                              '&:hover': {
-                                background: 'rgba(230, 155, 0, 0.2)',
-                                boxShadow: 'none',
-                                border: '1.2px solid rgba(230, 155, 0, 0.5)',
-                              },
-                            }}
                           >
                             {' '}
-                            Add to cart{' '}
-                          </Button>
+                            <span className="md:text-[13px] 2xl:text-[14px] text-[11px]">
+                              {' '}
+                              Add To Cart{' '}
+                            </span>
+                          </button>
                         }
-                        message={<span>Item has been added to cart</span>}
+                        message={
+                          <span>
+                            {cartAdded
+                              ? 'Product has been added to cart'
+                              : 'Product is already in cart'}
+                          </span>
+                        }
                         button_text=" View Cart"
                         success="True"
                       />

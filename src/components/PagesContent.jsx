@@ -26,7 +26,10 @@ export default function PagesContent({
   const { counter, firstName } = useContext(productContext)
   return (
     <>
-      <div className="px-7 h-screen flex flex-col">
+      <div
+        className="sm:px-5 lg:px-6 xl:px-7 2xl:px-7.1
+      px-3.5 h-screen flex flex-col"
+      >
         <Navigation
           counter={counter}
           cartActive={cart_true ? 'border-2 border-yellow' : ''}
@@ -35,25 +38,29 @@ export default function PagesContent({
         />
         {/* back arrow */}
         {is_back && (
-          <Link to="/">
-            {' '}
-            <div
-              className="text-lg text-black-200 mt-1 relative 
-             right-3.5 flex items-center cursor-pointer hover:text-charcoal"
-            >
-              <Lottie
-                animationData={arrow}
-                className="w-[50px] h-[50px] rotate-[180deg]"
-              />
-              <p className="ml-2">Back</p>
-            </div>{' '}
-          </Link>
+          <div className="w-7.1">
+            <Link to="/">
+              {' '}
+              <div
+                className="md:flex 2xl:text-xl 2xl:right-4 
+              right-3.5 text-lg text-black-200 mt-1 relative hidden
+              items-center cursor-pointer hover:text-charcoal"
+              >
+                <Lottie
+                  animationData={arrow}
+                  className="w-[50px] h-[50px] rotate-[180deg]"
+                />
+                <p className="ml-1">Back</p>
+              </div>{' '}
+            </Link>
+          </div>
         )}
 
         {/* heading */}
         {page_heading && (
           <h2
-            className={`text-xl mt-2 bg-ash shadow-md w-7.3 
+            className={`2xl:text-2xl 2xl:max-w-[250px] 2xl:py-3 md:text-xl md:max-w-[230px] md:mt-2
+            text-tiny mt-3 bg-ash shadow-md w-ful max-w-[180px] 
             text-left px-4 rounded-md py-2 opacity-[0.7] tracking-wide
             ${profile_style}`}
           >
@@ -65,17 +72,25 @@ export default function PagesContent({
         {/* empty cart item */}
         {is_cartEmpty && (
           <section
-            className="absolute top-[34vh] flex
-           justify-center left-0 right-0 h-screen"
+            className="
+            flex relative  
+            justify-center items-center h-screen"
           >
             <div
-              className="bg-white-300 shadow-md w-11 h-7.8 rounded-2xl
+              className="md:h-7.8 md:max-w-[550px] mt-[-80px] 2xl:max-w-[700px] 2xl:h-8 2xl:mt-[-130px]
+              bg-white-300 shadow-md max-w-[450px] w-full h-7.6 rounded-2xl
               flex justify-center items-center flex-col"
             >
               {image}
               <div className={`text-center ${texts_style}`}>
-                <h2 className="text-xl pb-2"> {productstatus} </h2>
-                <span className="text-lg font-light text-black-200">
+                <h2 className="md:text-xl 2xl:text-2xl text-lg pb-2">
+                  {' '}
+                  {productstatus}{' '}
+                </h2>
+                <span
+                  className="md:text-lg 2xl:text-xl md:px-0 
+                  px-3 text-center text-sm font-light text-black-200"
+                >
                   {' '}
                   {productInfo}{' '}
                 </span>

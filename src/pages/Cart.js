@@ -94,8 +94,12 @@ export default function Cart({ handleSavelater, currentUser }) {
       {counter == 0 ? (
         <PagesContent
           image={
-            <div className="w-[120px] h-[120px] relative ">
-              <Lottie animationData={cartLottie} />
+            <div className="relative ">
+              <Lottie
+                className="lg:w-[120px] lg:h-[120px] 2xl:w-[150px] 2xl:h-[150px]
+                 w-[100px] h-[100px]"
+                animationData={cartLottie}
+              />
             </div>
           }
           productstatus="Your cart is empty"
@@ -112,90 +116,117 @@ export default function Cart({ handleSavelater, currentUser }) {
           productAdded={
             <>
               <div
-                className="flex text-black-200 justify-between items-start 
-                text-lg relative top-7 pb-5"
+                className="2xl:text-lg lg:grid-cols-3 md:text-lg md:top-7 md:items-start lg:gap-4 
+                grid grid-cols-1 text-black-200 justify-center items-center
+                text-base relative top-6 pb-5 w-[100%]"
               >
-                <div className="bg-white-300 w-13 rounded-2xl">
-                  {/* Heading */}
+                <div
+                  className="lg:col-span-2 col-span-1 xl:rounded-2xl
+                 bg-white-300 w-full max-w-[100%] rounded-lg"
+                >
                   <div
-                    className="flex justify-between items-center
-                    px-4 bg-stone-400 py-3 rounded-t-2xl"
+                    className="lg:px-3 xl:px-4 grid grid-cols-8 xl:rounded-t-2xl
+                    px-3.5 bg-stone-700 py-3.5 rounded-t-lg shadow-sm"
                   >
-                    <div className="flex items-center gap-x-2">
+                    <div
+                      className="md:col-span-5
+                     col-span-4 flex items-center gap-x-2"
+                    >
                       <ShoppingCartOutlinedIcon fontSize="large" />
                       <h4> My Cart </h4>
                     </div>
-                    <div className="flex gap-[210px]">
-                      <h4>Price</h4>
-                      <h4>Action</h4>
-                    </div>
+                    <h4 className="md:flex hidden col-span-2">Price</h4>
+                    <h4 className="md:col-span-1 col-span-4 flex justify-end">
+                      Action
+                    </h4>
                   </div>
                   {/* Cart Items */}
                   {cart.map((item) => (
                     <div
-                      key={item.id}
-                      className="flex py-6 justify-between px-4
-                       border-b border-stone-400"
+                      className="xl:px-4 md:py-6
+                       grid grid-cols-8 px-3.5 py-5.5 border-t border-stone-700"
                     >
-                      <div className="flex gap-4">
+                      {/* image */}
+                      <div
+                        className="md:col-span-5 sm:gap-3.5 md:gap-4
+                       col-span-4 flex gap-3"
+                      >
                         <img
                           src={item.images[0]}
-                          className="w-7 h-7 rounded-md object-cover"
+                          className="sm:w-7.1 sm:h-7 md:w-7 md:h-7 xl:w-[120px] xl:h-[100px]
+                           2xl:w-[140px] 2xl:h-[120px]
+                          w-[65px] h-7 rounded-md object-cover"
                           alt=""
                         />
                         <div>
-                          <h4 className="font-medium text-base">
+                          <h4 className="md:text-base 2xl:text-lg font-medium text-xs">
                             {' '}
                             {item.title}{' '}
                           </h4>
 
-                          <p className="text-blue text-sm mt-2"> Mobuy store</p>
-                        </div>
-                      </div>
-                      {/* Action / Price */}
-                      <div className="flex gap-[120px]">
-                        <div>
-                          <h4 className="text-xl opacity-[0.8] font-medium">
+                          <p
+                            className="lg:text-xxs xl:text-sm 2xl:text-base md:mt-2
+                           text-blue text-xs mt-1"
+                          >
+                            {' '}
+                            Mobuy store
+                          </p>
+                          <p className="md:hidden font-medium text-sm flex mt-1">
+                            {' '}
                             {currency}
-                            {item.price}.00
-                          </h4>
-                          <p
-                            className="text-black-200 opacity-[0.7]
-                            font-regular text-sm"
-                          >
-                            {' '}
-                            {/* $428 x 1{' '} */}
+                            {item.price}.00{' '}
                           </p>
                         </div>
-                        {/* Action */}
-                        <div className="text-base text-stone-300 flex flex-col gap-y-2">
-                          {/* Remove item */}
-                          <p
-                            className="cursor-pointer hover:text-blue"
-                            onClick={() => handleRemoveItem(item.id)}
-                          >
-                            <DeleteOutlinedIcon
-                              sx={{ width: '22px', height: '22px' }}
-                              className="mr-1"
-                            />
-                            Remove Item
-                          </p>
-                          {/* Save Item */}
-
-                          <p
-                            className="cursor-pointer ml-[3px] hover:text-blue"
-                            onClick={() => handleSaveLater(item)}
-                          >
-                            {' '}
-                            <FavoriteBorderOutlinedIcon
-                              sx={{ width: '19px', height: '19px' }}
-                              className="mr-1"
-                            />
-                            Save Item
-                          </p>
-                        </div>
-                        {/* Action ends */}
                       </div>
+                      {/* Price */}
+                      <div className="md:flex hidden col-span-2">
+                        <h4 className="2xl:text-2xl xl:text-xl lg:text-lg opacity-[0.8] font-medium">
+                          {currency}
+                          {item.price}.00
+                        </h4>
+                        <p
+                          className="text-black-200 opacity-[0.7]
+                            font-regular text-sm"
+                        >
+                          {' '}
+                        </p>
+                      </div>
+                      {/* Action */}
+                      <div
+                        className="2xl:text-base md:col-span-1 xl:left-3 lg:items-start md:text-sm
+                        lg:text-xxs xl:text-sm 
+                        col-span-4 text-[12px] relative 
+                      text-stone-300 flex flex-col items-end gap-y-2"
+                      >
+                        {/* Remove item */}
+                        <p
+                          className="cursor-pointer hover:text-blue 
+                          flex justify-center items-center"
+                          onClick={() => handleRemoveItem(item.id)}
+                        >
+                          <DeleteOutlinedIcon
+                            sx={{ width: '20px', height: '20px' }}
+                            className="lg:scale-[0.8] xl:scale-[1] xl:mr-1 sm:scale-[0.8]
+                             scale-[0.7]"
+                          />
+                          Remove
+                        </p>
+                        {/* Save Item */}
+                        <p
+                          className="cursor-pointer flex justify-center items-center
+                            hover:text-blue "
+                          onClick={() => handleSaveLater(item)}
+                        >
+                          {' '}
+                          <FavoriteBorderOutlinedIcon
+                            sx={{ width: '19px', height: '19px' }}
+                            className="lg:scale-[0.8] xl:scale-[1] xl:mr-1 sm:scale-[0.8]
+                             scale-[0.7]"
+                          />
+                          Save Item
+                        </p>
+                      </div>
+                      {/* Action ends */}
                     </div>
                   ))}
                   {/* Cart Items ends*/}

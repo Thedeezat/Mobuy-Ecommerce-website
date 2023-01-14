@@ -12,7 +12,7 @@ export default function ProfileTab({
   }
   return (
     <p
-      className={`cursor-pointer text-sm ${extraStyle}
+      className={`2xl:text-base lg:text-sm cursor-pointer text-xs ${extraStyle}
     hover:text-darkOrange ${
       activeTab === id ? 'text-darkOrange' : 'text-charcoal'
     }`}

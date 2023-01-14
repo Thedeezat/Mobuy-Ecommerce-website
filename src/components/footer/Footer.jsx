@@ -13,47 +13,60 @@ import Lottie from 'lottie-react'
 import arrowup from '../lottie/arrowup.json'
 
 export default function Footer() {
+  const footerTexts_Heading = 'font-medium 2xl:text-lg text-base'
+  const footerTexts = 'cursor-pointer 2xl:text-base hover:text-stone-300'
+
   return (
     <footer
-      className="mt-7 px-7 py-7 text-black-200 bg-stone-500
-     w-screen "
+      className="sm:px-5 lg:px-6 xl:px-7 2xl:px-7.1
+      mt-7 px-3.5 py-7 text-black-200 bg-stone-500 w-screen "
     >
-      <div className="flex items-start justify-start gap-x-[150px]">
-        <div className="flex flex-col">
-          {/* Logo */}
-          <h4 className="text-black-100 text-3xl mb-3"> Mobuy </h4>
-          <p className="pt-2 text-sm">
+      <div
+        className="md:flex-row 
+        flex flex-col items-start justify-start gap-x-[150px]"
+      >
+        {/* intro */}
+        <div className="md:pb-0 pb-6 flex flex-col ">
+          <h4 className="2xl:text-4xl lg:mb-3 text-black-100 text-3xl mb-1">
+            {' '}
+            Mobuy{' '}
+          </h4>
+          <p className="2xl:text-base pt-2 text-sm">
             Cricklewood, London <br />
             NW2 6qg, Uk
           </p>
           {/* Social media */}
-          <div className="mt-3 flex gap-2">
+          <div className="2xl:mt-4 mt-3 flex gap-3 md:gap-2 2xl:gap-3.5">
             <div
-              className="w-4 h-4 border border-black-200
-           flex items-center justify-center rounded-full
-           cursor-pointer hover:bg-gray hover:scale-[1.1]"
+              className="2xl:scale-[1.2] 2xl:hover:scale-[1.3]
+              w-4 h-4 border border-black-200
+              flex items-center justify-center rounded-full
+             cursor-pointer hover:bg-gray hover:scale-[1.1]"
             >
               {' '}
               <RiFacebookFill className="w-3 h-3 text" />
             </div>
             <div
-              className="w-4 h-4 border border-black-200
-           flex items-center justify-center rounded-full
-           cursor-pointer hover:bg-gray hover:scale-[1.1]"
+              className="2xl:scale-[1.2] 2xl:hover:scale-[1.3]
+              w-4 h-4 border border-black-200
+             flex items-center justify-center rounded-full
+             cursor-pointer hover:bg-gray hover:scale-[1.1]"
             >
               {' '}
               <AiFillInstagram className="w-3 h-3 text" />
             </div>
             <div
-              className="w-4 h-4 border border-black-200
-           flex items-center justify-center rounded-full
-           cursor-pointer hover:bg-gray hover:scale-[1.1]"
+              className="2xl:scale-[1.2] 2xl:hover:scale-[1.3]
+              w-4 h-4 border border-black-200
+             flex items-center justify-center rounded-full
+             cursor-pointer hover:bg-gray hover:scale-[1.1]"
             >
               {' '}
               <BsTwitter className="w-3 h-3" />
             </div>
             <div
-              className="w-4 h-4 border border-black-200
+              className="2xl:scale-[1.2] 2xl:hover:scale-[1.3]
+              w-4 h-4 border border-black-200
            flex items-center justify-center rounded-full
            cursor-pointer hover:bg-gray hover:scale-[1.1]"
             >
@@ -62,60 +75,65 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        {/* Shop */}
-        <div className="flex flex-col gap-y-2 text-sm tracking-wide">
-          <h4 className="font-medium text-base">Shop</h4>
-          <p className="cursor-pointer hover:text-stone-300">Gift cards</p>
-          <p className="cursor-pointer hover:text-stone-300">Site map</p>
-          <p className="cursor-pointer hover:text-stone-300">Polka blog</p>
-          <p className="cursor-pointer hover:text-stone-300">Bulk purchase</p>
-          <p className="cursor-pointer hover:text-stone-300">Delivery</p>
-        </div>
-        {/* Sell */}
-        <div className="flex flex-col gap-y-2 text-sm tracking-wide">
-          <h4 className="font-medium text-base">Sell</h4>
-          <p className="cursor-pointer hover:text-stone-300">Sell on Polka</p>
-          <p className="cursor-pointer hover:text-stone-300">Teams</p>
-          <p className="cursor-pointer hover:text-stone-300">Forums</p>
-          <p className="cursor-pointer hover:text-stone-300">Affiliates</p>
-        </div>
-        {/* About */}
-        <div className="flex flex-col gap-y-2 text-sm tracking-wide">
-          <h4 className="font-medium text-base">About</h4>
-          <p className="cursor-pointer hover:text-stone-300">Polka, Inc.</p>
-          <p className="cursor-pointer hover:text-stone-300">Policies</p>
-          <p className="cursor-pointer hover:text-stone-300">Investors</p>
-          <p className="cursor-pointer hover:text-stone-300">Careers</p>
-          <p className="cursor-pointer hover:text-stone-300">Press</p>
-        </div>
-        {/* Help */}
-        <div className="flex flex-col gap-y-2 text-sm tracking-wide">
-          <h4 className="font-medium text-base">Help</h4>
-          <p className="cursor-pointer hover:text-stone-300">Help Center</p>
-          <p className="cursor-pointer hover:text-stone-300">
-            Trust and safety
-          </p>
-          <p className="cursor-pointer hover:text-stone-300">
-            Privacy settings
-          </p>
+
+        {/* product info  */}
+        <div
+          className="lg:justify-between lg:flex lg:w-[900px] 2xl:w-[1000px] sm:grid-cols-3 
+          grid grid-cols-2 w-full gap-y-6 gap-x-5"
+        >
+          {/* Shop */}
+          <div className="flex flex-col gap-y-2 text-sm tracking-wide">
+            <h4 className={footerTexts_Heading}>Shop</h4>
+            <p className={footerTexts}>Gift cards</p>
+            <p className={footerTexts}>Site map</p>
+            <p className={footerTexts}>Polka blog</p>
+            <p className={footerTexts}>Bulk purchase</p>
+            <p className={footerTexts}>Delivery</p>
+            <p className={footerTexts}>Privacy policy</p>
+          </div>
+          {/* Sell */}
+          <div className="flex flex-col gap-y-2 text-sm tracking-wide">
+            <h4 className={footerTexts_Heading}>Sell</h4>
+            <p className={footerTexts}>Sell on Polka</p>
+            <p className={footerTexts}>Teams</p>
+            <p className={footerTexts}>Forums</p>
+            <p className={footerTexts}>Affiliates</p>
+            <p className={footerTexts}>Terms of use</p>
+          </div>
+          {/* About */}
+          <div className="flex flex-col gap-y-2 text-sm tracking-wide">
+            <h4 className={footerTexts_Heading}>About</h4>
+            <p className={footerTexts}>Polka, Inc.</p>
+            <p className={footerTexts}>Policies</p>
+            <p className={footerTexts}>Investors</p>
+            <p className={footerTexts}>Careers</p>
+            <p className={footerTexts}>Press</p>
+          </div>
+          {/* Help */}
+          <div className="flex flex-col gap-y-2 text-sm tracking-wide">
+            <h4 className={footerTexts_Heading}>Help</h4>
+            <p className={footerTexts}>Help Center</p>
+            <p className={footerTexts}>Trust and safety</p>
+            <p className={footerTexts}>Privacy settings</p>
+            <p className={footerTexts}>Cookies</p>
+          </div>
         </div>
       </div>
       {/* Terms / conditions */}
-      <div className="mt-6 text-sm flex gap-x-5">
-        <p className="mr-[120px]">© 2022 Commerce, Inc.</p>
-        <p className="cursor-pointer hover:text-stone-300">Privacy policy</p>
-        <p className="text-yellow cursor-pointer hover:text-stone-300">
-          Terms of use
-        </p>
-        <p className="cursor-pointer hover:text-stone-300">Cookies</p>
+      <div className="flex justify-between 2xl:text-base lg:mt-6 md:mt-7 text-sm mt-5">
+        <p>© 2022 Commerce, Inc.</p>
+
         {/* Scroll up */}
         <p
-          className="text-base text-black-200 relative left-10 flex
-         justify-center items-end cursor-pointer opacity-[0.7] hover:opacity-[0.9]"
+          className="md:text-base 2xl:text-lg text-sm flex text-black-200 
+          cursor-pointer opacity-[0.7] hover:opacity-[0.9]"
         >
-          <span className="mr-[3px]"> Scroll to top </span>
-          <div className="rotate-[180deg] w-[30px] h-[30px]">
-            <Lottie animationData={arrowup} />
+          <span className="md:mr-[3px] mr-0"> Scroll to top </span>
+          <div className="lg:mt-0 mt-[-3px] rotate-[180deg]">
+            <Lottie
+              className="w-[30px] lg:scale-[1] scale-[0.5] h-[30px]"
+              animationData={arrowup}
+            />
           </div>
         </p>
       </div>

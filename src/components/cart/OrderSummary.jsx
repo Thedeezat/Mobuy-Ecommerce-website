@@ -22,10 +22,13 @@ export default function OrderSummary({ counter, currency, cart, currentUser }) {
   }, [cart, total])
 
   return (
-    <div className="w-8 h-8.3 bg-white-300 rounded-2xl text-black-200">
+    <div
+      className="lg:mt-0
+      w-full max-w-[100%] h-8.3 bg-white-300 rounded-2xl text-black-200 mt-6"
+    >
       {/* Heading */}
       <div
-        className="py-3.5 border-b border-white-700 flex
+        className="md:py-3.5 py-3.5 border-b border-white-700 flex
        justify-between px-3"
       >
         <h4>Order summary</h4>
@@ -33,8 +36,10 @@ export default function OrderSummary({ counter, currency, cart, currentUser }) {
       </div>
       {/* Delivery Charges */}
       <div className="border-b border-white-700 flex justify-between px-3 py-3.5">
-        <h4 className="text-[15px]">Delivery Charges:</h4>
-        <p className="text-xs text-right opacity-[0.7]">
+        <h4 className="2xl:text-base xl:text-[15px] text-xs">
+          Delivery Charges:
+        </h4>
+        <p className="2xl:text-sm xl:text-xs text-xxs text-right opacity-[0.7]">
           {' '}
           Delivery charges will
           <br />
@@ -45,23 +50,26 @@ export default function OrderSummary({ counter, currency, cart, currentUser }) {
       </div>
       {/* Subtotal */}
       <div className="border-b border-white-700 flex justify-between px-3 py-3.5">
-        <h4 className="text-[15px]"> Subtotal: </h4>
-        <p className="text-tiny">
+        <h4 className="2xl:text-base xl:text-[15px] text-xs"> Subtotal: </h4>
+        <p className="xl:text-tiny text-base">
           {currency}
           {price}
         </p>
       </div>
       {/* Total */}
       <div className="border-b border-white-700 flex justify-between px-3 py-3.5">
-        <h4 className="text-lg font-medium"> Total </h4>
-        <p className="text-xl font-medium">
+        <h4 className="2xl:text-xl xl:text-lg text-tiny font-medium">
+          {' '}
+          Total{' '}
+        </h4>
+        <p className="xl:text-xl text-lg font-medium">
           {' '}
           {currency}
           {price}{' '}
         </p>
       </div>
       {/* delivery info */}
-      <p className="text-[12px] text-darkOrange opacity-[0.7] text-right px-2 py-1">
+      <p className="2xl:text-sm xl:text-[12px] md:text-xs text-xxs text-darkOrange opacity-[0.7] text-right px-2 py-1">
         {' '}
         Excluding delivery charges{' '}
       </p>
@@ -69,8 +77,9 @@ export default function OrderSummary({ counter, currency, cart, currentUser }) {
       <Link to={currentUser ? '/checkout/completeOrder' : '/account/login'}>
         <div className="border-b border-white-700 flex justify-center py-2 pb-3">
           <button
-            className="w-[90%] h-5.5 rounded-lg bg-stone-200
-           text-base text-white-300 hover:bg-charcoal font-out-fit"
+            className="2xl:text-lg xl:text-base 2xl:h-6
+            w-[90%] h-5.5 rounded-lg bg-stone-200
+           text-sm text-white-300 hover:bg-charcoal font-out-fit"
           >
             Continue to checkout
           </button>
@@ -78,7 +87,10 @@ export default function OrderSummary({ counter, currency, cart, currentUser }) {
       </Link>
       {/* Card accepted */}
       <div className="flex items-center pt-1">
-        <span className="text-xs opacity-[0.4] px-3"> We accept: </span>
+        <span className="2xl:text-sm xl:text-xs text-xxs opacity-[0.4] px-3">
+          {' '}
+          We accept:{' '}
+        </span>
         <div className="flex gap-x-2 items-center">
           <FaCcMastercard />
           <SiVisa className="text-2xl" />
@@ -91,7 +103,7 @@ export default function OrderSummary({ counter, currency, cart, currentUser }) {
               {' '}
               <div
                 className="w-1 h-1 bg-orange opacity-[0.5]
-              rounded-full absolute left-0 top-[4px]"
+                rounded-full absolute left-0 top-[4px]"
               ></div>{' '}
               V
             </span>
@@ -104,8 +116,8 @@ export default function OrderSummary({ counter, currency, cart, currentUser }) {
         </div>
       </div>
       {/* secure */}
-      <p className="text-xs opacity-[0.4] px-3 py-1 flex items-center">
-        <LockIcon className="text-blue mr-[4px]" />
+      <p className="2xl:text-sm 2xl:py-3.5 xl:text-xs xl:py-3 text-xxs opacity-[0.4] px-3 py-2 flex items-center">
+        <LockIcon className="xl:scale-[1] text-blue mr-[4px] scale-[0.8]" />
         <span>Transactions are 100% save and secure</span>
       </p>
     </div>

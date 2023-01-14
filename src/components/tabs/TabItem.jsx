@@ -13,7 +13,7 @@ export default function TabItem({
   return (
     <div
       onClick={handleClick}
-      className={`sm:w-7 sm:h-7 md:w-7.1 md:h-7.1 md:rounded-3xl
+      className={`sm:w-7 sm:h-7 md:w-7.1 md:h-7.1 md:rounded-3xl 2xl:w-[110px] 2xl:h-[110px]
         w-[65px] h-[15px] bg-transparent rounded-2xl text-sm
         border cursor-pointer border-stone-400 ${
           activeTab === id ? 'border-darkYellow' : ''
@@ -23,7 +23,7 @@ export default function TabItem({
     >
       {' '}
       {icon}
-      <h4 className="md:text-sm text-xxs"> {product} </h4>
+      <h4 className="md:text-sm 2xl:text-base text-xxs"> {product} </h4>
     </div>
   )
 }

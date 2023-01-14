@@ -95,20 +95,30 @@ export default function DeliveryAdress({
   const handleEditAdress = () => {
     setSaveChanges(!saveChanges)
   }
+  const inputStyle = `md:text-sm 2xl:text-base 2xl:h-[50px]
+  placeholder:text-black-200 placeholder:opacity-[0.7] 
+  text-xs px-3.5 my-1 w-full h-[40px] bg-transparent text-black-100 
+  rounded-xl border border-stone-400 font-out-fit focus:outline
+  focus:border-transparent outline-1 outline-stone-200
+  hover:border-stone-200`
 
   return (
     <>
       {saveChanges ? (
-        <div className="w-13 h-7.8 bg-stone-500 rounded-xl">
+        <div className="pb-4 bg-stone-500 rounded-xl">
           {/* heading */}
           <div
-            className="border-b border-stone-600 flex justify-between py-3
-            px-4"
+            className="md:px-4 border-b border-stone-600 flex justify-between py-3
+            px-3.5"
           >
-            <h3 className="text-lg"> Delivery Address </h3>
+            <h3 className="2xl:text-xl md:text-lg text-base">
+              {' '}
+              Delivery Address{' '}
+            </h3>
             <button
-              className="bg-stone-200 w-[110px] h-[35px] rounded-md
-            text-white-300 text-sm hover:bg-charcoal"
+              className="2xl:w-[110px] 2xl:h-[40px] md:w-[110px] md:h-[35px] md:text-sm
+              bg-stone-200 w-[85px] h-[30px] rounded-md 
+             text-white-300 text-xs hover:bg-charcoal"
               onClick={handleEditAdress}
             >
               Edit Address
@@ -117,22 +127,22 @@ export default function DeliveryAdress({
 
           {/* Adress section */}
           <div
-            className="w-8 h-7.3 border border-stone-600 rounded-md
-             mt-4 mx-4"
+            className="max-w-[410px] md:mx-4 pb-2
+             border border-stone-700 rounded-md mt-4 mx-3.5"
           >
             {/* Heading */}
-            <div className="border-b border-stone-600 py-1 px-4 mb-2 ">
-              <p className="text-black-200 text-sm">
+            <div className="md:px-4 border-b border-stone-700 py-2 px-3.5 mb-2 ">
+              <p className="2xl:text-base md:text-sm text-[13px] text-black-200">
                 <span> Pickup Destination </span>
               </p>
             </div>
 
-            <div className="flex flex-col gap-y-3.5 px-4">
+            <div className="md:px-4 flex flex-col gap-y-3.5 px-3.5">
               {/* Name */}
-              <p className="text-sm flex items-center">
+              <p className="2xl:text-base md:text-sm text-xs flex items-center">
                 <Person2OutlinedIcon
                   fontSize="medium"
-                  className="mr-2 text-darkYellow"
+                  className="mr-2 text-darkYellow 2xl:scale-[1.2]"
                 />
                 <span>
                   {first_name || last_name ? (
@@ -144,10 +154,10 @@ export default function DeliveryAdress({
               </p>
 
               {/* Location */}
-              <p className="text-sm flex items-start">
+              <p className="2xl:text-base md:text-sm text-xs flex items-start">
                 <LocationOnOutlinedIcon
                   fontSize="medium"
-                  className="mr-2 text-darkYellow"
+                  className="mr-2 text-darkYellow 2xl:scale-[1.2]"
                 />
                 <span>
                   {getCountry}, {getState}
@@ -158,10 +168,10 @@ export default function DeliveryAdress({
               </p>
 
               {/* Phone */}
-              <p className="text-sm flex items-center">
+              <p className="2xl:text-base md:text-sm text-xs flex items-center">
                 <LocalPhoneOutlinedIcon
                   fontSize="medium"
-                  className="mr-2 text-darkYellow"
+                  className="mr-2 text-darkYellow 2xl:scale-[1.2]"
                 />
                 <span> {phoneNumber} </span>
               </p>
@@ -172,23 +182,23 @@ export default function DeliveryAdress({
         <>
           {/* Form */}
           <form
-            className="bg-stone-500 w-13 h-11 flex flex-col
+            className="2xl:h-12 bg-stone-500 w-full h-11 flex flex-col
             justify-center rounded-xl"
             onSubmit={handleSubmit}
           >
             {/* heading */}
-            <div
-              className="border-b border-stone-600 py-3
-            px-4"
-            >
-              <h3 className="text-lg"> Add Delivery Address </h3>
+            <div className="md:md:px-4 border-b border-stone-600 py-3 px-3.5">
+              <h3 className="2xl:text-2xl text-lg"> Add Delivery Address </h3>
             </div>
 
             {/* Forms */}
-            <div className="px-4 pt-4 text-base opacity-[0.8] flex flex-col gap-y-3">
+            <div className="md:px-4 px-3.5 pt-4 text-base opacity-[0.8] flex flex-col gap-y-3">
               {/* Phone Number */}
               <div className="relative flex flex-col ">
-                <label htmlFor="number" className="text-sm text-black-200">
+                <label
+                  htmlFor="number"
+                  className="2xl:text-base lg:text-sm text-xs text-black-200"
+                >
                   Phone Number
                 </label>
                 <input
@@ -198,18 +208,14 @@ export default function DeliveryAdress({
                   onChange={(e) => setPhoneNuber(e.target.value)}
                   value={phoneNumber}
                   placeholder="Mobile Number"
-                  className={`placeholder:text-black-200 placeholder:opacity-[0.7] 
-                text-sm px-3.5 my-1 w-full h-[40px] bg-transparent text-black-100 
-                rounded-xl border border-stone-400 font-out-fit focus:outline
-                focus:border-transparent outline-1 outline-stone-200
-                hover:border-stone-200`}
+                  className={inputStyle}
                 />
               </div>
               {/* Street address */}
               <div className="relative flex flex-col">
                 <label
                   htmlFor="street-address"
-                  className="text-sm text-black-200"
+                  className="2xl:text-base lg:text-sm text-xs text-black-200"
                 >
                   Street address
                 </label>
@@ -220,11 +226,7 @@ export default function DeliveryAdress({
                   onChange={(e) => setStreetAddress(e.target.value)}
                   value={streetAddress}
                   placeholder="Enter delivery address"
-                  className={`placeholder:text-black-200 placeholder:opacity-[0.7] 
-                   text-sm px-3.5 my-1 w-full h-[40px] bg-transparent text-black-100 
-                   rounded-xl border border-stone-400 font-out-fit focus:outline
-                   focus:border-transparent outline-1 outline-stone-200
-                  hover:border-stone-200`}
+                  className={inputStyle}
                 />
               </div>
               {/* Country and state */}
@@ -244,16 +246,20 @@ export default function DeliveryAdress({
                     </div>
                   )}
 
-                  <label htmlFor=" Country" className="text-sm text-black-200">
+                  <label
+                    htmlFor=" Country"
+                    className="2xl:text-base lg:text-sm text-xs text-black-200"
+                  >
                     Country
                   </label>
-                  <ArrowDropDownOutlinedIcon className="absolute right-2 top-[43px]" />
+                  <ArrowDropDownOutlinedIcon className="md:top-[43px] absolute right-2 top-[40px]" />
                   <select
                     onChange={(e) => handleCountryChange(e)}
                     name="country"
                     id="country"
-                    className={`placeholder:text-black-200 placeholder:opacity-[0.7] 
-                    text-sm px-3.5 my-1 w-full h-[40px] bg-transparent text-black-100 
+                    className={`md:text-sm md:px-3.5
+                    placeholder:text-black-200 placeholder:opacity-[0.7] 
+                    text-xs px-3 my-1 w-full h-[40px] bg-transparent text-black-100 
                     rounded-xl border border-stone-400 font-out-fit focus:outline
                     focus:border-transparent outline-1 outline-stone-200
                     hover:border-stone-200`}
@@ -270,16 +276,20 @@ export default function DeliveryAdress({
                 </div>
                 {/* state */}
                 <div className="relative input-states flex flex-col w-[50%]">
-                  <label htmlFor="State" className="text-sm text-black-200">
+                  <label
+                    htmlFor="State"
+                    className="2xl:text-base lg:text-sm text-xs text-black-200"
+                  >
                     State
                   </label>
-                  <ArrowDropDownOutlinedIcon className="absolute right-2 top-[43px]" />
+                  <ArrowDropDownOutlinedIcon className="md:top-[43px] absolute right-2 top-[40px]" />
                   <select
                     name="states"
                     id="states"
                     onChange={(e) => handleStateChange(e)}
-                    className={`placeholder:text-black-200 placeholder:opacity-[0.7] 
-                    text-sm px-3.5 my-1 w-full h-[40px] bg-transparent text-black-100 
+                    className={`md:text-sm md:px-3.5
+                    placeholder:text-black-200 placeholder:opacity-[0.7] 
+                    text-xs px-3 my-1 w-full h-[40px] bg-transparent text-black-100 
                     rounded-xl border border-stone-400 font-out-fit focus:outline
                     focus:border-transparent outline-1 outline-stone-200
                     hover:border-stone-200`}
@@ -299,15 +309,19 @@ export default function DeliveryAdress({
               <div className="flex justify-between items-center gap-x-5">
                 {/* City */}
                 <div className="relative input-states flex flex-col w-[50%]">
-                  <label htmlFor="City" className="text-sm text-black-200">
+                  <label
+                    htmlFor="City"
+                    className="2xl:text-base lg:text-sm text-xs text-black-200"
+                  >
                     City
                   </label>
-                  <ArrowDropDownOutlinedIcon className="absolute right-2 top-[43px]" />
+                  <ArrowDropDownOutlinedIcon className="md:top-[43px] absolute right-2 top-[40px]" />
                   <select
                     name="city"
                     id="city"
-                    className={`placeholder:text-black-200 placeholder:opacity-[0.7] 
-                    text-sm px-3.5 my-1 w-full h-[40px] bg-transparent text-black-100 
+                    className={`md:text-sm md:px-3.5
+                    placeholder:text-black-200 placeholder:opacity-[0.7] 
+                    text-xs px-3.5 my-1 w-full h-[40px] bg-transparent text-black-100 
                     rounded-xl border border-stone-400 font-out-fit focus:outline
                     focus:border-transparent outline-1 outline-stone-200
                     hover:border-stone-200`}
@@ -324,7 +338,10 @@ export default function DeliveryAdress({
                 </div>
                 {/* Direction */}
                 <div className="relative input-states flex flex-col w-[50%]">
-                  <label htmlFor="Direction" className="text-sm text-black-200">
+                  <label
+                    htmlFor="Direction"
+                    className="2xl:text-base lg:text-sm text-xs text-black-200"
+                  >
                     Direction (Optional)
                   </label>
                   <input
@@ -334,8 +351,9 @@ export default function DeliveryAdress({
                     onChange={(e) => setDirection(e.target.value)}
                     value={dirction}
                     placeholder="Enter Direction"
-                    className={`placeholder:text-black-200 placeholder:opacity-[0.7] 
-                    text-sm px-3.5 my-1 w-full h-[40px] bg-transparent text-black-100 
+                    className={`md:text-sm md:px-3.5
+                    placeholder:text-black-200 placeholder:opacity-[0.7] 
+                    text-xs px-3.5 my-1 w-full h-[40px] bg-transparent text-black-100 
                     rounded-xl border border-stone-400 font-out-fit focus:outline
                     focus:border-transparent outline-1 outline-stone-200
                     hover:border-stone-200`}
@@ -349,8 +367,9 @@ export default function DeliveryAdress({
                 <button
                   type="submit"
                   disabled={changesLoading}
-                  className="w-full h-[45px] bg-stone-200
-                text-white-300 rounded-xl text-base font-out-fit
+                  className="2xl:h-[55px] 
+                   w-full h-[45px] bg-stone-200
+                 text-white-300 rounded-xl text-base font-out-fit
                     tracking-wide hover:bg-charcoal relative flex 
                     justify-center items-center my-3"
                 >
