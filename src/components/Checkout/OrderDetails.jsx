@@ -23,18 +23,24 @@ export default function OrderDetails({
     handleTotal()
   }, [cart, total])
   return (
-    <div className="w-8 h-full bg-stone-500 pb-1 rounded-lg">
+    <div
+      className="md:col-span-1 md:my-0 
+     my-1 bg-stone-500 rounded-lg"
+    >
       {/* heading */}
       <div
-        className="flex justify-between items-center
-           px-4 border-b border-stone-700 py-3 
-          text-base"
+        className="2xl:py-3.5 2xl:text-lg lg:px-4 md:px-3.5 lg:text-base
+          flex justify-between items-center
+          px-3 border-b border-stone-700 py-3 
+          text-sm"
       >
         <h2 className="">Order Details</h2>
         <Link to="/cart">
           <button
-            className="bg-stone-700 w-[90px] h-[30px] rounded-md
-            text-black-200 text-xs hover:text-charcoal"
+            className="2xl:text-sm 2xl:w-[110px] 2xl:h-[40px] lg:w-[90px]
+             md:w-[75px] lg:text-xs
+            bg-stone-700 w-[85px] h-[30px] rounded-md
+            text-black-200 text-[11px] hover:text-charcoal"
           >
             Modify Cart
           </button>
@@ -45,19 +51,26 @@ export default function OrderDetails({
         cart.map((item) => (
           <div
             key={item.id}
-            className="flex py-4 justify-between px-4
+            className="lg:py-4 flex py-3.5 justify-between px-4
               border-b border-stone-700"
           >
             <div className="flex gap-4">
               <img
                 src={item.images[0]}
-                className="w-7 h-7 rounded-md object-cover"
+                className="2xl:w-7.1 2xl:h-7.1 lg:w-7 lg:h-7 md:w-6 md:h-6
+                w-7 h-7 rounded-md object-cover"
                 alt=""
               />
               <div>
-                <h4 className="font-medium text-base"> {item.title} </h4>
-                <p className="text-blue text-xs mt-1"> Mobuy store</p>
-                <p className="text-xs mt-3 opacity-[0.8] font-medium">
+                <h4 className="2xl:text-lg lg:text-base font-medium text-sm">
+                  {' '}
+                  {item.title}{' '}
+                </h4>
+                <p className="2xl:text-base lg:text-xs text-blue text-xxs mt-1">
+                  {' '}
+                  Mobuy store
+                </p>
+                <p className="2xl:text-base lg:text-xs text-sm mt-3 opacity-[0.8] font-medium">
                   {currency}
                   {item.price}.00
                 </p>
@@ -67,8 +80,9 @@ export default function OrderDetails({
         ))}
       {/* Cart Items ends*/}
       <div
-        className="border-t border-stone-700 py-3 px-4 flex
-       flex-col gap-y-3 text-base"
+        className="2xl:text-lg 2xl:gap-y-4 lg:text-base lg:gap-y-3
+         border-t border-stone-700 py-3 px-4 flex
+       flex-col gap-y-3.5 text-sm"
       >
         <div className="flex justify-between pt-4">
           {' '}
@@ -87,7 +101,7 @@ export default function OrderDetails({
             {delivery}{' '}
           </p>
         </div>
-        <div className="flex text-lg justify-between font-medium">
+        <div className="2xl:text-xl lg:text-lg flex text-tiny justify-between font-medium">
           <p>Total: </p>
           <p>
             {' '}

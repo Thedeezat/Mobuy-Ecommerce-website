@@ -211,6 +211,7 @@ function App() {
                 deliveryAddress={deliveryAddress}
                 cart={cart}
                 currency={currency}
+                firstName={firstName}
               />
             </Route>
             <Route path="/forgot-password">

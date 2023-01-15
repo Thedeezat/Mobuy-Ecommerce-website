@@ -65,34 +65,39 @@ export default function Login({
       setGoogleError('Failed to login with google')
     }
   }
+  const inputStyle = `2xl:h-[60px] 2xl:text-base md:h-[50px] md:text-sm
+  placeholder:text-black-200 placeholder:opacity-[0.7] 
+  text-xs px-3.5 my-1 w-full h-[45px] bg-transparent text-black-100 
+  rounded-xl border border-stone-400 font-out-fit focus:outline
+  focus:border-transparent outline-1 outline-stone-200
+  hover:border-stone-200`
+
   return (
-    <>
+    <div className="overflow-x-hidden">
       {/* back arrow */}
       <Link to="/">
         {' '}
         <h2
-          className="text-lg text-black-200 mt-3 absolute top-3
-            left-5 flex items-center cursor-pointer hover:text-charcoal"
+          className="2xl:text-xl md:text-lg md:top-3 md:left-3 lg:left-5
+          text-base text-black-200 mt-3 relative top-2
+          left-3 flex items-center cursor-pointer hover:text-charcoal"
         >
           <Lottie
             animationData={arrow}
-            className="w-[50px] h-[50px] rotate-[180deg]"
+            className="md:scale-1 w-[50px] h-[50px] rotate-[180deg] scale-[0.9]"
           />
-          <span className="ml-2">Back</span>
+          <span className="md:ml-2 ml-1">Back</span>
         </h2>{' '}
       </Link>
 
       <div
-        className="h-screen flex justify-center
-        items-center"
+        className="md:mx-0 mx-3.5 h-screen flex relative justify-center
+       items-center"
       >
-        <div className="w-9 bg-white-300 pb-3.5 rounded-xl">
+        <div className="2xl:max-w-[550px] w-full max-w-[480px] bg-white-300 pb-3.5 rounded-xl">
           {/* Heading */}
-          <div
-            className="text-center border-b border-white-700
-           py-3"
-          >
-            <h4 className="text-3xl">
+          <div className="text-center border-b border-white-700 py-3">
+            <h4 className="2xl:text-4xl md:text-3xl text-2xl">
               <Link to="/">
                 <span className="text-stone-200 mr-[5px]">Mobuy</span>
               </Link>{' '}
@@ -101,8 +106,8 @@ export default function Login({
           </div>
           {/* Form */}
           <form
-            className="flex justify-center
-            flex-col px-5 mt-3 gap-y-3.5"
+            className="md:px-5 flex justify-center
+            flex-col px-3.5 mt-3 gap-y-3.5"
             onSubmit={handleLogin}
           >
             {/* Error */}
@@ -118,7 +123,10 @@ export default function Login({
             )}
             {/* email */}
             <div className="relative flex flex-col">
-              <label htmlFor="email" className="text-sm text-black-200">
+              <label
+                htmlFor="email"
+                className="2xl:text-base md:text-sm text-xs text-black-200"
+              >
                 Email
               </label>
               <input
@@ -128,27 +136,26 @@ export default function Login({
                 id="email"
                 name="email"
                 placeholder="Enter Email Address"
-                className="placeholder:text-black-200 placeholder:opacity-[0.7] 
-                text-sm px-3.5 my-1 w-full h-[50px] bg-transparent text-black-100 
-                rounded-xl border border-stone-400 font-out-fit focus:outline
-                focus:border-transparent outline-1 outline-stone-200
-                hover:border-stone-200"
+                className={inputStyle}
               />
               <AlternateEmailIcon
-                className="absolute text-black-200 right-2 
+                className="2xl:top-[55px] absolute text-black-200 right-2 
                 top-[48px] opacity-[0.7] "
               />
             </div>
 
             {/* password */}
             <div className="relative flex flex-col">
-              <label htmlFor="password" className="text-sm text-black-200">
+              <label
+                htmlFor="password"
+                className="2xl:text-base md:text-sm text-xs text-black-200"
+              >
                 Password
               </label>
               {/* forget password */}
               <Link to="/forgot-password">
                 <p
-                  className="absolute top-0 right-0 text-right text-blue text-sm 
+                  className="md:text-sm text-xs absolute top-0 right-0 text-right text-blue
                 cursor-pointer underline"
                 >
                   {' '}
@@ -164,21 +171,17 @@ export default function Login({
                 id="password"
                 name="password"
                 placeholder="Enter Password"
-                className="placeholder:text-black-200 placeholder:opacity-[0.7] 
-                text-sm px-3.5 my-1 w-full h-[50px] bg-transparent text-black-100 
-                rounded-xl border border-stone-400 font-out-fit focus:outline
-                focus:border-transparent outline-1 outline-stone-200
-                hover:border-stone-200"
+                className={inputStyle}
               />
               {visibilityOn ? (
                 <VisibilityOffIcon
-                  className="absolute text-black-200 right-2 top-[45px]
+                  className="2xl:top-[55px] absolute text-black-200 right-2 top-[45px]
                   cursor-pointer opacity-[0.7] "
                   onClick={handlePasswordShow}
                 />
               ) : (
                 <VisibilityIcon
-                  className="absolute text-black-200 right-2 top-[45px]
+                  className="2xl:top-[55px] absolute text-black-200 right-2 top-[45px]
                   cursor-pointer opacity-[0.7] "
                   onClick={handlePasswordShow}
                 />
@@ -189,10 +192,11 @@ export default function Login({
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full h-[45px] bg-stone-200
-               text-white-300 rounded-xl text-base font-out-fit
-               tracking-wide hover:bg-charcoal relative flex 
-               justify-center items-center"
+                className="2xl:text-tiny 2xl:h-[50px] md:h-[45px] md:text-base 
+                w-full h-[40px] bg-stone-200
+               text-white-300 rounded-xl text-sm font-out-fit
+                tracking-wide hover:bg-charcoal relative flex 
+                justify-center items-center"
               >
                 {' '}
                 {loading ? '' : <span>Login</span>}
@@ -202,10 +206,10 @@ export default function Login({
           </form>
 
           {/* Signin options */}
-          <div className="pt-5 px-4">
+          <div className="md:pt-5 pt-4 px-4">
             <Divider className="opacity-[0.5]" orientation="horizontal">
               <span
-                className="border border-stone-600 w-6 h-6
+                className="md:w-6 md:h-6 border border-stone-600 w-5 h-5 
                p-[4px] rounded-full tracking-wider"
               >
                 OR
@@ -215,32 +219,35 @@ export default function Login({
             <div className="mt-3.5 flex items-center gap-x-3">
               {/* Facebook */}
               <div
-                className="h-3 border border-stone-200 flex
-              justify-center items-center py-3 rounded-md text-sm
-              px-2 cursor-pointer hover:bg-ash"
+                className="md:text-sm 2xl:text-base md:px-2
+                border border-stone-200 flex
+                justify-center items-center py-[5px] rounded-md text-xs
+                px-1 opacity-[0.5]"
               >
                 <span className="opacity-[0.7]"> Login with</span>
                 <FacebookIcon
                   fontSize="large"
-                  className="ml-[4px] text-black-200"
+                  className="md:scale-1 scale-[0.8] ml-[4px] text-black-200"
                 />
               </div>
 
               {/* google */}
               <div
-                className="h-3 border border-stone-200 flex
-              justify-center items-center py-3 rounded-md text-sm
-              px-2 cursor-pointer hover:bg-ash"
+                className="md:text-sm 2xl:text-base md:px-2
+                border border-stone-200 flex
+                justify-center items-center py-[5px] rounded-md text-xs
+                px-1 cursor-pointer hover:bg-ash"
                 onClick={handleGoogle}
               >
                 <span className="opacity-[0.7]"> Login with </span>
-                <FcGoogle className="ml-[4px] text-base" />
+                <FcGoogle className="md:text-base ml-[5px] text-sm" />
               </div>
             </div>
 
             {/* Create account */}
             <p
-              className="text-base mt-4 text-black-200
+              className="md:text-base 2xl:text-lg
+              text-sm mt-4 text-black-200
                w-full opacity-[0.8]"
             >
               Don't have an account?{' '}
@@ -257,6 +264,6 @@ export default function Login({
           {/* signin option closes */}
         </div>
       </div>
-    </>
+    </div>
   )
 }

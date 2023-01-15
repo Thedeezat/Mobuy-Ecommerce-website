@@ -18,7 +18,7 @@ import Lottie from 'lottie-react'
 
 import Tick from '../components/lottie/Tick.json'
 
-export default function Checkout({ cart, currency }) {
+export default function Checkout({ cart, currency, firstName }) {
   const [totalAmount, setTotalAmount] = useState()
 
   const {
@@ -43,20 +43,24 @@ export default function Checkout({ cart, currency }) {
       <PagesContent
         page_heading="Checkout"
         productAdded={
-          <div className="mt-6 flex justify-between gap-x-2">
+          <div
+            className="md:grid-cols-3 
+            grid grid-cols-1 mt-6 gap-2 mb-4"
+          >
             {/* Delivery */}
-            <section>
-              <div className="w-13 bg-stone-500 rounded-lg">
+            <section className="md:col-span-2 col-span-none">
+              <div className="w-full bg-stone-500 rounded-lg">
                 {/* heading */}
                 <h2
-                  className="flex items-center rounded-t-lg text-base
-                  px-4 border-b border-stone-700 py-3"
+                  className="2xl:text-lg 2xl:py-3.5 lg:text-base md:px-3.5 lg:px-4
+                  flex items-center rounded-t-lg text-sm
+                  px-3 border-b border-stone-700 py-3"
                 >
                   {checkoutLocation && phoneNumber ? (
                     <div className="relative">
                       <Lottie
                         animationData={Tick}
-                        className="w-[35px] h-[35px] mr-1"
+                        className="lg:w-[35px] lg:h-[35px] h-[30px] w-[30px] mr-1"
                       />
                     </div>
                   ) : (
@@ -65,26 +69,31 @@ export default function Checkout({ cart, currency }) {
                   Choose Delivery Details
                 </h2>
                 {/* Address */}
-                <div className="flex py-5 justify-between mx-3 items-start">
+                <div
+                  className="2xl:mx-3.5 lg:mx-3 md:flex-row
+                 flex-col flex py-5 justify-between mx-2 items-start"
+                >
                   <div
-                    className="w-8.1 py-3 px-3.5 bg-stone-500 border
+                    className="2xl:text-base 2xl:px-4 2xl:py-3.5 lg:text-sm
+                    lg:px-3.5 2xl:max-w-[600px]
+                    max-w-[450px] py-3 px-3 bg-stone-500 border
                   border-white-700 rounded-tiny flex shadow-sm
-                  flex-col items-start justify-center text-black-100 text-sm "
+                  flex-col items-start justify-center text-black-100 text-xs"
                   >
                     <p>
                       {' '}
-                      Hi hadiza, Click on Add Address to specify a delivery
+                      Hi {firstName}, Click on Add Address to specify a delivery
                       address.
                     </p>
                     {/* Delivery detail */}
                     <div className="mt-3.5 flex flex-col gap-y-2">
                       {/* Location */}
-                      <p className="text-sm flex items-start">
+                      <p className="2xl:text-base lg:text-sm text-xs flex items-start">
                         <LocationOnOutlinedIcon
                           fontSize="medium"
-                          className="mr-2 mt-[3px] text-darkYellow"
+                          className="lg:mr-2 mr-1 mt-[3px] text-darkYellow"
                         />
-                        Location:{' '}
+                        Locations:
                         <p className="opacity-[0.6] ml-2">
                           {checkoutLocation ? (
                             <span>{locationInfo}</span>
@@ -97,10 +106,10 @@ export default function Checkout({ cart, currency }) {
                         </p>
                       </p>
                       {/* Phone */}
-                      <p className="text-sm flex items-center">
+                      <p className="2xl:text-base lg:text-sm text-xs flex items-center">
                         <LocalPhoneOutlinedIcon
                           fontSize="medium"
-                          className="mr-2 text-darkYellow"
+                          className="lg:mr-2 mr-1 text-darkYellow"
                         />
                         Mobile Number:{' '}
                         <p className="opacity-[0.6] ml-2">
@@ -119,8 +128,10 @@ export default function Checkout({ cart, currency }) {
 
                     <Link to="/profile">
                       <button
-                        className="bg-stone-200 w-[110px] h-[37px] rounded-md
-                       text-white-300 text-sm hover:bg-charcoal mt-3.5"
+                        className="2xl:text-base 2xl:w-[120px] 2xl:h-[40px] 2xl:mt-4 lg:w-[110px]
+                        lg:h-[37px] lg:text-sm
+                        bg-stone-200 w-[85px] h-[30px] rounded-md
+                       text-white-300 text-xs hover:bg-charcoal mt-3.5"
                       >
                         Add Address
                       </button>
@@ -128,9 +139,10 @@ export default function Checkout({ cart, currency }) {
                   </div>
                   {/* address info */}
                   <div
-                    className="w-7.7 px-3 h-7.1 bg-stone-700 border
-                  border-white-700 rounded-tiny flex opacity-[0.8]
-                    items-center text-black-100 text-sm shadow-sm"
+                    className="2xl:text-base md:mt-0 lg:text-sm md:px-2 lg:px-3.5
+                     py-2 px-3 bg-stone-700 border
+                    mt-3 border-white-700 rounded-tiny flex opacity-[0.8]
+                    items-center text-black-100 text-xs shadow-sm"
                   >
                     Your item should be delivered to you in about 5 <br />{' '}
                     working days within your country, and 7 to 14 <br /> days

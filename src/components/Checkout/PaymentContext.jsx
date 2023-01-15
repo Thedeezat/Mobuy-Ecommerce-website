@@ -9,14 +9,18 @@ export function PaymentContext({ checkoutLocation, phoneNumber, totalAmount }) {
 
   return (
     <section
-      className="w-13 h-7.1 flex justify-between items-center mt-5
-     bg-stone-500 rounded-lg px-4 py-3"
+      className="lg:px-4 md:px-3.5 lg:h-7.1
+      h-7 flex justify-between items-center mt-5
+     bg-stone-500 rounded-lg px-3 py-3"
     >
       {/* heading */}
-      <h2 className="flex items-center text-base">
+      <h2 className="2xl:text-lg lg:text-base md:pr-0 pr-3 flex items-center text-sm">
         {checkoutLocation && phoneNumber ? (
           <div className="relative">
-            <Lottie animationData={Tick} className="w-[35px] h-[35px] mr-1" />
+            <Lottie
+              animationData={Tick}
+              className="lg:w-[35px] lg:h-[35px] h-[30px] w-[30px] mr-1"
+            />
           </div>
         ) : (
           ''
@@ -26,8 +30,10 @@ export function PaymentContext({ checkoutLocation, phoneNumber, totalAmount }) {
       <a href="https://buy.stripe.com/test_aEUeVsgeBgKa7VS6op">
         <button
           disabled={disable}
-          className={`bg-stone-200 w-[110px] h-[37px] rounded-md
-        text-white-300 text-[15px] hover:bg-charcoal
+          className={`2xl:text-base 2xl:w-[120px] 2xl:h-[40px] 
+          lg:w-[110px] lg:h-[37px] lg:text-[15px]
+          bg-stone-200 w-[85px] h-[30px] rounded-md
+        text-white-300 text-xs hover:bg-charcoal
          ${
            checkoutLocation && phoneNumber
              ? ''

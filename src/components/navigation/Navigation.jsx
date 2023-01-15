@@ -39,14 +39,20 @@ export default function Navigation({
   currency,
   cartActive,
   savelaterActive,
+  mobileCartIconActive,
+  mobileCartTextActive,
+  mobileSaveIconActive,
+  mobileSaveTextActive,
+  mobileProfileIconActive,
+  mobileProfileTextActive,
   firstName,
 }) {
   const { setSearchItem } = useContext(productContext)
-  const showProfile = false
   const { currentUser, logOut } = AuthContext()
   const [error, setError] = useState('')
   const history = useHistory()
   const [isOpen, setIsOpen] = useState(false)
+  const [openMenu, setOpenMenu] = useState(null)
 
   const [anchorEl, setAnchorEl] = React.useState(null)
   const open = Boolean(anchorEl)
@@ -85,10 +91,20 @@ export default function Navigation({
       setError('Failed to log out')
     }
   }
-
+  const menuItem =
+    'flex items-center font-out-fit w-full py-1 border-t border-stone-700 text-sm'
   const toolTip = (text) => (
     <span className="text-xs font-out-fit padding-1">{text}</span>
   )
+  // Hamburger
+  const handleMenuClose = () => {
+    setIsOpen(false)
+    setOpenMenu(null)
+  }
+  const handleMenu = (event) => {
+    setIsOpen(!isOpen)
+    setOpenMenu(event.currentTarget)
+  }
 
   return (
     <>
@@ -128,30 +144,159 @@ export default function Navigation({
 
         {/* Hamburger */}
         <button
-          className="md:hidden col-span-5
+          className="md:hidden col-span-5 
           flex flex-col justify-center items-end group"
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={handleMenu}
         >
           <div
             className={`${genericHamburgerLine} ${
-              isOpen
-                ? 'rotate-45 translate-y-[6px] bg-charcoal'
-                : 'group-hover:bg-blue'
+              isOpen ? 'rotate-45 translate-y-[6px] bg-charcoal' : ''
             }`}
           ></div>
           <div
-            className={`${genericHamburgerLine} ${
-              isOpen ? 'opacity-0' : 'group-hover:bg-blue'
-            }`}
+            className={`${genericHamburgerLine} ${isOpen ? 'opacity-0' : ''}`}
           ></div>
           <div
             className={`${genericHamburgerLine} ${
-              isOpen
-                ? '-rotate-45 -translate-y-[6px] bg-charcoal'
-                : 'group-hover:bg-blue'
+              isOpen ? '-rotate-45 -translate-y-[6px] bg-charcoal' : ''
             }`}
           ></div>
         </button>
+        {/* Hamburger contents */}
+        <Menu
+          id="menu-appbar"
+          anchorEl={null}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          keepMounted
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          open={Boolean(openMenu)}
+          onClose={handleMenuClose}
+          className="md:hidden bg-stone-600 absolute top-8"
+          PaperProps={{
+            sx: {
+              // mt: '65px',
+              boxShadow: 'none',
+              width: '57%',
+              bgcolor: '#eceff2',
+              fontFamily: 'Outfit',
+            },
+          }}
+        >
+          <MenuItem onClick={handleMenuClose}>
+            <div
+              className={`font-out-fit w-full rounded-md bg-stone-700 py-2 text-base text-center`}
+            >
+              Close
+            </div>
+          </MenuItem>
+          {/* carts */}
+          <Link to="/cart">
+            <MenuItem onClick={handleMenuClose}>
+              <div className={menuItem}>
+                <StyledBadge
+                  className="mr-1 scale-[0.6]"
+                  showZero
+                  badgeContent={counter}
+                  color="secondary"
+                >
+                  <div
+                    className={`
+                  bg-lightYellow w-[43px] h-[43px] rounded-2xl
+                   flex justify-center items-center relative ${mobileCartIconActive}   
+                   hover:border-2 border-yellow`}
+                  >
+                    <LocalMallRoundedIcon
+                      fontSize="large"
+                      className="text-yellow"
+                    />
+                  </div>
+                </StyledBadge>
+                <span className={`${mobileCartTextActive}`}> My Cart </span>
+              </div>
+            </MenuItem>
+          </Link>
+          {/* Save items */}
+          <Link to="/saveLater">
+            <MenuItem onClick={handleMenuClose}>
+              <div className={`${menuItem}`}>
+                <div
+                  className={`${mobileSaveIconActive}
+                bg-lightYellow w-[43px] h-[43px] rounded-2xl scale-[0.6]
+                flex justify-center items-center relative mr-1 cursor-pointer
+                ${savelaterActive} hover:border-2 border-yellow`}
+                >
+                  <FavoriteRoundedIcon
+                    fontSize="large"
+                    className="text-yellow"
+                  />
+                </div>{' '}
+                <span className={`${mobileSaveTextActive}`}> Saved Items </span>{' '}
+              </div>
+            </MenuItem>
+          </Link>
+          {/* Profile */}
+          {currentUser && (
+            <Link to="/profile">
+              <MenuItem onClick={handleMenuClose}>
+                <div className={menuItem}>
+                  {' '}
+                  <div
+                    className={`scale-[0.6] ${mobileProfileIconActive}
+                bg-lightYellow w-[43px] h-[43px] rounded-2xl
+                  flex justify-center items-center relative mr-1 cursor-pointer
+                  hover:border-2 border-yellow `}
+                  >
+                    <FaceRoundedIcon fontSize="large" className="text-yellow" />
+                  </div>{' '}
+                  <span className={`${mobileProfileTextActive}`}>
+                    {' '}
+                    Profile{' '}
+                  </span>
+                </div>
+              </MenuItem>
+            </Link>
+          )}
+          {/* Logout */}
+          <Link to="/account/login">
+            <MenuItem onClick={handleMenuClose}>
+              <div className={menuItem}>
+                <div
+                  className={`scale-[0.6]
+                bg-lightYellow w-[43px] h-[43px] rounded-2xl
+                  flex justify-center items-center relative mr-1 cursor-pointer
+                  hover:border-2 border-yellow `}
+                >
+                  <AccountCircleIcon fontSize="large" className="text-yellow" />{' '}
+                </div>
+                Login / SignUp{' '}
+              </div>
+            </MenuItem>
+          </Link>
+          {/* logout */}
+          {currentUser && (
+            <div onClick={handleLogout}>
+              <MenuItem onClick={handleMenuClose}>
+                <div className={`${menuItem} text-darkOrange`}>
+                  <div
+                    className={`scale-[0.5] opacity-[0.8]
+                bg-darkOrange w-[43px] h-[43px] rounded-2xl
+                  flex justify-center items-center relative mr-1 cursor-pointer
+                 border-yellow `}
+                  >
+                    <Logout fontSize="large" className="text-white-200" />
+                  </div>
+                  Logout{' '}
+                </div>
+              </MenuItem>
+            </div>
+          )}
+        </Menu>
         {/* Icons */}
         <div className="col-span-7 hidden md:flex items-center justify-end ">
           {/* Currency changer */}

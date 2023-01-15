@@ -34,6 +34,7 @@ export default function Profile({
     <PagesContent
       page_heading="Account Information"
       is_back="true"
+      is_profile={true}
       profile_style="w-7.6"
       productAdded={
         <>
