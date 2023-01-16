@@ -297,6 +297,7 @@ export default function Navigation({
             </div>
           )}
         </Menu>
+
         {/* Icons */}
         <div className="col-span-7 hidden md:flex items-center justify-end ">
           {/* Currency changer */}
@@ -317,7 +318,7 @@ export default function Navigation({
           {/* cart */}
           <Link to="/cart">
             <StyledBadge
-              className="2xl:scale-[1.4] 2xl:mr-6.1
+              className="2xl:scale-[1.2] 2xl:mr-6
               cursor-pointer mr-5 scale-[1]"
               showZero
               badgeContent={counter}
@@ -339,7 +340,7 @@ export default function Navigation({
           {/* savelater */}
           <Link to="/saveLater">
             <div
-              className={`2xl:scale-[1.4] 2xl:mr-6.1
+              className={`2xl:scale-[1.2] 2xl:mr-6
               bg-lightYellow w-[43px] h-[43px] rounded-2xl scale-[1]
             flex justify-center items-center relative mr-4 cursor-pointer
             ${savelaterActive} hover:border-2 border-yellow`}
@@ -351,7 +352,7 @@ export default function Navigation({
           <div className="relative">
             <Tooltip title={toolTip('My Account')}>
               <div
-                className={`2xl:scale-[1.4] 2xl:mr-6.1
+                className={`2xl:scale-[1.2] 2xl:mr-6
                 bg-lightYellow w-[43px] h-[43px] rounded-2xl
                   flex justify-center items-center relative mr-4 cursor-pointer
                   hover:border-2 border-yellow ${

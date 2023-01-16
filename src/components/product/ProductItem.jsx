@@ -199,7 +199,7 @@ export default function ProductItem({ productImage_num }) {
                         </span>
                       )
                     }
-                    button_text=" View Cart"
+                    button_text="View Cart"
                     success="True"
                   />
                 </div>

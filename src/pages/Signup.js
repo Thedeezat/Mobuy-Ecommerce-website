@@ -82,8 +82,8 @@ export function Signup({
       <div>
         <div
           className="relative md:mx-0 mx-3.5 lg:mt-0 mt-4 h-screen flex justify-center
-          max-[320px]:top-[-20px] 
-          items-center top-[-60px]"
+          max-[320px]:top-[-20px] top-[-60px]
+          items-center md:top-[-20px]"
         >
           <div className="2xl:max-w-[550px] w-full max-w-[480px] bg-white-300 pb-3.5 rounded-xl">
             {/* Heading */}

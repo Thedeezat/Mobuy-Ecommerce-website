@@ -93,7 +93,7 @@ export default function Login({
       </div>
 
       <div
-        className="md:mx-0 mx-3.5 h-screen flex relative justify-center max-[320px]:top-[-30px]
+        className="md:mx-0 mx-3.5 h-screen flex relative justify-center max-[320px]:top-[-30px] md:top-[-20px]
        items-center top-[-70px]"
       >
         <div className="2xl:max-w-[550px] w-full max-w-[480px] bg-white-300 pb-3.5 rounded-xl">
