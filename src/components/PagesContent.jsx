@@ -85,8 +85,8 @@ export default function PagesContent({
             justify-center items-center h-screen"
           >
             <div
-              className="md:h-7.8 md:max-w-[550px] mt-[-80px] 2xl:max-w-[700px]
-               2xl:h-8 2xl:mt-[-90px]
+              className="md:h-7.8 md:max-w-[550px] mt-[-80px] 2xl:max-w-[650px]
+               2xl:h-7.9 2xl:mt-[-90px]
               bg-white-300 shadow-md max-w-[450px] w-full h-7.6 rounded-2xl
               flex justify-center items-center flex-col"
             >
