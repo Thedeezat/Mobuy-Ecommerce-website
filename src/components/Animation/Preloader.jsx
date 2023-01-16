@@ -13,8 +13,8 @@ export default function Preloader() {
 
   return (
     <div
-      className="preloader h-screen w-full bg-ash fixed
-     top-0 bottom-0 left-0 right-0 z-50 flex items-center justify-center
+      className="preloader h-screen w-full bg-ash fixed 
+     top-0 bottom-0 left-0 right-0 z-[9999] flex items-center justify-center
      text-black-200 overflow-hidden flex-col"
     >
       <div className="relative loding">

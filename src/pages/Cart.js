@@ -24,6 +24,8 @@ import IconButton from '@mui/material/IconButton'
 
 import CloseIcon from '@mui/icons-material/Close'
 
+import { Link } from 'react-router-dom'
+
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />
 })
@@ -55,14 +57,16 @@ export default function Cart({ handleSavelater, currentUser }) {
           You need to be loged in to save
           <br /> an item
         </span>
-        <button
-          className="border border-yellow outline-none bg-transparent
-        w-[120px] mt-1 rounded-md py-[4px] text-xs font-out-fit 
-        hover:bg-darkYellow hover:text-black-300"
-        >
-          {' '}
-          Click here to login{' '}
-        </button>
+        <Link to="/account/login">
+          <button
+            className="border border-yellow outline-none bg-transparent
+          w-[120px] mt-1 rounded-md py-[4px] text-xs font-out-fit 
+         hover:bg-darkYellow hover:text-black-300"
+          >
+            {' '}
+            Click here to login{' '}
+          </button>
+        </Link>
       </div>
     </>
   )

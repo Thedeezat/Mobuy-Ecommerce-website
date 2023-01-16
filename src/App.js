@@ -1,4 +1,4 @@
-import { useState, createContext, useEffect, useRef } from 'react'
+import { useState, createContext, useEffect } from 'react'
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
@@ -58,7 +58,7 @@ function App() {
     return savedItem || 0
   })
 
-  const [currency, setCurrency] = useState('$')
+  const currency = '₦'
   const [searchItem, setSearchItem] = useState('')
   const [passwordType, setPasswordType] = useState('password')
   const [passwordInput, setPasswordInput] = useState('')
@@ -66,8 +66,6 @@ function App() {
   const [deliveryAddress, setDeliveryAddress] = useState(false)
   const [cartAdded, setCartAdded] = useState(false)
   const [saveAdded, setSaveAdded] = useState(false)
-
-  const handleCurrency = (e) => {}
 
   const handleSavelater = (item) => {
     setSaveAdded(false)

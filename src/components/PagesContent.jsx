@@ -50,8 +50,8 @@ export default function PagesContent({
               {' '}
               <div
                 className="md:flex 2xl:text-xl 2xl:right-4 
-              right-3.5 text-lg text-black-200 mt-1 relative hidden
-              items-center cursor-pointer hover:text-charcoal"
+                right-3.5 text-lg text-black-200 mt-1 relative hidden
+                items-center cursor-pointer hover:text-charcoal"
               >
                 <Lottie
                   animationData={arrow}

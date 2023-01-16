@@ -444,11 +444,12 @@ export default function Navigation({
                     </span>
                   </div>
                 </MenuItem>
-                <Divider className="opacity-[0.5]" />
               </Link>
               {/* Logout */}
               {currentUser && (
                 <div onClick={handleLogout}>
+                  <Divider className="opacity-[0.5]" />
+
                   <MenuItem>
                     <div className="flex items-center py-1">
                       <ListItemIcon>

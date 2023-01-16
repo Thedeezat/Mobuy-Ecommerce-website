@@ -14,6 +14,8 @@ import { CustomSnackbar } from '../Snackbar'
 
 import { productContext } from '../../App'
 
+import { Link } from 'react-router-dom'
+
 export default function ProductItem({ productImage_num }) {
   const {
     currency,
@@ -37,27 +39,30 @@ export default function ProductItem({ productImage_num }) {
   const Savelater_snackbar = (
     <div className="flex flex-col">
       {currentUser ? (
-        <span className="text-sm font-out-fit">
+        <span className="md:text-sm text-xs font-out-fit">
           {saveAdded
             ? 'Product already in saved items'
             : ' Product added to saved items'}
         </span>
       ) : (
-        <span className="text-sm font-out-fit">
+        <span className="md:text-sm text-xs font-out-fit">
           You need to be loged in to save
           <br /> an item
         </span>
       )}
 
       {!currentUser && (
-        <button
-          className="border border-yellow outline-none bg-transparent
-         w-[120px] mt-1 rounded-md py-[4px] text-xs font-out-fit 
-        hover:bg-darkYellow hover:text-black-300"
-        >
-          {' '}
-          Click here to login
-        </button>
+        <Link to="/account/login">
+          <button
+            className="md:text-xs md:w-[120px]
+            border border-yellow outline-none bg-transparent
+            w-[90px] mt-1 rounded-md py-[4px] text-xxs font-out-fit 
+           hover:bg-darkYellow hover:text-black-300"
+          >
+            {' '}
+            Click here to login
+          </button>
+        </Link>
       )}
     </div>
   )
@@ -89,33 +94,35 @@ export default function ProductItem({ productImage_num }) {
                 product.id >= 310 ? 'hidden' : ''
               } rounded-lg overflow-hidden`}
             >
-              <CustomSnackbar
-                children={
-                  <>
-                    {/* Savelater */}
-                    <div className="relative">
-                      {' '}
-                      <div
-                        className={` 
+              <div className="">
+                <CustomSnackbar
+                  children={
+                    <>
+                      {/* Savelater */}
+                      <div className="relative">
+                        {' '}
+                        <div
+                          className={` 
                           md:w-[28px] md:h-[28px] 
                           absolute flex rounded-full w-[25px] h-[25px] shadow-md group opacity-[0.7]
                           items-center justify-center bg-stone-500 right-2 top-2 cursor-pointer
                           hover:opacity-[0.8]
                         `}
-                        onClick={() => handleSavelater(product)}
-                      >
-                        <FavoriteBorderOutlinedIcon
-                          className="md:scale-[1]
+                          onClick={() => handleSavelater(product)}
+                        >
+                          <FavoriteBorderOutlinedIcon
+                            className="md:scale-[1]
                           text-black-100 group-hover:text-black-100 scale-[0.9]"
-                        />
+                          />
+                        </div>
                       </div>
-                    </div>
-                  </>
-                }
-                message={Savelater_snackbar}
-                success={currentUser ? 'True' : null}
-                button_text={currentUser && 'View items'}
-              />
+                    </>
+                  }
+                  message={Savelater_snackbar}
+                  success={currentUser ? 'True' : null}
+                  button_text={currentUser && 'View items'}
+                />
+              </div>
               {/* Image */}
               <img
                 src={product.images[productImage_num]}
@@ -181,12 +188,12 @@ export default function ProductItem({ productImage_num }) {
                     }
                     message={
                       cartAdded ? (
-                        <span>
+                        <span className="md:text-sm text-xs">
                           {productTitle} <br />
                           is alredy in the cart
                         </span>
                       ) : (
-                        <span>
+                        <span className="md:text-sm text-xs">
                           {productTitle} <br />
                           has been added to cart
                         </span>

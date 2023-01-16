@@ -8,6 +8,8 @@ import IconButton from '@mui/material/IconButton'
 
 import CloseIcon from '@mui/icons-material/Close'
 
+import { Link } from 'react-router-dom'
+
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />
 })
@@ -27,15 +29,18 @@ export function CustomSnackbar({ children, message, success, button_text }) {
   }
   const snackbar_text = (
     <div className="flex flex-col ml-1 font-normal">
-      <span className="text-sm font-out-fit">{message}</span>
-      <button
-        className="border border-white-100 outline-none bg-transparent
-        w-[80px] mt-1 rounded-md py-[1px] text-xs font-out-fit 
-        hover:bg-darkYellow hover:border-yellow tracking-wider"
-      >
-        {' '}
-        {button_text}
-      </button>
+      <span className="md:text-sm text-xs font-out-fit">{message}</span>
+      <Link to="/cart">
+        <button
+          className="md:text-xs md:w-[80px]
+          border border-white-100 outline-none bg-transparent
+          w-[70px] mt-1 rounded-md py-[1px] text-xxs font-out-fit 
+          hover:bg-darkYellow hover:border-yellow tracking-wider"
+        >
+          {' '}
+          {button_text}
+        </button>
+      </Link>
     </div>
   )
   const action = (
@@ -65,14 +70,14 @@ export function CustomSnackbar({ children, message, success, button_text }) {
           <Alert
             onClose={handleClose}
             severity="success"
-            sx={{ width: '290px', opacity: '0.1' }}
+            sx={{ width: 240, opacity: '0.1' }}
           >
             {snackbar_text}
           </Alert>
         </Snackbar>
       ) : (
         <Snackbar
-          sx={{ zIndex: '30px' }}
+          sx={{ zIndex: '30px', width: 240 }}
           open={open}
           autoHideDuration={6000}
           onClose={handleClose}
