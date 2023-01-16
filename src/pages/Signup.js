@@ -60,27 +60,30 @@ export function Signup({
   hover:border-stone-200`
 
   return (
-    <div className="">
+    <div className="overflow-x-hidden">
       {/* back arrow */}
-      <Link to="/">
-        {' '}
-        <h2
-          className="2xl:text-xl md:text-lg md:top-3 md:left-3 lg:left-5
-          text-base text-black-200 mt-3 relative top-2
-          left-3 flex items-center cursor-pointer hover:text-charcoal"
-        >
-          <Lottie
-            animationData={arrow}
-            className="md:scale-1 w-[50px] h-[50px] rotate-[180deg] scale-[0.9]"
-          />
-          <span className="md:ml-2 ml-1">Back</span>
-        </h2>{' '}
-      </Link>
+      <div className="md:top-3 md:left-3 lg:left-5 w-7.1 relative top-2 z-50 left-3">
+        <Link to="/">
+          {' '}
+          <h2
+            className="2xl:text-xl md:text-lg 
+          text-base text-black-200 mt-3 
+          flex items-center cursor-pointer hover:text-charcoal"
+          >
+            <Lottie
+              animationData={arrow}
+              className="md:scale-1 w-[50px] h-[50px] rotate-[180deg] scale-[0.9]"
+            />
+            <span className="md:ml-2 ml-1">Back</span>
+          </h2>{' '}
+        </Link>
+      </div>
 
       <div>
         <div
           className="relative md:mx-0 mx-3.5 lg:mt-0 mt-4 h-screen flex justify-center
-          items-center"
+          max-[320px]:top-[-20px] 
+          items-center top-[-60px]"
         >
           <div className="2xl:max-w-[550px] w-full max-w-[480px] bg-white-300 pb-3.5 rounded-xl">
             {/* Heading */}

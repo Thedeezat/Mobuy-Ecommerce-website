@@ -144,7 +144,7 @@ export default function Navigation({
 
         {/* Hamburger */}
         <button
-          className="md:hidden col-span-5 
+          className="md:hidden col-span-5  pr-1
           flex flex-col justify-center items-end group"
           onClick={handleMenu}
         >
@@ -369,6 +369,7 @@ export default function Navigation({
               open={open}
               onClose={handleClose}
               onClick={handleClose}
+              className="hidden md:block"
               PaperProps={{
                 elevation: 0,
                 sx: {
@@ -423,9 +424,9 @@ export default function Navigation({
                       </span>
                     </div>
                   </MenuItem>
+                  <Divider className="opacity-[0.5]" />
                 </Link>
               )}
-              <Divider />
 
               {/* Login */}
               <Link to="/account/login">
@@ -443,8 +444,8 @@ export default function Navigation({
                     </span>
                   </div>
                 </MenuItem>
+                <Divider className="opacity-[0.5]" />
               </Link>
-              <Divider />
               {/* Logout */}
               {currentUser && (
                 <div onClick={handleLogout}>

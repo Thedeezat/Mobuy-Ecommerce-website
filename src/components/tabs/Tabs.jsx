@@ -36,7 +36,7 @@ export default function Tabs() {
   const [activeTab, setActiveTab] = useState('tab1')
 
   const categoryIcons =
-    'md:scale-[1] 2xl:scale-[1.3] 2xl:mb-3 scale-[0.7] text-yellow mb-1'
+    'md:scale-[1] 2xl:scale-[1.3] 2xl:mb-3 scale-[0.8] text-yellow mb-1'
 
   return (
     <>
