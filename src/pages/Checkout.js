@@ -18,7 +18,7 @@ import Lottie from 'lottie-react'
 
 import Tick from '../components/lottie/Tick.json'
 
-export default function Checkout({ cart, currency, firstName }) {
+export default function Checkout({ cart, currency, firstName, currentUser }) {
   const [totalAmount, setTotalAmount] = useState()
 
   const {
@@ -140,7 +140,7 @@ export default function Checkout({ cart, currency, firstName }) {
                   {/* address info */}
                   <div
                     className="2xl:text-base md:mt-0 lg:text-sm md:px-2 lg:px-3.5
-                     py-2 px-3 bg-stone-700 border
+                    py-2 px-3 bg-stone-700 border
                     mt-3 border-white-700 rounded-tiny flex opacity-[0.8]
                     items-center text-black-100 text-xs shadow-sm"
                   >
@@ -155,6 +155,7 @@ export default function Checkout({ cart, currency, firstName }) {
                 checkoutLocation={checkoutLocation}
                 phoneNumber={phoneNumber}
                 totalAmount={totalAmount}
+                currentUser={currentUser}
               />
             </section>
 

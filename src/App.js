@@ -66,6 +66,7 @@ function App() {
   const [deliveryAddress, setDeliveryAddress] = useState(false)
   const [cartAdded, setCartAdded] = useState(false)
   const [saveAdded, setSaveAdded] = useState(false)
+  // const [orderHistory, setOrderHistory] = useState('')
 
   const handleSavelater = (item) => {
     setSaveAdded(false)
@@ -210,6 +211,7 @@ function App() {
                 cart={cart}
                 currency={currency}
                 firstName={firstName}
+                currentUser={currentUser}
               />
             </Route>
             <Route path="/forgot-password">

@@ -16,7 +16,7 @@ export default function OrderHistory() {
       <div className="text-center">
         <h2 className="2xl:text-2xl md:text-lg text-base pb-2">
           {' '}
-          No transactions hisstory.{' '}
+          No transactions history.{' '}
         </h2>
         <span className="2xl:text-lg md:text-base text-sm font-light text-black-200">
           You have not made any purchase recently.

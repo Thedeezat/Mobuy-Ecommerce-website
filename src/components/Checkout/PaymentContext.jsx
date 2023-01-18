@@ -4,8 +4,34 @@ import Lottie from 'lottie-react'
 
 import Tick from '../lottie/Tick.json'
 
-export function PaymentContext({ checkoutLocation, phoneNumber, totalAmount }) {
+import { usePaystackPayment } from 'react-paystack'
+
+import { useHistory } from 'react-router-dom'
+
+export function PaymentContext({
+  checkoutLocation,
+  phoneNumber,
+  totalAmount,
+  currentUser,
+}) {
+  const history = useHistory()
   const disable = checkoutLocation && phoneNumber ? false : true
+  const total_price = totalAmount * 100
+
+  const config = {
+    reference: new Date().getTime().toString(),
+    email: currentUser ? currentUser.email : '',
+    amount: total_price, // 20000 kobo = N200
+    publicKey: 'pk_live_a9e1bfa00d271a8d393d7196b25246d61b0898d8',
+  }
+  const initializePayment = usePaystackPayment(config)
+  const onSuccess = () => {
+    // Implementation for whatever you want to do with reference and after success call.
+    history.push('/')
+  }
+  const onClose = () => {
+    // implementation for whatever you want to do when the Paystack dialog closed.
+  }
 
   return (
     <section
@@ -27,22 +53,24 @@ export function PaymentContext({ checkoutLocation, phoneNumber, totalAmount }) {
         )}
         Payment Checkout
       </h2>
-      <a href="https://buy.stripe.com/test_aEUeVsgeBgKa7VS6op">
-        <button
-          disabled={disable}
-          className={`2xl:text-base 2xl:w-[120px] 2xl:h-[40px] 
+      <button
+        onClick={(e) => {
+          e.preventDefault()
+          initializePayment(onSuccess, onClose)
+        }}
+        disabled={disable}
+        className={`2xl:text-base 2xl:w-[120px] 2xl:h-[40px] 
           lg:w-[110px] lg:h-[37px] lg:text-[15px]
           bg-stone-200 w-[85px] h-[30px] rounded-md
-        text-white-300 text-xs hover:bg-charcoal
+         text-white-300 text-xs hover:bg-charcoal
          ${
            checkoutLocation && phoneNumber
              ? ''
              : 'opacity-[0.5] hover:bg-stone-200'
          }`}
-        >
-          Checkout
-        </button>
-      </a>
+      >
+        Checkout
+      </button>
     </section>
   )
 }
