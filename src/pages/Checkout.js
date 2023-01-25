@@ -18,7 +18,13 @@ import Lottie from 'lottie-react'
 
 import Tick from '../components/lottie/Tick.json'
 
-export default function Checkout({ cart, currency, firstName, currentUser }) {
+export default function Checkout({
+  cart,
+  currency,
+  firstName,
+  currentUser,
+  setOrderHistory,
+}) {
   const [totalAmount, setTotalAmount] = useState()
 
   const {
@@ -156,6 +162,7 @@ export default function Checkout({ cart, currency, firstName, currentUser }) {
                 phoneNumber={phoneNumber}
                 totalAmount={totalAmount}
                 currentUser={currentUser}
+                setOrderHistory={setOrderHistory}
               />
             </section>
 

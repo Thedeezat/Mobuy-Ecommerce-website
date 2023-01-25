@@ -66,7 +66,7 @@ function App() {
   const [deliveryAddress, setDeliveryAddress] = useState(false)
   const [cartAdded, setCartAdded] = useState(false)
   const [saveAdded, setSaveAdded] = useState(false)
-  // const [orderHistory, setOrderHistory] = useState('')
+  const [orderHistory, setOrderHistory] = useState(false)
 
   const handleSavelater = (item) => {
     setSaveAdded(false)
@@ -225,6 +225,8 @@ function App() {
                 last_name={lastName}
                 OnsetLastName={setLastName}
                 setDeliveryAddress={setDeliveryAddress}
+                orderHistory = {orderHistory}
+                setOrderHistory = {setOrderHistory}
               />
             </Route>
           </Switch>

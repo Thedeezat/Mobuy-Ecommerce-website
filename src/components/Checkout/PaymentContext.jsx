@@ -13,6 +13,7 @@ export function PaymentContext({
   phoneNumber,
   totalAmount,
   currentUser,
+  setOrderHistory,
 }) {
   const history = useHistory()
   const disable = checkoutLocation && phoneNumber ? false : true
@@ -28,6 +29,7 @@ export function PaymentContext({
   const onSuccess = () => {
     // Implementation for whatever you want to do with reference and after success call.
     history.push('/')
+    setOrderHistory(true)
   }
   const onClose = () => {
     // implementation for whatever you want to do when the Paystack dialog closed.
