@@ -90,9 +90,7 @@ export default function ProductItem({ productImage_num }) {
             <div
               key={product.id}
               className={`md:rounded-xl
-              pb-2 bg-stone-500 ${
-                product.id >= 310 ? 'hidden' : ''
-              } rounded-lg overflow-hidden`}
+              pb-2 bg-stone-500 rounded-lg overflow-hidden`}
             >
               <div className="">
                 <CustomSnackbar

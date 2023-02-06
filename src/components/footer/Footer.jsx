@@ -12,6 +12,8 @@ import Lottie from 'lottie-react'
 
 import arrowup from '../lottie/arrowup.json'
 
+import AnchorLink from 'react-anchor-link-smooth-scroll'
+
 export default function Footer() {
   const footerTexts_Heading = 'font-medium 2xl:text-lg text-base'
   const footerTexts = 'cursor-pointer 2xl:text-base hover:text-stone-300'
@@ -128,7 +130,9 @@ export default function Footer() {
           className="md:text-base 2xl:text-lg text-sm flex text-black-200 
           cursor-pointer opacity-[0.7] hover:opacity-[0.9]"
         >
-          <span className="md:mr-[3px] mr-0"> Scroll to top </span>
+          <AnchorLink href="#header">
+            <span className="md:mr-[3px] mr-0"> Scroll to top </span>
+          </AnchorLink>
           <div className="lg:mt-0 mt-[-3px] rotate-[180deg]">
             <Lottie
               className="w-[30px] lg:scale-[1] scale-[0.5] h-[30px]"

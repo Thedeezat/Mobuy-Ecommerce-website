@@ -212,6 +212,7 @@ function App() {
                 currency={currency}
                 firstName={firstName}
                 currentUser={currentUser}
+                setOrderHistory={setOrderHistory}
               />
             </Route>
             <Route path="/forgot-password">
@@ -225,8 +226,8 @@ function App() {
                 last_name={lastName}
                 OnsetLastName={setLastName}
                 setDeliveryAddress={setDeliveryAddress}
-                orderHistory = {orderHistory}
-                setOrderHistory = {setOrderHistory}
+                orderHistory={orderHistory}
+                setOrderHistory={setOrderHistory}
               />
             </Route>
           </Switch>

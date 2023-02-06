@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 
 import Navigation from '../components/navigation/Navigation'
 
@@ -14,7 +14,10 @@ export default function Home() {
   return (
     <>
       <div className="overflow-hidden">
-        <header className="px-3.5 sm:px-5 lg:px-6 xl:px-7 2xl:px-7.1">
+        <header
+          className="px-3.5 sm:px-5 lg:px-6 xl:px-7 2xl:px-7.1"
+          id="header"
+        >
           <Navigation
             counter={counter}
             currency={currency}
