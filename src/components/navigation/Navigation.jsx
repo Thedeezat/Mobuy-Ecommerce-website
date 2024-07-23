@@ -1,38 +1,38 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState } from "react";
 
-import LocalMallRoundedIcon from '@mui/icons-material/LocalMallRounded'
+import LocalMallRoundedIcon from "@mui/icons-material/LocalMallRounded";
 
-import { CiSearch } from 'react-icons/ci'
+import { CiSearch } from "react-icons/ci";
 
-import { styled } from '@mui/material/styles'
+import { styled } from "@mui/material/styles";
 
-import Badge from '@mui/material/Badge'
+import Badge from "@mui/material/Badge";
 
-import FaceRoundedIcon from '@mui/icons-material/FaceRounded'
+import FaceRoundedIcon from "@mui/icons-material/FaceRounded";
 
-import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded'
+import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useHistory } from "react-router-dom";
 
-import { productContext } from '../../App'
+import { productContext } from "../../App";
 
-import debounce from 'lodash.debounce'
+import debounce from "lodash.debounce";
 
-import { AuthContext } from '../Auth/AuthContext'
+import { AuthContext } from "../Auth/AuthContext";
 
-import Tooltip from '@mui/material/Tooltip'
+import Tooltip from "@mui/material/Tooltip";
 
-import AccountCircleIcon from '@mui/icons-material/AccountCircle'
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
-import Menu from '@mui/material/Menu'
+import Menu from "@mui/material/Menu";
 
-import MenuItem from '@mui/material/MenuItem'
+import MenuItem from "@mui/material/MenuItem";
 
-import ListItemIcon from '@mui/material/ListItemIcon'
+import ListItemIcon from "@mui/material/ListItemIcon";
 
-import Divider from '@mui/material/Divider'
+import Divider from "@mui/material/Divider";
 
-import Logout from '@mui/icons-material/Logout'
+import Logout from "@mui/icons-material/Logout";
 
 export default function Navigation({
   counter,
@@ -47,64 +47,64 @@ export default function Navigation({
   mobileProfileTextActive,
   firstName,
 }) {
-  const { setSearchItem } = useContext(productContext)
-  const { currentUser, logOut } = AuthContext()
-  const [error, setError] = useState('')
-  const history = useHistory()
-  const [isOpen, setIsOpen] = useState(false)
-  const [openMenu, setOpenMenu] = useState(null)
+  const { setSearchItem } = useContext(productContext);
+  const { currentUser, logOut } = AuthContext();
+  const [error, setError] = useState("");
+  const history = useHistory();
+  const [isOpen, setIsOpen] = useState(false);
+  const [openMenu, setOpenMenu] = useState(null);
 
-  const [anchorEl, setAnchorEl] = React.useState(null)
-  const open = Boolean(anchorEl)
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
   const handleClick = (event) => {
-    setAnchorEl(event.currentTarget)
-  }
+    setAnchorEl(event.currentTarget);
+  };
   const handleClose = () => {
-    setAnchorEl(null)
-  }
+    setAnchorEl(null);
+  };
 
   const genericHamburgerLine = `h-[1.5px] w-[24px] my-[2px] rounded-lg bg-black transition
-   ease transform duration-300 bg-black-200`
+   ease transform duration-300 bg-black-200`;
 
   const StyledBadge = styled(Badge)(({ theme }) => ({
-    '& .MuiBadge-badge': {
+    "& .MuiBadge-badge": {
       right: -3,
       top: 0,
-      color: 'white',
-      fontSize: '10px',
-      background: '#7688aa',
-      fontFamily: 'outfit',
-      borderRadius: '8px',
+      color: "white",
+      fontSize: "10px",
+      background: "#7688aa",
+      fontFamily: "outfit",
+      borderRadius: "8px",
     },
-  }))
+  }));
   const handleChange = debounce((e) => {
-    setSearchItem(e.target.value)
-  }, 800)
+    setSearchItem(e.target.value);
+  }, 800);
 
   const handleLogout = async () => {
-    setError('')
+    setError("");
 
     try {
-      await logOut()
-      history.push('/account/login')
+      await logOut();
+      history.push("/account/login");
     } catch {
-      setError('Failed to log out')
+      setError("Failed to log out");
     }
-  }
+  };
   const menuItem =
-    'flex items-center font-out-fit w-full py-1 border-t border-stone-700 text-sm'
+    "flex items-center font-out-fit w-full py-1 border-t border-stone-700 text-sm";
   const toolTip = (text) => (
     <span className="text-xs font-out-fit padding-1">{text}</span>
-  )
+  );
   // Hamburger
   const handleMenuClose = () => {
-    setIsOpen(false)
-    setOpenMenu(null)
-  }
+    setIsOpen(false);
+    setOpenMenu(null);
+  };
   const handleMenu = (event) => {
-    setIsOpen(!isOpen)
-    setOpenMenu(event.currentTarget)
-  }
+    setIsOpen(!isOpen);
+    setOpenMenu(event.currentTarget);
+  };
 
   return (
     <>
@@ -137,7 +137,7 @@ export default function Navigation({
             className="md:h-[55px] md:text-sm md:px-4 2xl:h-[70px] 2xl:text-base
               w-full h-5.5 border-none outline-none rounded-xl bg-stone-400 
               px-3 pr-4 text-xxs font-out-fit placeholder:text-black-200 tracking-wider"
-            placeholder="Search for products"
+            placeholder="Search for summer products"
             onChange={handleChange}
           />
         </div>
@@ -150,15 +150,15 @@ export default function Navigation({
         >
           <div
             className={`${genericHamburgerLine} ${
-              isOpen ? 'rotate-45 translate-y-[6px] bg-charcoal' : ''
+              isOpen ? "rotate-45 translate-y-[6px] bg-charcoal" : ""
             }`}
           ></div>
           <div
-            className={`${genericHamburgerLine} ${isOpen ? 'opacity-0' : ''}`}
+            className={`${genericHamburgerLine} ${isOpen ? "opacity-0" : ""}`}
           ></div>
           <div
             className={`${genericHamburgerLine} ${
-              isOpen ? '-rotate-45 -translate-y-[6px] bg-charcoal' : ''
+              isOpen ? "-rotate-45 -translate-y-[6px] bg-charcoal" : ""
             }`}
           ></div>
         </button>
@@ -167,13 +167,13 @@ export default function Navigation({
           id="menu-appbar"
           anchorEl={null}
           anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
+            vertical: "top",
+            horizontal: "right",
           }}
           keepMounted
           transformOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
+            vertical: "top",
+            horizontal: "right",
           }}
           open={Boolean(openMenu)}
           onClose={handleMenuClose}
@@ -181,10 +181,10 @@ export default function Navigation({
           PaperProps={{
             sx: {
               // mt: '65px',
-              boxShadow: 'none',
-              width: '57%',
-              bgcolor: '#eceff2',
-              fontFamily: 'Outfit',
+              boxShadow: "none",
+              width: "57%",
+              bgcolor: "#eceff2",
+              fontFamily: "Outfit",
             },
           }}
         >
@@ -235,8 +235,8 @@ export default function Navigation({
                     fontSize="large"
                     className="text-yellow"
                   />
-                </div>{' '}
-                <span className={`${mobileSaveTextActive}`}> Saved Items </span>{' '}
+                </div>{" "}
+                <span className={`${mobileSaveTextActive}`}> Saved Items </span>{" "}
               </div>
             </MenuItem>
           </Link>
@@ -245,7 +245,7 @@ export default function Navigation({
             <Link to="/profile">
               <MenuItem onClick={handleMenuClose}>
                 <div className={menuItem}>
-                  {' '}
+                  {" "}
                   <div
                     className={`scale-[0.6] ${mobileProfileIconActive}
                 bg-lightYellow w-[43px] h-[43px] rounded-2xl
@@ -253,10 +253,10 @@ export default function Navigation({
                   hover:border-2 border-yellow `}
                   >
                     <FaceRoundedIcon fontSize="large" className="text-yellow" />
-                  </div>{' '}
+                  </div>{" "}
                   <span className={`${mobileProfileTextActive}`}>
-                    {' '}
-                    Profile{' '}
+                    {" "}
+                    Profile{" "}
                   </span>
                 </div>
               </MenuItem>
@@ -272,9 +272,9 @@ export default function Navigation({
                   flex justify-center items-center relative mr-1 cursor-pointer
                   hover:border-2 border-yellow `}
                 >
-                  <AccountCircleIcon fontSize="large" className="text-yellow" />{' '}
+                  <AccountCircleIcon fontSize="large" className="text-yellow" />{" "}
                 </div>
-                Login / SignUp{' '}
+                Login / SignUp{" "}
               </div>
             </MenuItem>
           </Link>
@@ -291,7 +291,7 @@ export default function Navigation({
                   >
                     <Logout fontSize="large" className="text-white-200" />
                   </div>
-                  Logout{' '}
+                  Logout{" "}
                 </div>
               </MenuItem>
             </div>
@@ -350,13 +350,13 @@ export default function Navigation({
           </Link>
           {/* profile */}
           <div className="relative">
-            <Tooltip title={toolTip('My Account')}>
+            <Tooltip title={toolTip("My Account")}>
               <div
                 className={`2xl:scale-[1.2] 2xl:mr-6
                 bg-lightYellow w-[43px] h-[43px] rounded-2xl
                   flex justify-center items-center relative mr-4 cursor-pointer
                   hover:border-2 border-yellow ${
-                    anchorEl && 'border-2 border-yellow'
+                    anchorEl && "border-2 border-yellow"
                   }`}
                 onClick={handleClick}
               >
@@ -374,37 +374,37 @@ export default function Navigation({
               PaperProps={{
                 elevation: 0,
                 sx: {
-                  overflow: 'visible',
-                  filter: 'drop-shadow(0px 2px 4px rgba(0,0,0,0.1))',
+                  overflow: "visible",
+                  filter: "drop-shadow(0px 2px 4px rgba(0,0,0,0.1))",
                   mt: 3,
-                  width: '220px',
-                  background: '#eceff2',
-                  '& .MuiAvatar-root': {
+                  width: "220px",
+                  background: "#eceff2",
+                  "& .MuiAvatar-root": {
                     width: 32,
                     height: 32,
                     ml: -0.5,
                     mr: 1,
                   },
-                  '&:before': {
+                  "&:before": {
                     content: '""',
-                    display: 'block',
-                    position: 'absolute',
+                    display: "block",
+                    position: "absolute",
                     top: 0,
                     right: 14,
                     width: 10,
                     height: 10,
-                    bgcolor: '#eceff2',
-                    transform: 'translateY(-50%) rotate(45deg)',
+                    bgcolor: "#eceff2",
+                    transform: "translateY(-50%) rotate(45deg)",
                     zIndex: 0,
                   },
                 },
               }}
-              transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-              anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+              transformOrigin={{ horizontal: "right", vertical: "top" }}
+              anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
             >
               <p className="2xl:text-xl text-lg px-3.5 opacity-[0.7] py-2 shadow-sm">
-                {' '}
-                Hi, {currentUser ? `${firstName}` : ''}
+                {" "}
+                {currentUser ? `, ${firstName}` : "Welcome 👋"}
               </p>
               <MenuItem className="opacity-[0]"></MenuItem>
 
@@ -477,5 +477,5 @@ export default function Navigation({
         </div>
       </nav>
     </>
-  )
+  );
 }

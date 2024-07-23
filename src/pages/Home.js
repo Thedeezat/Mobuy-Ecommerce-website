@@ -1,15 +1,11 @@
-import React, { useContext } from 'react'
-
-import Navigation from '../components/navigation/Navigation'
-
-import Tabs from '../components/tabs/Tabs'
-
-import { productContext } from '../App'
-
-import Footer from '../components/footer/Footer'
+import React, { useContext } from "react";
+import Navigation from "../components/navigation/Navigation";
+import Tabs from "../components/tabs/Tabs";
+import { productContext } from "../App";
+import Footer from "../components/footer/Footer";
 
 export default function Home() {
-  const { counter, currency, firstName } = useContext(productContext)
+  const { counter, currency, firstName } = useContext(productContext);
 
   return (
     <>
@@ -28,5 +24,5 @@ export default function Home() {
         <Footer />
       </div>
     </>
-  )
+  );
 }

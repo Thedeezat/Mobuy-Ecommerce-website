@@ -1,42 +1,26 @@
-import React, { useState } from 'react'
-
-import TabItem from './TabItem'
-
-import CheckroomRoundedIcon from '@mui/icons-material/CheckroomRounded'
-
-import CardGiftcardRoundedIcon from '@mui/icons-material/CardGiftcardRounded'
-
-import KingBedRoundedIcon from '@mui/icons-material/KingBedRounded'
-
-import CableRoundedIcon from '@mui/icons-material/CableRounded'
-
-import BabyChangingStationRoundedIcon from '@mui/icons-material/BabyChangingStationRounded'
-
-import SoupKitchenRoundedIcon from '@mui/icons-material/SoupKitchenRounded'
-
-import ShoppingBasketRoundedIcon from '@mui/icons-material/ShoppingBasketRounded'
-
-import TabContent from './TabContent'
-
-import AllCategory from '../product/categories/AllCategory'
-
-import Clothes from '../product/categories/Clothes'
-
-import Furniture from '../product/categories/Furniture'
-
-import Electronics from '../product/categories/Electronics'
-
-import Babies from '../product/categories/Babies'
-
-import Kitchen from '../product/categories/Kitchen'
-
-import Others from '../product/categories/Others'
+import React, { useState } from "react";
+import TabItem from "./TabItem";
+import CheckroomRoundedIcon from "@mui/icons-material/CheckroomRounded";
+import CardGiftcardRoundedIcon from "@mui/icons-material/CardGiftcardRounded";
+import KingBedRoundedIcon from "@mui/icons-material/KingBedRounded";
+import CableRoundedIcon from "@mui/icons-material/CableRounded";
+import BabyChangingStationRoundedIcon from "@mui/icons-material/BabyChangingStationRounded";
+import SoupKitchenRoundedIcon from "@mui/icons-material/SoupKitchenRounded";
+import ShoppingBasketRoundedIcon from "@mui/icons-material/ShoppingBasketRounded";
+import TabContent from "./TabContent";
+import AllCategory from "../product/categories/AllCategory";
+import Clothes from "../product/categories/Clothes";
+import Furniture from "../product/categories/Furniture";
+import Electronics from "../product/categories/Electronics";
+import Babies from "../product/categories/Babies";
+import Kitchen from "../product/categories/Kitchen";
+import Others from "../product/categories/Others";
 
 export default function Tabs() {
-  const [activeTab, setActiveTab] = useState('tab1')
+  const [activeTab, setActiveTab] = useState("tab1");
 
   const categoryIcons =
-    'md:scale-[1] 2xl:scale-[1.3] 2xl:mb-3 scale-[0.8] text-yellow mb-1'
+    "md:scale-[1] 2xl:scale-[1.3] 2xl:mb-3 scale-[0.8] text-yellow mb-1";
 
   return (
     <>
@@ -159,5 +143,5 @@ export default function Tabs() {
         </TabContent>
       </div>
     </>
-  )
+  );
 }

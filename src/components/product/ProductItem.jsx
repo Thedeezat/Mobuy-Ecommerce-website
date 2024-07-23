@@ -1,20 +1,20 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext } from "react";
 
-import useFetch from '../Api/useFetch'
+import useFetch from "../Api/useFetch";
 
-import Rating from '@mui/material/Rating'
+import Rating from "@mui/material/Rating";
 
-import PageSkeleton from '../Loader/Skeleton'
+import PageSkeleton from "../Loader/Skeleton";
 
-import { TextError } from '../Error'
+import { TextError } from "../Error";
 
-import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined'
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 
-import { CustomSnackbar } from '../Snackbar'
+import { CustomSnackbar } from "../Snackbar";
 
-import { productContext } from '../../App'
+import { productContext } from "../../App";
 
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 export default function ProductItem({ productImage_num }) {
   const {
@@ -25,24 +25,27 @@ export default function ProductItem({ productImage_num }) {
     currentUser,
     saveAdded,
     cartAdded,
-  } = useContext(productContext)
+  } = useContext(productContext);
 
-  const { data: products, loading, error } = useFetch(
-    'https://api.escuelajs.co/api/v1/products',
-  )
-  const [productTitle, setProductTitle] = useState('')
+  const {
+    data: products,
+    loading,
+    error,
+  } = useFetch("https://api.escuelajs.co/api/v1/products");
+
+  const [productTitle, setProductTitle] = useState("");
 
   const handleAddToCart = (item) => {
-    setProductTitle(item.title)
-    handleCart(item)
-  }
+    setProductTitle(item.title);
+    handleCart(item);
+  };
   const Savelater_snackbar = (
     <div className="flex flex-col">
       {currentUser ? (
         <span className="md:text-sm text-xs font-out-fit">
           {saveAdded
-            ? 'Product already in saved items'
-            : ' Product added to saved items'}
+            ? "Product already in saved items"
+            : " Product added to saved items"}
         </span>
       ) : (
         <span className="md:text-sm text-xs font-out-fit">
@@ -59,13 +62,19 @@ export default function ProductItem({ productImage_num }) {
             w-[90px] mt-1 rounded-md py-[4px] text-xxs font-out-fit 
            hover:bg-darkYellow hover:text-black-300"
           >
-            {' '}
+            {" "}
             Click here to login
           </button>
         </Link>
       )}
     </div>
-  )
+  );
+
+  const extractImageUrl = (imageString) => {
+    // Assuming the image string is a JSON array in string format
+    const matches = imageString.match(/"(https:\/\/[^"]+)"/);
+    return matches ? matches[1] : ""; // Return the matched URL or an empty string if not found
+  };
 
   return (
     <section
@@ -78,17 +87,18 @@ export default function ProductItem({ productImage_num }) {
       {products &&
         products
           .filter((val) => {
-            if (searchItem === ' ') {
-              return val
+            if (searchItem.trim() === " ") {
+              return val;
             } else if (
               val.title.toLowerCase().includes(searchItem.toLowerCase())
             ) {
-              return val
+              return val;
             }
+            return null;
           })
-          .map((product) => (
+          .map((product, id) => (
             <div
-              key={product.id}
+              key={id}
               className={`md:rounded-xl
               pb-2 bg-stone-500 rounded-lg overflow-hidden`}
             >
@@ -98,7 +108,7 @@ export default function ProductItem({ productImage_num }) {
                     <>
                       {/* Savelater */}
                       <div className="relative">
-                        {' '}
+                        {" "}
                         <div
                           className={` 
                           md:w-[28px] md:h-[28px] 
@@ -117,26 +127,27 @@ export default function ProductItem({ productImage_num }) {
                     </>
                   }
                   message={Savelater_snackbar}
-                  success={currentUser ? 'True' : null}
-                  button_text={currentUser && 'View items'}
+                  success={currentUser ? "True" : null}
+                  button_text={currentUser && "View items"}
                 />
               </div>
               {/* Image */}
               <img
-                src={product.images[productImage_num]}
+                src={extractImageUrl(product.images[0])}
+                alt={product.title}
                 className="md:h-[180px] md:rounded-xl
-                 h-[120px] w-full object-cover 
+                 h-[120px] w-full object-cover
                  bg-stone-600 border-none rounded-lg"
-                alt=""
-              />{' '}
+              />
+
               {/* Description */}
               <div className="px-3 pt-3">
                 <h3
                   className="md:text-sm 2xl:text-base 2xl:h-4 
                   text-xs h-3.5 overflow-hidden"
                 >
-                  {' '}
-                  {product.title}{' '}
+                  {" "}
+                  {product.title}{" "}
                 </h3>
                 {/* price */}
                 <div
@@ -144,17 +155,17 @@ export default function ProductItem({ productImage_num }) {
                   pt-2 flex items-center justify-between"
                 >
                   <h3 className="md:text-base 2xl:text-tiny text-[15px] text-black-100">
-                    {' '}
+                    {" "}
                     {currency}
-                    {product.price}{' '}
+                    {product.price}{" "}
                   </h3>
                   <h4
                     className="line-through tracking-wider 
                     text-sm 2xl:text-base opacity-[0.8]"
                   >
-                    {' '}
+                    {" "}
                     {currency}
-                    {product.price + 70}{' '}
+                    {product.price + 70}{" "}
                   </h4>
                 </div>
                 {/* Rating */}
@@ -177,10 +188,10 @@ export default function ProductItem({ productImage_num }) {
                         border border-darkYellow mt-3"
                         onClick={() => handleAddToCart(product)}
                       >
-                        {' '}
+                        {" "}
                         <span className="md:text-[13px] 2xl:text-[14px] text-[11px]">
-                          {' '}
-                          Add To Cart{' '}
+                          {" "}
+                          Add To Cart{" "}
                         </span>
                       </button>
                     }
@@ -206,5 +217,5 @@ export default function ProductItem({ productImage_num }) {
             </div>
           ))}
     </section>
-  )
+  );
 }
